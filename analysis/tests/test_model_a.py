@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from analysis.model_a import load_phase,summarize,tables
+from analysis.model_a import attempt_usage,load_phase,summarize,tables
 from analysis.model_a_figures import report_text
 from harness.artifacts import read_json
 from harness.preflight import ROOT
@@ -31,6 +31,12 @@ def fixture():
 class ModelAAnalysisTests(unittest.TestCase):
     def setUp(self):
         self.config=read_json(ROOT/'config/analysis.json')
+
+    def test_cost_usage_preserves_failed_response_usage_when_provider_exposes_it(self):
+        usage={'input_tokens':10,'output_tokens':20,'cost':.1}
+        self.assertEqual(attempt_usage({'result':{'summary':{'usage':usage}}}),usage)
+        self.assertEqual(attempt_usage({'failure':'model_mismatch','raw':{'usage':usage}}),usage)
+        self.assertEqual(attempt_usage({'failure':'timeout'}),{})
 
     def test_full_factorial_contrast_signs_and_task_bootstrap(self):
         summary=summarize(fixture(),self.config)

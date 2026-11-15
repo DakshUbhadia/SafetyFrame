@@ -10,7 +10,7 @@ import sys
 from harness.artifacts import confined,digest,read_json,tree_hash,write_json
 from harness.bootstrap import complete_contrast,paired_bootstrap
 from harness.freeze import planned_rows,verify_freeze
-from harness.preflight import ROOT
+from harness.preflight import ROOT,nonnegative_number
 from harness.scoring import aggregate_assessments,assess
 
 CONDITIONS=('C','S','CD','SD')
@@ -21,6 +21,13 @@ PUBLIC_FIELDS=('run_id','task_id','task_family','model_id','returned_model_id','
     'provider_failure_type','retry_count','primary_analysis_included','end_to_end_utility_score',
     'input_tokens','output_tokens','reported_cost','estimated_cost','cost_accounting_complete',
     'latency_seconds','timestamp_turn1','timestamp_turn2','prompt_hash','repo_hash','test_hash')
+
+
+def attempt_usage(outcome):
+    usage=outcome.get('result',{}).get('summary',{}).get('usage')
+    if not usage and isinstance(outcome.get('raw'),dict):
+        usage=outcome['raw'].get('usage')
+    return usage if isinstance(usage,dict) else {}
 
 
 def load_phase(output=ROOT/'data/main'):
@@ -68,13 +75,14 @@ def load_phase(output=ROOT/'data/main'):
         if row['status']=='completed' and len(public_turns)!=2: raise ValueError('Completed run needs both turns')
         attempts=[]
         for path in sorted((output/'raw'/run).glob('*-outcome.json')):
-            outcome=read_json(path); result=outcome.get('result',{}); usage=result.get('summary',{}).get('usage') or {}
+            outcome=read_json(path); usage=attempt_usage(outcome)
             estimated=None
-            if all(isinstance(usage.get(key),(int,float)) for key in ('input_tokens','output_tokens')):
+            if all(nonnegative_number(usage.get(key)) for key in ('input_tokens','output_tokens')):
                 rates=model['pricing']
                 estimated=(usage['input_tokens']*rates['input_credits_per_million']+usage['output_tokens']*rates['output_credits_per_million'])/1e6
             attempts.append(dict(file=path.relative_to(ROOT).as_posix(),outcome_hash=digest(outcome),
-                failure=outcome.get('failure'),attempt=outcome['attempt'],reported_cost=usage.get('cost'),
+                failure=outcome.get('failure'),attempt=outcome['attempt'],
+                reported_cost=usage.get('cost') if nonnegative_number(usage.get('cost')) else None,
                 estimated_cost=estimated,input_tokens=usage.get('input_tokens'),output_tokens=usage.get('output_tokens')))
         release.append(dict(trajectory={key:row.get(key) for key in PUBLIC_FIELDS},turns=public_turns,
                             attempts=attempts,record_hash=digest(record),identity_hash=digest(identity)))
