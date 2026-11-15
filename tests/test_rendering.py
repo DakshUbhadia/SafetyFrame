@@ -64,6 +64,16 @@ class RenderingTests(unittest.TestCase):
         self.assertIsNone(report["model_token_counts"])
         self.assertIn("not a model tokenizer", report["token_method"])
 
+    def test_multifile_prompt_order_uses_canonical_names_not_rendered_alphabet(self):
+        for folder in ('canonical','reference_solution'):
+            (self.template/folder/'reporting.py').write_text('VALUE = 1\n')
+        pair=self.pair()
+        report=audit_pair(self.template,pair['C'],pair['S'])
+        self.assertTrue(report['equivalence_pass'])
+        for role,module in [('C','performance_monitor.py'),('S','robustness_monitor.py')]:
+            body=initial_messages(TaskBundle.load(pair[role]),role)[1]['content']
+            self.assertLess(body.index('<file path="'+module+'">'),body.index('<file path="reporting.py">'))
+
     def test_both_references_pass_public_and_all_hidden_requirements(self):
         pair = self.pair()
         report = audit_pair(self.template, pair["C"], pair["S"], True, TestRunner("trusted_fixture"))

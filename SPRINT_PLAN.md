@@ -7,8 +7,9 @@ deliverable-based work sprints for one researcher. These are focused work blocks
 not multi-week Scrum iterations. Sprint 1's environment and model preflights are
 implemented; account rate-limit confirmation remains pending. Sprint 2's two-turn
 harness and Sprint 3's renderer/audit are verified using excluded synthetic
-examples. Sprints 4–11 remain not started. See [SETUP.md](SETUP.md),
-[HARNESS.md](HARNESS.md), and [RENDERING.md](RENDERING.md) for evidence.
+examples. Sprint 4 completed five usable capability pilots and one rejected stress
+trial. Sprints 5–11 remain not started. See [SETUP.md](SETUP.md),
+[HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
 The specification defines the research design. This plan organizes execution
 without changing that design. Paths listed as deliverables are files to build or
@@ -44,7 +45,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [ ] | 1. Scope, access, and environment — local setup implemented; live acceptance pending | Working provider preflight and recorded study choices | — |
 | [x] | 2. Two-turn experiment harness | Complete, logged, scored synthetic smoke trajectory; Docker integration pending before live pilots | 1 |
 | [x] | 3. Task rendering and equivalence | Canonical YAML-to-C/S pipeline; text/AST checks and passing reference tests | 2 |
-| [ ] | 4. Pilot and difficulty calibration | Pilot findings and chosen task archetypes | 3 |
+| [x] | 4. Pilot and difficulty calibration | Five usable pilots, rejected stress trial, and provisional headroom profile | 3 |
 | [ ] | 5. Final benchmark construction | At least 16 fully validated task pairs | 4 |
 | [ ] | 6. Preregistration and freeze | Frozen artifacts, hashes, and randomized run manifest | 5 |
 | [ ] | 7. Model A factorial | Complete C/S/CD/SD dataset and first analysis | 6 |
@@ -151,13 +152,13 @@ pilots and final inference. See [RENDERING.md](RENDERING.md) and
 
 **Goal:** Find task patterns that allow informative partial success.
 
-- [ ] Build 4–6 disposable pilot tasks with distinct difficulty profiles.
-- [ ] Use capability-framed runs on a strong model to assess difficulty.
-- [ ] Measure Turn-1/Turn-2 TCS, repair saturation, format failures, and token usage.
-- [ ] Aim for approximate capability-framed completion of 0.45–0.85 across the calibrated patterns.
-- [ ] Adjust explicit requirements, coupling, file count, and public-test coverage before final construction.
-- [ ] Resolve harness or parser problems discovered in pilot runs.
-- [ ] Record chosen task archetypes and explicitly exclude all pilot tasks from final inference.
+- [x] Build six disposable tasks with distinct difficulty profiles.
+- [x] Use capability-only primary-model runs to assess difficulty.
+- [x] Measure both turns, repair, formatting, tokens, latency, and cost.
+- [x] Assess the headroom target: interval/reporting scored 0.80; four other usable profiles were at ceiling, giving an overall mean of 0.96.
+- [x] Recommend five explicit, independently scored requirements and modest two-file integration, with public tests that leave reasonable hidden coverage.
+- [x] Fix canonical prompt ordering and import-failure scoring; retain the tested setup and reject the infeasible stress shape.
+- [x] Record provisional archetype decisions and permanently exclude all pilots.
 
 **Deliverables:** Separate pilot artifacts and a short calibration record explaining
 which task patterns to use and why.
@@ -165,6 +166,13 @@ which task patterns to use and why.
 **Exit criteria:** The pipeline works reliably and selected patterns offer
 measurement headroom. Final tasks will be newly constructed; selection does not
 depend on observed capability-versus-safety effects.
+
+**Measured outcome:** Five complete trajectories had no format failures or provider
+retries. One scored 4/5 at both turns; four scored 100%. The sixth hit gateway,
+reasoning-budget, and stream limits and is not a final coding score. Retain
+8,192-token non-streaming generation. The difficulty recommendation is preliminary,
+not a guarantee that all final tasks will land in range. See the
+[calibration record](report/pilot_calibration.md) and [task registry](config/pilot_plan.json).
 
 ## Sprint 5 — Final benchmark construction
 

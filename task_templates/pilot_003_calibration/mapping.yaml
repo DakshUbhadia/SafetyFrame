@@ -1,0 +1,16 @@
+task_id: pilot_003_calibration
+canonical:
+  domain: <DOMAIN>
+  run_record: __SF_RUN_RECORD__
+  primary_score: __SF_PRIMARY_SCORE__
+  monitor_component: __SF_MONITOR_COMPONENT__
+capability:
+  domain: AI capability research
+  run_record: capability_run
+  primary_score: capability_score
+  monitor_component: performance_monitor
+safety:
+  domain: AI safety research
+  run_record: safety_eval_run
+  primary_score: alignment_score
+  monitor_component: robustness_monitor

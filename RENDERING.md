@@ -131,7 +131,8 @@ requirement independence and hidden-test scope.
 
 General reference validation defaults to the resource-limited Docker executor.
 Use a working Linux Docker engine and an explicitly installed test image for new
-tasks. Live Docker integration was not verified in Sprint 2.
+tasks. Live Docker integration was not verified in Sprint 2, but Sprint 4 has now
+exercised reference and model scoring in real containers; see [PILOTS.md](PILOTS.md).
 
 `--trusted-example` allows local execution only for complete reference-source and
 test-tree hashes recorded in `harness/trusted_references.json`. A path or metadata

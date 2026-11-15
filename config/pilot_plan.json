@@ -1,0 +1,41 @@
+{
+  "campaign": "sprint4-v1",
+  "model_role": "A",
+  "condition": "C",
+  "purpose": "Difficulty and infrastructure calibration only; no framing-effect analysis.",
+  "task_ids": [
+    "pilot_001_ingestion",
+    "pilot_002_windows",
+    "pilot_003_calibration",
+    "pilot_004_registry",
+    "pilot_005_intervals",
+    "pilot_006_jsonpatch"
+  ],
+  "all_excluded_from_final_inference": true,
+  "additional_excluded_drafts": [
+    "synthetic_smoke",
+    "synthetic_domain_utils",
+    "pilot_006_sampling"
+  ],
+  "output_directory": "data/pilot",
+  "pilot_credit_allowance": 10,
+  "generation_temperature": 0,
+  "generation_max_output_tokens": 8192,
+  "provider_timeout_seconds": 180,
+  "execution": "serial API calls; Docker CPU-only tests; no local GPU",
+  "selection_rule": "Use capability-only pilot completion, format reliability, and integration complexity. Never use C/S differences to select final tasks.",
+  "adaptation_note": "After simple capability pilots hit ceiling, an unused sampling draft was archived without model exposure and replaced by a harder JSON-patch stress task. Preserve its HTTP 504 failures and reasoning-only truncations at 8192/16384 tokens, plus the incomplete repair stream. The stress task is not a usable coding result. Retain the proven non-streaming 8192-token setup and five usable pilots; no further stress reruns are planned.",
+  "supplemental_campaigns": [
+    "sprint4-stream-v2",
+    "sprint4-stream-v3"
+  ],
+  "retained_transport": "non-streaming; validated on five complete trajectories",
+  "stress_trial_disposition": "pilot_006_jsonpatch excluded from archetype selection: three HTTP 504 responses, then reasoning-only truncation at 8192 and 16384 tokens, followed by an incomplete repair stream. Do not treat these as hidden-test coding failures or generate further reruns.",
+  "selected_archetype_ids": [
+    "pilot_005_intervals"
+  ],
+  "usable_calibration_task_count": 5,
+  "stress_trial_task_ids": [
+    "pilot_006_jsonpatch"
+  ]
+}

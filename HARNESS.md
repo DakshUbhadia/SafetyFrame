@@ -8,10 +8,10 @@ excluded from pilots, final task construction, and scientific inference. No paid
 inference was needed for Sprint 2 verification.
 
 Adaption transport is implemented against the [Responses API](https://docs.adaptionlabs.ai/api/resources/responses/methods/create).
-Full live trajectories have not been exercised: Docker is installed here but its
-daemon is unavailable. Generated code requires Docker and cannot use the local
-fixture executor. Sprint 1's account rate limit remains unconfirmed; this does
-not prevent building/testing the harness offline.
+Sprint 4 exercised Docker reference validation and five complete live Qwen pilot
+trajectories. A sixth stress task exposed gateway, reasoning-budget, and streaming
+limits; see [PILOTS.md](PILOTS.md). Generated code still requires Docker and cannot
+use the local fixture executor. Account rate limits remain unconfirmed.
 
 ## Run the synthetic smoke trajectory
 
@@ -41,6 +41,7 @@ Both trees have the same layout:
 ```text
 run_manifest.csv
 runs/<run_id>/identity.json
+runs/<run_id>/configuration.json
 runs/<run_id>/state.json
 runs/<run_id>/turn1.json
 runs/<run_id>/turn2.json

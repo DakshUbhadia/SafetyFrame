@@ -23,7 +23,8 @@
       "api_key_env": "ADAPTION_API_KEY",
       "models_path": "/models?type=hosted",
       "responses_path": "/responses",
-      "timeout_seconds": 60,
+      "timeout_seconds": 180,
+      "stream": false,
       "requests_per_minute": null,
       "rate_limit_source": null
     }
@@ -33,7 +34,7 @@
       "provider": "adaption",
       "model_id": "qwen3.5-397b",
       "family": "Qwen",
-      "selection_rationale": "Primary coding candidate from the accessible Qwen family. Completed preflight at temperature 0 with an 8192-token cap. GLM-5.2 was excluded after two setup transport/timeouts (45s and 60s), before study outcomes. Pilot validation still required.",
+      "selection_rationale": "Primary coding model retained after five complete excluded capability pilots; initial four simple/moderate profiles hit ceiling and the two-file interval profile scored 4/5. JSON-patch stress profile was infeasible under tested transport/token budgets and is not a final-task pattern.",
       "conditions": [
         "C",
         "S",
@@ -45,7 +46,7 @@
         "temperature": 0
       },
       "settings_verified": true,
-      "settings_evidence": "data/setup/preflight-20261114T093213Z-fb983287.json: smoke.B accepted qwen3.5-397b at temperature 0, max_output_tokens 8192; completed in 12.96s. Does not verify maximum context or coding quality.",
+      "settings_evidence": "Five completed capability pilots at temperature 0, max_output_tokens 8192, non-streaming transport: data/pilot/scored/sprint4-v1-pilot_001_ingestion.json through pilot_005_intervals.json. Heavier JSON-patch stress attempts are excluded as format/provider failures.",
       "estimated_cost_per_trajectory": 0.071,
       "pricing": {
         "input_credits_per_million": 0.55,
@@ -55,13 +56,17 @@
         "assumed_input_tokens_per_trajectory": 24000,
         "assumed_output_tokens_per_trajectory": 16384,
         "cache_discount_assumed": false
-      }
+      },
+      "accepted_returned_model_ids": [
+        "qwen3.5-397b-a17b-nvfp4"
+      ],
+      "returned_id_evidence": "Observed terminal streaming response under requested qwen3.5-397b in data/pilot/raw/sprint4-stream-v2-pilot_006_jsonpatch/turn1-attempt0-outcome.json. Record both identifiers; backend naming/routing not independently certified by provider."
     },
     "B": {
       "provider": "adaption",
       "model_id": "deepseek-v4-flash",
       "family": "DeepSeek",
-      "selection_rationale": "Distinct model family for independent framing generalization, present in the account catalogue with published hosted token rates; pending setup generation check and excluded coding pilots.",
+      "selection_rationale": "Independent DeepSeek family for final C/S generalization; setup generation preflight passed. No Model B scientific or pilot outcomes inspected during primary-model difficulty calibration.",
       "conditions": [
         "C",
         "S"
@@ -71,7 +76,7 @@
         "temperature": 0
       },
       "settings_verified": true,
-      "settings_evidence": "data/setup/preflight-20261114T093258Z-8de026bd.json: smoke.B completed at temperature 0 and max_output_tokens 8192. Does not verify maximum context or coding quality.",
+      "settings_evidence": "data/setup/preflight-20261114T093258Z-8de026bd.json: setup smoke.B completed at temperature 0 and max_output_tokens 8192; coding calibration used Model A only.",
       "estimated_cost_per_trajectory": 0.0034,
       "pricing": {
         "input_credits_per_million": 0.045,

@@ -32,7 +32,8 @@ def main():
     skipped = len(result.skipped) + len(result.expectedFailures)
     failed = len(result.failures) + len(result.errors) + len(result.unexpectedSuccesses) + skipped
     output = {"total": count, "passed": max(0, count - failed), "failures": failures,
-              "skipped": skipped, "successful": count > 0 and failed == 0}
+              "skipped": skipped, "successful": count > 0 and failed == 0,
+              "collection_failed": bool(loader.errors)}
     print(json.dumps(output))
 
 

@@ -16,6 +16,39 @@ class ProviderFailure(RuntimeError):
         self.kind, self.retryable, self.http_status, self.raw = kind, retryable, http_status, raw
 
 
+def read_event_stream(response, timeout):
+    """Require a terminal Responses event; never treat partial deltas as final code."""
+    events, data_lines = [], []
+    size=0
+    started=time.monotonic()
+    for line in response:
+        size+=len(line)
+        if size>8*1024*1024:
+            raise ProviderFailure('stream_size_limit',raw={'events':events})
+        if time.monotonic()-started>timeout:
+            raise ProviderFailure('timeout',True,raw={'events':events})
+        line=line.decode('utf-8').rstrip('\r\n')
+        if line.startswith('data:'):
+            data_lines.append(line[5:].lstrip())
+        elif not line and data_lines:
+            payload='\n'.join(data_lines); data_lines=[]
+            if payload=='[DONE]': break
+            try: event=json.loads(payload)
+            except ValueError:
+                raise ProviderFailure('invalid_provider_stream',raw={'events':events}) from None
+            if not isinstance(event,dict):
+                raise ProviderFailure('invalid_provider_stream',raw={'events':events})
+            events.append(event)
+            if event.get('type') in {'response.completed','response.incomplete','response.failed'}:
+                terminal=event.get('response')
+                if not isinstance(terminal,dict):
+                    raise ProviderFailure('invalid_provider_stream',raw={'events':events})
+                return terminal,events
+            if event.get('type')=='error':
+                raise ProviderFailure('provider_stream_error',raw={'events':events})
+    raise ProviderFailure('stream_incomplete',raw={'events':events})
+
+
 class AdaptionProvider:
     name = "adaption"
 
@@ -27,7 +60,7 @@ class AdaptionProvider:
         if not key:
             raise ProviderFailure("missing_credentials")
         payload = {"model": model["model_id"], "input": messages, **model["generation"],
-                   "agentic_memory": False, "store": False, "stream": False, "tools": [], "tool_choice": "none"}
+                   "agentic_memory": False, "store": False, "stream": self.config.get('stream',False), "tools": [], "tool_choice": "none"}
         request = Request(self.config["base_url"].rstrip("/") + self.config["responses_path"],
                           data=json.dumps(payload).encode(),
                           headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
@@ -35,7 +68,11 @@ class AdaptionProvider:
         timestamp = datetime.now(timezone.utc).isoformat()
         try:
             with build_opener(NoRedirect()).open(request, timeout=self.config["timeout_seconds"]) as response:
-                raw = json.load(response)
+                stream_events=None
+                if payload['stream'] and 'text/event-stream' in (response.headers.get('Content-Type') or ''):
+                    raw,stream_events=read_event_stream(response,self.config['timeout_seconds'])
+                else:
+                    raw = json.load(response)
                 request_id = response.headers.get("x-request-id") or response.headers.get("request-id")
         except HTTPError as exc:
             status = exc.code
@@ -65,9 +102,13 @@ class AdaptionProvider:
             code = error.get("code") if isinstance(error, dict) else None
             kind = "provider_filter" if code in {"content_filter", "content_policy_violation", "safety_filter"} else "5xx" if code in {"server_error", "internal_error"} else "provider_error"
             raise ProviderFailure(kind, kind == "5xx", raw=raw)
-        if raw.get("model") != model["model_id"]:
+        if raw.get("model") not in {model["model_id"],*model.get('accepted_returned_model_ids',[])}:
             raise ProviderFailure("model_mismatch", raw=raw)
         summary = response_summary(raw)
+        if not summary['output_text'] and stream_events and raw.get('status') in {'completed','incomplete'}:
+            summary['output_text']=''.join(event['delta'] for event in stream_events
+                                          if event.get('type')=='response.output_text.delta' and isinstance(event.get('delta'),str))
         return {"raw": raw, "text": summary["output_text"], "summary": summary,
+                "raw_stream_events": stream_events,
                 "timestamp": timestamp, "request_id": request_id,
                 "latency_seconds": time.monotonic() - start}

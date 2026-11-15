@@ -70,10 +70,15 @@ def validate_config(config: dict) -> None:
                 raise ValueError(f"Invalid provider {key}")
         if not provider["api_key_env"].isidentifier():
             raise ValueError("api_key_env must name an environment variable")
-        if not 0 < provider["timeout_seconds"] <= 60:
-            raise ValueError("Provider timeout must be within 0..60 seconds")
+        if not 0 < provider["timeout_seconds"] <= 300:
+            raise ValueError("Provider timeout must be within 0..300 seconds")
+        if not isinstance(provider.get('stream',False),bool):
+            raise ValueError('Provider stream setting must be boolean')
     for role, expected in (("A", ["C", "S", "CD", "SD"]), ("B", ["C", "S"])):
         model = config["models"][role]
+        accepted=model.get('accepted_returned_model_ids',[])
+        if not isinstance(accepted,list) or any(not isinstance(value,str) or not value.strip() for value in accepted):
+            raise ValueError('Accepted returned model IDs must be an explicit list of nonempty strings')
         if model["provider"] not in config["providers"] or model["conditions"] != expected:
             raise ValueError(f"Model {role} must use a known provider and default conditions")
         generation = model["generation"]

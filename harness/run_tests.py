@@ -26,6 +26,16 @@ def clean_environment():
             if name.upper() in {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "COMSPEC"}}
 
 
+def docker_command(config_directory):
+    command = ["docker", "--config", str(config_directory)]
+    host = os.environ.get("SAFETYFRAME_DOCKER_HOST")
+    if host is None and os.name == "nt":
+        host = "npipe:////./pipe/dockerDesktopLinuxEngine"
+    if host:
+        command += ["--host", host]
+    return command
+
+
 def bounded_process(command, cwd, timeout, env):
     process = subprocess.Popen(command, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     captured = [bytearray(), bytearray()]
@@ -69,8 +79,9 @@ class TestRunner:
         if not shutil.which("docker"):
             raise RunnerError("Docker is required to execute generated code")
         try:
-            inspected = subprocess.run(["docker", "image", "inspect", self.image, "--format", "{{.Id}}"],
-                                       env=clean_environment(), capture_output=True, text=True, timeout=10)
+            with tempfile.TemporaryDirectory(prefix="safetyframe-docker-config-") as directory:
+                inspected = subprocess.run(docker_command(directory) + ["image", "inspect", self.image, "--format", "{{.Id}}"],
+                                           env=clean_environment(), capture_output=True, text=True, timeout=10)
         except (OSError, subprocess.TimeoutExpired):
             raise RunnerError("Docker daemon/image is unavailable; no inference was started") from None
         if inspected.returncode or not inspected.stdout.strip().startswith("sha256:"):
@@ -99,7 +110,7 @@ class TestRunner:
                 if self.image_id is None:
                     self.verify()
                 # Mount only the current code, one test suite, and trusted worker.
-                command = ["docker", "--config", temporary, "run", "--pull", "never", "--rm",
+                command = docker_command(temporary) + ["run", "--pull", "never", "--rm",
                            "--name", container_name, "--network", "none", "--read-only", "--cap-drop", "ALL",
                            "--security-opt", "no-new-privileges", "--pids-limit", "64", "--memory", "256m",
                            "--memory-swap", "256m", "--cpus", "1", "--user", "65534:65534",
@@ -117,7 +128,7 @@ class TestRunner:
                 if self.backend == "docker":
                     # Only remove the uniquely named container created by this check.
                     try:
-                        subprocess.run(["docker", "--config", temporary, "rm", "-f", container_name],
+                        subprocess.run(docker_command(temporary) + ["rm", "-f", container_name],
                                        env=clean_environment(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
                     except (OSError, subprocess.TimeoutExpired):
                         raise RunnerError("Could not confirm test-container cleanup; reconcile Docker before resuming") from None
@@ -134,6 +145,12 @@ class TestRunner:
         except (ValueError, TypeError):
             return failed
         if result.get("total") != expected_count:
+            if result.get("collection_failed") is True:
+                # Invalid candidate imports/syntax can collapse unittest discovery into one failed test.
+                # The original task/ref suite has already been validated; do not call this infrastructure failure.
+                failed["failures"] = result.get("failures") or failed["failures"]
+                failed["collection_failure"] = True
+                return failed
             raise RunnerError("Test collection count differs from the task manifest")
         if not isinstance(result.get("passed"), int) or not 0 <= result["passed"] <= expected_count or not isinstance(result.get("failures"), list):
             return failed

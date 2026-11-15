@@ -23,8 +23,11 @@ def exclusive_lock(path):
 
 
 class BudgetLedger:
-    def __init__(self, path, config):
+    def __init__(self, path, config, spend_ceiling=None):
         self.path, self.config = Path(path), config
+        if spend_ceiling is not None and not nonnegative_number(spend_ceiling):
+            raise ValueError("Spend ceiling must be finite and nonnegative")
+        self.spend_ceiling = spend_ceiling
 
     def reserve(self, call_id, messages, model):
         pricing = model.get("pricing", {})
@@ -43,7 +46,10 @@ class BudgetLedger:
                 return
             spent = sum(item["liability"] for item in ledger["calls"].values())
             budget = self.config["budget"]
-            if spent + bound > budget["available"] - budget["protected_reserve"]:
+            ceiling = budget["available"] - budget["protected_reserve"]
+            if self.spend_ceiling is not None:
+                ceiling = min(ceiling,self.spend_ceiling)
+            if spent + bound > ceiling:
                 raise RuntimeError("Budget reserve would be crossed; no generation call sent")
             ledger["calls"][call_id] = {"liability": bound, "status": "reserved_or_unknown",
                                         "request_hash": digest([messages, model["model_id"], model["generation"]]),

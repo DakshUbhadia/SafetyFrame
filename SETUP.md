@@ -11,7 +11,9 @@ are now implemented; see [HARNESS.md](HARNESS.md).
 The initial inspection had no configured key; authenticated catalogue discovery
 subsequently succeeded. Model A is selected as `qwen3.5-397b` and Model B as
 `deepseek-v4-flash`. Both passed generation preflight at temperature 0 and an
-8,192-token output cap; excluded coding-pilot validation is still required before freeze.
+8,192-token output cap. Sprint 4 has now completed five excluded Model A coding
+pilots using that cap, with one preliminary partial-success profile. See
+[PILOTS.md](PILOTS.md) for usable outcomes, stress failures, and retained settings.
 The user's latest reported balance is **3,500 Adaption credits**, superseding the
 earlier 1,250-credit allocation. Published hosted token rates have been checked;
 account-specific limits and actual spending still need verification.
@@ -74,7 +76,8 @@ Edit `config/study.json` after discovery:
 3. Record each family and selection rationale independently of framing outcomes.
 4. Verify context/output capacity and supported settings using provider/model evidence.
 5. Adjust `generation.max_output_tokens` consistently across conditions within each model.
-   The initial value, 8192, is a planning value, not verified model support.
+   The retained value, 8192, is accepted in setup and five usable coding pilots;
+   a larger reasoning cap was tested only in the rejected stress trial.
 6. Add `generation.temperature: 0` only if supported; otherwise record the lowest
    supported setting or explain why the parameter is omitted.
 7. Set `settings_verified` and `settings_evidence` only after checking the actual

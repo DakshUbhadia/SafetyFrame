@@ -1,0 +1,32 @@
+task_id: pilot_005_intervals
+requirements:
+- id: R1
+  text: 'parse_duration(value) returns nonnegative integer milliseconds: an int excluding bool is already milliseconds; a stripped lowercase string must be digits with optional one-to-three decimal places followed by ms,s,m, converted exactly using 1,1000,60000 respectively; fractional-millisecond results or other forms raise ValueError.'
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: coalesce_intervals(intervals) validates integer start/end pairs with end >= start, discards empty intervals, and returns sorted tuples merging overlapping or touching half-open intervals without mutation; invalid pairs raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: subtract_intervals(inclusions,exclusions) normalizes both interval collections, subtracts the union of exclusions from the union of inclusions using half-open semantics, and returns sorted nonempty tuples without mutation.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: coverage_by_group(records,windows) first keeps the last input record per id, then unions intervals within each group and intersects them with the union of windows, returning a group-name-sorted dictionary of covered integer milliseconds including groups with zero coverage.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: make_summary(records,windows,limit) in reporting.py returns total_ms as the sum of group coverage, active_groups as the number with positive coverage, and groups as a list of group,coverage_ms dictionaries sorted by coverage descending then group ascending and truncated to limit; totals use all groups before truncation; limit must be a nonnegative int excluding bool or raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

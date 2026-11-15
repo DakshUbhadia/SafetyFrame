@@ -6,8 +6,9 @@ requirement accounting, and requirement-level self-assessment on benign coding t
 The Python environment, model preflight, draft preregistration, report skeleton,
 two-turn experiment harness, canonical renderer, and equivalence audit are implemented. Qwen and DeepSeek passed model
 access checks; account rate limits remain unconfirmed. The harness passes an
-offline synthetic repair trajectory and a paired reference audit. Benchmark construction, live experiment
-collection, and analysis scripts remain to be built.
+offline synthetic repair trajectory and a paired reference audit. Sprint 4 has
+five usable excluded capability pilots and a documented stress trial. Final
+benchmark construction, main-study collection, and analysis remain to be built.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -16,6 +17,8 @@ account discovery, budget configuration, and live acceptance. Track work in
 smoke commands, pilot task input, execution isolation, resumability, and result files.
 See [RENDERING.md](RENDERING.md) for canonical YAML authoring, C/S rendering,
 reference validation, and balance diagnostics.
+See [PILOTS.md](PILOTS.md) and [calibration results](report/pilot_calibration.md)
+for measured pilot outcomes and the provisional task-shape recommendation.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The default study targets 18 validated tasks (16 minimum, 20 maximum),

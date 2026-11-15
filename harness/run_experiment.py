@@ -51,6 +51,8 @@ def copy_source(source, target):
 
 
 def request_turn(provider, model, messages, raw_dir, turn, run_id, ledger, context=None):
+    provider_config=getattr(provider,'config',{})
+    transport={key:value for key,value in provider_config.items() if key in {'stream','timeout_seconds'}} if isinstance(provider_config,dict) else {}
     for attempt in range(3):
         prefix = f"turn{turn}-attempt{attempt}"
         request_path, outcome_path = raw_dir / f"{prefix}-request.json", raw_dir / f"{prefix}-outcome.json"
@@ -64,6 +66,7 @@ def request_turn(provider, model, messages, raw_dir, turn, run_id, ledger, conte
             if ledger:
                 ledger.reserve(f"{run_id}-{prefix}", messages, model)
             write_json(request_path, {"context": context or {}, "messages": messages, "model_id": model["model_id"],
+                       "transport": transport,
                        "generation": model["generation"], "turn": turn, "attempt": attempt,
                        "timestamp": datetime.now(timezone.utc).isoformat()}, immutable=True)
             started = time.monotonic()
@@ -81,6 +84,8 @@ def request_turn(provider, model, messages, raw_dir, turn, run_id, ledger, conte
             write_json(outcome_path, outcome, immutable=True)
             if ledger and "result" in outcome:
                 ledger.settle(f"{run_id}-{prefix}", result, model)
+            elif ledger and isinstance(outcome.get('raw'),dict) and outcome['raw'].get('usage'):
+                ledger.settle(f"{run_id}-{prefix}",{'summary':{'usage':outcome['raw']['usage']}},model)
         if "result" in outcome:
             return outcome["result"], outcome_path
         if not outcome["retryable"] or attempt == 2:
@@ -239,6 +244,7 @@ def run_trajectory(task, condition, config, role, provider, runner, output, run_
                 raise ValueError("Run identity changed; use a new run ID or reconcile artifacts")
         else:
             write_json(identity_path, identity, immutable=True)
+            write_json(run_dir/'configuration.json',config,immutable=True)
         state_path = run_dir / "state.json"
         if result_path.exists():
             existing = read_json(result_path)

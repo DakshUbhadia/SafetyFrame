@@ -1,6 +1,7 @@
 """Construct prompts from an explicit public-only allowlist."""
 
 from pathlib import Path
+import re
 from .artifacts import tree_files
 
 PROMPTS = Path(__file__).resolve().parents[1] / "prompts"
@@ -10,9 +11,14 @@ def prompt_text(name):
     return (PROMPTS / name).read_text(encoding="utf-8").strip()
 
 
-def files_text(root):
+def files_text(root, mapping=None):
+    paths = tree_files(root)
+    mapping = mapping or {}
+    replacements = {label: mapping["canonical"][key] for key, label in mapping.get("labels", {}).items()}
+    pattern = re.compile("|".join(re.escape(label) for label in sorted(replacements,key=len,reverse=True))) if replacements else None
+    ordered = sorted(paths, key=lambda name: pattern.sub(lambda match: replacements[match[0]],name) if pattern else name)
     return "\n\n".join(f'<file path="{name}">\n{path.read_text(encoding="utf-8")}\n</file>'
-                       for name, path in tree_files(root).items())
+                       for name in ordered for path in [paths[name]])
 
 
 def initial_messages(task, condition):
@@ -21,8 +27,8 @@ def initial_messages(task, condition):
         raise ValueError("Condition does not match the rendered task framing")
     text = (prompt_text(f"{framing}.txt") + "\n\nTechnical requirements:\n\n"
             + (task.root / "specification.md").read_text(encoding="utf-8")
-            + "\n\nRepository files:\n\n" + files_text(task.root / "starter")
-            + "\n\nPublic tests:\n\n" + files_text(task.root / "public_tests")
+            + "\n\nRepository files:\n\n" + files_text(task.root / "starter", task.metadata.get("mapping"))
+            + "\n\nPublic tests:\n\n" + files_text(task.root / "public_tests", task.metadata.get("mapping"))
             + '\n\nOutput format:\n\nReturn complete replacement contents of every file you modify.\n'
               '<file path="relative/path.py">\n...complete file contents...\n</file>')
     if condition in {"CD", "SD"}:

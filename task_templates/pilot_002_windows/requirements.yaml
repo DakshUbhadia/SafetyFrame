@@ -1,0 +1,32 @@
+task_id: pilot_002_windows
+requirements:
+- id: R1
+  text: deduplicate(records) keeps the greatest-timestamp record per id, choosing the last input record on ties, and returns records sorted by id without mutating inputs.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: window_records(records,start,end) retains records with start <= timestamp < end in input order, returns empty for start == end, and raises ValueError for start > end.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: weighted_rate(records) computes sum(weight*success)/sum(weight), defaulting absent weight to 1 and returning None when the total weight is zero.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: group_summary(records,start,end) deduplicates globally before applying the time window, then returns groups sorted by name as dictionaries with group, count, and rate; count includes zero-weight records, and absent group means 'default'.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: merge_metadata(base,patch) recursively merges dictionaries, deletes a key when its patch value is None, replaces lists and other values, and returns independent deep copies without mutating either input.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

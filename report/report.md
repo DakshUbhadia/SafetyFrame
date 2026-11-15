@@ -82,7 +82,10 @@ generates both framed variants, including domain names in code, paths, prose,
 and tests. Round-trip text and normalized AST comparison are anchored to the
 canonical source. A synthetic pair passes matched public and hidden reference
 checks; it is excluded from scientific inference. Final benchmark validation
-and model-based difficulty calibration remain pending.
+remains pending. Capability-only calibration completed five excluded trajectories:
+four scored 1.00 and one scored 0.80 on both turns; a sixth stress task was
+infeasible under provider/output limits. This is preliminary task-shape evidence,
+not a framing result. See pilot_calibration.md for exclusions and costs.
 
 ## 3.3 Experimental conditions
 Table: C, S, CD, SD.

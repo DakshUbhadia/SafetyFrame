@@ -8,7 +8,9 @@ artifacts remain pending. This document does not constitute a completed registra
 
 - Researcher: pending.
 - Final task count: pending validation; target 18, minimum 16, maximum 20.
-- Pilot task IDs: pending construction; all 4–6 pilots excluded from inference.
+- Pilot IDs: `pilot_001_ingestion`, `pilot_002_windows`, `pilot_003_calibration`,
+  `pilot_004_registry`, `pilot_005_intervals`, `pilot_006_jsonpatch`. All versions,
+  failed stress attempts, and the unused archived sampling draft remain excluded.
 - Freeze timestamp, commit, and manifest: pending Sprint 6.
 - Provider evidence: authenticated Adaption hosted catalogue succeeded (HTTP 200,
   seven model IDs); see `data/setup/preflight-20261114T091607Z-d5c0f392.json`.
@@ -57,6 +59,14 @@ infrastructure evidence, not a validated final task. `synthetic_domain_utils`
 is excluded from pilots and final inference. Length diagnostics currently use
 an explicitly labeled token proxy, not actual model-token counts; validate
 provider usage during calibration. See [RENDERING.md](RENDERING.md).
+
+Sprint 4 completed five capability-only Model A trajectories: four at ceiling,
+one at 0.80 on both turns. A sixth stress task was infeasible under tested provider
+and reasoning limits, with no usable final coding score. Retain temperature 0,
+8,192 output tokens, and non-streaming transport for feasible profiles. Prefer
+new five-requirement tasks with partial credit and modest integration; this is
+preliminary headroom evidence, not a guaranteed benchmark distribution. No final
+tasks were selected using C/S results. See [calibration](report/pilot_calibration.md).
 
 Calibrate task patterns using 4–6 disposable capability-framed pilots. Aim for
 approximate TCS 0.45–0.85 on a strong model. Do not reuse pilots or select final
