@@ -76,6 +76,8 @@ def test_source(definition, hidden):
 
 
 def build_task(definition, output):
+    if Path(output).resolve()==(ROOT/'task_templates').resolve() and (ROOT/'freeze_manifest.json').exists():
+        raise ValueError('Final benchmark is frozen; author changes require a documented replacement freeze')
     task_id = definition['id']
     if not task_id.startswith('task_') or len(definition['requirements']) != 5 or len(definition['cases']) != 5:
         raise ValueError('Expected a fresh final task with five requirements')

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": {
-    "task_target": 18,
+    "task_target": 16,
     "task_minimum": 16,
     "task_maximum": 20,
     "requirements_per_task": [
@@ -15,7 +15,7 @@
     "turns_per_trajectory": 2,
     "primary_endpoint": "tcs_turn2",
     "analysis_unit": "task",
-    "frozen": false
+    "frozen": true
   },
   "providers": {
     "adaption": {

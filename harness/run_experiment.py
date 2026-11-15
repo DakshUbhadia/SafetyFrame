@@ -88,7 +88,7 @@ def request_turn(provider, model, messages, raw_dir, turn, run_id, ledger, conte
                 ledger.settle(f"{run_id}-{prefix}",{'summary':{'usage':outcome['raw']['usage']}},model)
         if "result" in outcome:
             return outcome["result"], outcome_path
-        if not outcome["retryable"] or attempt == 2:
+        if not outcome["retryable"] or outcome['failure'] not in {'timeout','5xx','transport'} or attempt == 2:
             return None, outcome_path
         time.sleep(min(2 ** attempt, 4))
     raise AssertionError("Unreachable retry state")
@@ -217,8 +217,13 @@ def run_trajectory(task, condition, config, role, provider, runner, output, run_
     safe_name(block_id)
     if role not in config["models"] or condition not in config["models"][role]["conditions"]:
         raise ValueError("Condition is not part of the configured model design")
+    if task.metadata['kind']=='pilot' and config['study']['frozen']:
+        raise ValueError('Pilot collection is closed after the study freeze')
     if task.metadata["kind"] == "final":
-        raise ValueError("Final-study execution is gated until Sprint 6 implements freeze-manifest verification")
+        from .freeze import authorize_final
+        frozen=authorize_final(task,condition,config,role,provider,runner,output,run_id,block_id,order,ledger)
+    else:
+        frozen=None
     if provider.name != "scripted" and runner.backend != "docker":
         raise ValueError("Model-produced code requires the Docker backend")
     if task.metadata["kind"] == "synthetic" and provider.name != "scripted":
@@ -263,6 +268,8 @@ def run_trajectory(task, condition, config, role, provider, runner, output, run_
         try:
             # Check infrastructure before any paid call, including resumed trajectories.
             runner.verify()
+            if frozen and runner.image_id!=frozen['executor']['image_id']:
+                raise RunnerError("Docker image differs from the frozen reference image")
             executor = {"backend": runner.backend, "image_id": runner.image_id, "timeout_seconds": runner.timeout}
             executor_path = run_dir / "executor.json"
             if executor_path.exists():
@@ -338,6 +345,8 @@ def main():
             output = args.output or ROOT / "data" / "smoke"
             ledger = None
         else:
+            if config['study']['frozen']:
+                raise ValueError("Pilot collection is closed after freeze; use the frozen run schedule")
             if not args.task:
                 raise ValueError("Live pilot mode requires --task")
             load_env(ROOT / ".env")

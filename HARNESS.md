@@ -201,3 +201,13 @@ latency and retry counts include all recorded attempts.
 Zero-denominator metrics remain undefined. Hidden assertions are not counted as
 independent experimental observations. Report checklist accuracy and objective
 completion separately from format/provider failures.
+
+## Frozen main-study entry point
+
+Sprint 6 replaces the unconditional final-task block with committed-manifest
+verification. Main runs use harness.run_frozen and exact scheduled IDs;
+verification is the default and paid inference requires --execute.
+The immutable plan remains data/run_manifest.csv, while mutable status exports
+are data/main/run_manifest.csv. Pilot collection is closed after freeze.
+See [FROZEN_STUDY.md](FROZEN_STUDY.md) for commands, pacing, integrity checks,
+budget limits, interruption handling, and fixed scoring/analysis policies.

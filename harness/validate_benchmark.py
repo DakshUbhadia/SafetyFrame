@@ -159,6 +159,8 @@ def write_task_checklist(definition,path,record,hashes):
 
 
 def publish_inventory():
+    if (ROOT/'freeze_manifest.json').exists():
+        raise ValueError('Benchmark publication is closed after freeze')
     records=[]
     for definition in definitions():
         paths=sorted((ROOT/'data/audits/final').glob(definition['id']+'-*.json'),key=lambda p:p.stat().st_mtime_ns,reverse=True)
@@ -213,7 +215,7 @@ def verify_inventory():
         record=read_json(ROOT/entry['validation_record'])
         if record['task_id']!=entry['task_id'] or digest(record)!=entry['validation_record_hash'] or check_record(record)!=entry['artifact_hashes']:
             raise ValueError('Validation record integrity failure')
-    print('Verified 16 accepted tasks and their current source/rendered/validation hashes; benchmark is unfrozen.',flush=True)
+    print('Verified 16 accepted tasks and current artifact/evidence hashes; the validation registry predates the study freeze.',flush=True)
 
 
 def main():

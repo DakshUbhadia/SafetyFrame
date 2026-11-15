@@ -3,13 +3,14 @@
 Research plan and starter templates for evaluating framing sensitivity,
 requirement accounting, and requirement-level self-assessment on benign coding tasks.
 
-The Python environment, model preflight, draft preregistration, report skeleton,
+The Python environment, model preflight, local preregistration, report skeleton,
 two-turn experiment harness, canonical renderer, and equivalence audit are implemented. Qwen and DeepSeek passed model
 access checks; account rate limits remain unconfirmed. The harness passes an
 offline synthetic repair trajectory and a paired reference audit. Sprint 4 has
 five usable excluded capability pilots and a documented stress trial. Sprint 5
 adds 16 validated final task pairs across four families, with five requirements
-each. Preregistration/freeze, main-study collection, and analysis remain pending.
+each. Sprint 6 freezes the validated study and randomized 96-trajectory plan.
+Main-study collection and results analysis remain pending.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -22,6 +23,8 @@ See [PILOTS.md](PILOTS.md) and [calibration results](report/pilot_calibration.md
 for measured pilot outcomes and the provisional task-shape recommendation.
 See [BENCHMARK.md](BENCHMARK.md) for the accepted task inventory, completed
 checklists, Docker reference/fault evidence, and reproduction commands.
+See [FROZEN_STUDY.md](FROZEN_STUDY.md) for the committed freeze, analysis choices,
+planned run schedule, and commands that verify integrity without inference.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),
@@ -73,10 +76,10 @@ Validate actual pilot logging before freezing.
 The initial runtime directories follow v4 section 62. `requirements.txt` documents
 the Python harness and pinned PyYAML parser; live test execution also requires a
 working Docker engine and an explicitly installed image. Later dependencies will be added
-when used. [preregistration.md](preregistration.md) is an unsigned draft and
+when used. [preregistration.md](preregistration.md) is a completed local registration and
 [report/report.md](report/report.md) contains planned Methods and unfilled results.
-The freeze manifest and final study run manifest will be created in Sprint 6 from
-actual validated tasks and verified model choices.
+Sprint 6 records the freeze manifest and randomized planned run manifest from
+actual validated tasks and verified model choices. No human signature is asserted.
 
 The superseded v3 specification and duplicate navigation, daily scheduling,
 resource, interpretation, and decision guides were removed during cleanup.

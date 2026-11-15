@@ -16,3 +16,6 @@ data/usage_ledger.json
 data/usage_ledger.lock
 # Superseded, unregistered benchmark drafts; current audit records stay tracked.
 data/benchmark_revisions/
+# Main-study responses, snapshots, operational state, and keys stay local.
+# The immutable planned schedule data/run_manifest.csv remains tracked.
+data/main/

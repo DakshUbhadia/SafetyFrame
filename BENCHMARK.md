@@ -3,8 +3,8 @@
 The accepted set is **16 tasks, four per family**, with five scored requirements
 per task. Each has two editable Python files, three public examples, ten hidden
 checks (two per requirement), a reference solution, and paired C/S renderings.
-The set is validated but **not frozen**. Main-study calls remain gated pending
-Sprint 6.
+The set was accepted as validated/unfrozen in Sprint 5. Sprint 6's committed
+freeze is now authoritative; see [FROZEN_STUDY.md](FROZEN_STUDY.md).
 
 | IDs | Family | Problems |
 |---|---|---|
@@ -66,8 +66,10 @@ Docker engine/image available:
 ~~~
 
 This quick command verifies membership and current artifact/evidence hashes
-without executing solutions or contacting a model. To rebuild and rerun the
-acceptance checks:
+without executing solutions or contacting a model. The commands below document
+the original pre-freeze construction workflow; authoring/publication now refuse
+the frozen workspace. For current integrity checks use harness.freeze; reference
+checks can still be rerun with validate_benchmark --task TASK_ID.
 
 ~~~powershell
 foreach ($batch in 1..4) {
@@ -99,8 +101,8 @@ functionally distinct and do not use artificial casing traps, but ceiling risk
 remains. Output fit at 8,192 tokens is an author estimate; reasoning overhead
 and actual completion are not verified on these final tasks.
 
-Sprint 6 must preregister these limitations, confirm remaining provider setup,
-freeze the artifacts/models/policies, generate randomized run blocks and the
-run manifest, and perform the planned design-sensitivity calculation. At 16
-tasks the default design has 96 two-turn trajectories (192 responses); this
-document does not authorize or start them.
+Sprint 6 records these limitations, freezes artifacts/models/policies, generates
+randomized run blocks and the planned manifest, and computes design sensitivity.
+The official account rate limit remains unknown; a self-imposed serial throttle
+is frozen explicitly. At 16 tasks the default design has 96 two-turn trajectories
+(192 responses); benchmark validation does not start them.

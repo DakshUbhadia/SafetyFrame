@@ -9,7 +9,9 @@ implemented; account rate-limit confirmation remains pending. Sprint 2's two-tur
 harness and Sprint 3's renderer/audit are verified using excluded synthetic
 examples. Sprint 4 completed five usable capability pilots and one rejected stress
 trial. Sprint 5 completed 16 validated task pairs without final-task model calls.
-Sprints 6–11 remain not started. See [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
+Sprint 6 fixes the preregistration, analysis policies, randomized plan, and
+committed integrity freeze. Sprints 7–11 remain not started.
+See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
 The specification defines the research design. This plan organizes execution
@@ -48,7 +50,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 3. Task rendering and equivalence | Canonical YAML-to-C/S pipeline; text/AST checks and passing reference tests | 2 |
 | [x] | 4. Pilot and difficulty calibration | Five usable pilots, rejected stress trial, and provisional headroom profile | 3 |
 | [x] | 5. Final benchmark construction | 16 fully validated task pairs; inventory, Docker evidence, and per-task checklists | 4 |
-| [ ] | 6. Preregistration and freeze | Frozen artifacts, hashes, and randomized run manifest | 5 |
+| [x] | 6. Preregistration and freeze | Local registration, committed integrity freeze, 96 planned runs, and design-sensitivity table | 5 |
 | [ ] | 7. Model A factorial | Complete C/S/CD/SD dataset and first analysis | 6 |
 | [ ] | 8. Model B generalization | Complete C/S dataset | 7 |
 | [ ] | 9. Final analysis and figures | Reproducible tables, intervals, and figures | 8 |
@@ -211,22 +213,31 @@ spent. The benchmark remains unfrozen pending Sprint 6.
 
 **Goal:** Lock the study before final-study model calls.
 
-- [ ] Complete `preregistration.md` from the retained template.
-- [ ] Freeze task IDs, mappings, reference solutions, tests, prompts, scoring, and models.
-- [ ] Fix settings, format-failure handling, missingness, retries, and provider-failure policies.
-- [ ] Specify strict/lenient self-assessment rules, zero-denominator handling, and metric aggregation.
-- [ ] Fix the paired task-bootstrap procedure, resample count, and random seed.
-- [ ] Implement `harness/build_blocks.py`; randomize within each task × model block and block order.
-- [ ] Generate `data/run_manifest.csv` with Model A C/S/CD/SD and Model B C/S.
-- [ ] Record integrity hashes and freeze metadata in `freeze_manifest.json`.
-- [ ] Preserve a version-control checkpoint and verify hashes before main runs.
-- [ ] Compute the lightweight design-sensitivity table before observing final outcomes.
+- [x] Complete `preregistration.md` from the retained template.
+- [x] Freeze task IDs, mappings, reference solutions, tests, prompts, scoring, and models.
+- [x] Fix settings, format-failure handling, missingness, retries, and provider-failure policies.
+- [x] Specify strict/lenient self-assessment rules, zero-denominator handling, and metric aggregation.
+- [x] Fix the paired task-bootstrap procedure, resample count, and random seed.
+- [x] Implement `harness/build_blocks.py`; randomize within each task × model block and block order.
+- [x] Generate `data/run_manifest.csv` with Model A C/S/CD/SD and Model B C/S.
+- [x] Record integrity hashes and freeze metadata in `freeze_manifest.json`.
+- [x] Preserve a version-control checkpoint and verify hashes before main runs.
+- [x] Compute the lightweight design-sensitivity table before observing final outcomes.
 
 **Deliverables:** Completed preregistration, freeze manifest, randomized run manifest,
 and analysis configuration.
 
 **Exit criteria:** All choices needed for execution and scoring are recorded,
 all included tasks are validated, and the frozen artifact set can be verified.
+
+**Result:** 16 tasks, 32 randomized task/model blocks, 96 two-turn trajectories
+(64 A, 32 B), and 192 planned responses. Scheduling seed 2026111506;
+10,000 paired-task percentile bootstrap resamples with seed 2026111509.
+All analysis/failure rules are recorded in the local preregistration and
+configuration. Exact artifact hashes and source Git checkpoint are verified
+before main runs and every inference request. No final-study calls were made.
+Official account RPM remains unknown; freeze explicitly retains this limitation
+and imposes a conservative serial 60-second request-start interval.
 
 For `n` tasks, the default study contains `6n` trajectories and `12n` model
 responses, excluding pilots and retries:

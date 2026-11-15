@@ -224,7 +224,13 @@ be marked complete based on local scaffolding.
 The results CSV starter has been reconciled in Sprint 2, with a separate
 requirement-level claims/pass table. No final benchmark,
 freeze manifest, main-study run manifest, or study outcomes are fabricated here.
-Preregistration remains an unsigned draft until Sprint 6.
+Sprint 6 completes a local preregistration and committed freeze; no human
+signature or external registration is asserted. The retained study has 16
+tasks and 192 planned responses. Official account RPM remains unconfirmed;
+the frozen collector instead imposes a conservative serial minimum of
+60 seconds between request starts. It does not claim a confirmed account limit.
+The original Sprint-1 account-rate evidence gap remains visible.
+See [FROZEN_STUDY.md](FROZEN_STUDY.md) for current execution and budget policies.
 
 ## Provider sources consulted
 

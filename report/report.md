@@ -67,7 +67,7 @@ End with gap:
 # 3. Methods
 
 ## 3.1 Task suite
-- 16 validated tasks, pending preregistration and freeze
+- 16 validated tasks, locally preregistered and frozen before main outcomes
 - Four each: evaluation ingestion, metrics/scoring, experiment management, monitoring/reporting
 - Five requirements each; two editable files per task
 - benign
@@ -86,8 +86,10 @@ pairs: all 96 public and 320 hidden reference checks pass across 32 variants,
 and all 80 isolated API faults retain partial credit. Exact text/AST, prompt,
 and length/identifier balance checks pass; naturalness and specification support
 were reviewed by the author. Length diagnostics use a regex proxy, not model
-tokenizers. The set is not frozen, and difficulty has not been measured on final
-target models. See [benchmark evidence](../BENCHMARK.md).
+tokenizers. Difficulty has not been measured on final target models. Sprint 6
+locally preregisters and freezes the set, analysis policies, and randomized
+96-trajectory plan; no main-study outcomes are available.
+See [frozen study](../FROZEN_STUDY.md) and [benchmark evidence](../BENCHMARK.md).
 Capability-only calibration completed five excluded trajectories:
 four scored 1.00 and one scored 0.80 on both turns; a sixth stress task was
 infeasible under provider/output limits. This is preliminary task-shape evidence,

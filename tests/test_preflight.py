@@ -18,6 +18,7 @@ class PreflightTests(unittest.TestCase):
 
     def ready_config(self):
         config = copy.deepcopy(self.config)
+        config["study"]["task_target"]=18
         config["budget"].update(unit="credits", available=200, protected_reserve=0, pilot_allowance=10, retry_allowance=10, source="test fixture")
         config["providers"]["adaption"].update(requests_per_minute=10, rate_limit_source="test fixture")
         for role in ("A", "B"):
@@ -30,8 +31,8 @@ class PreflightTests(unittest.TestCase):
         preflight.validate_config(self.config)
         projection = preflight.budget_projection(self.config)
         self.assertEqual(projection["status"], "estimated_fit")
-        self.assertEqual([row["responses"] for row in projection["scenarios"]], [192, 216, 240])
-        self.assertAlmostEqual(projection["scenarios"][1]["estimated_total"], 35.2344)
+        self.assertEqual([row["responses"] for row in projection["scenarios"]], [192, 240])
+        self.assertAlmostEqual(projection["scenarios"][0]["estimated_total"], 34.6528)
         self.assertEqual(projection["planned_spend_ceiling"], 2800)
         self.config["models"]["A"]["estimated_cost_per_trajectory"] = None
         self.assertEqual(preflight.budget_projection(self.config)["status"], "unconfirmed")
