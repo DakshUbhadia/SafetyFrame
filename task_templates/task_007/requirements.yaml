@@ -1,0 +1,32 @@
+task_id: task_007
+requirements:
+- id: R1
+  text: match_pairs(left,right) matches dictionaries by shared string IDs, sorts IDs, and returns (id,right-left) tuples, ignoring unshared IDs.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: sign_summary(deltas,tolerance) counts positive values above tolerance, negative values below -tolerance, and ties in the inclusive middle; tolerance must be nonnegative or raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: trimmed_mean(values,fraction) sorts values, removes floor(n*fraction) from each end, and averages the remainder; require 0<=fraction<0.5 or raise ValueError, and return None for empty input.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: leave_one_out(values) returns the mean after omitting each index, preserving omission order; empty or singleton inputs return an empty list.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: comparison_report(left,right,tolerance,fraction) in reporting.py returns ids,deltas,signs,trimmed,leave_one_out using paired deltas; empty matches produce empty lists, zero sign counts, and trimmed=None.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

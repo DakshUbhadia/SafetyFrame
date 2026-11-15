@@ -1,0 +1,32 @@
+task_id: task_013
+requirements:
+- id: R1
+  text: classify(values,low,high) returns low,ok,high labels using strict comparisons (<low or >high); None yields missing, boundary values are ok, and low>high raises ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: breach_streaks(labels) returns consecutive identical low/high streak lengths at each position; ok or missing resets to zero and switching breach side starts at one.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: alert_events(labels,min_streak,cooldown) requires positive integer min_streak and nonnegative integer cooldown excluding booleans or raises ValueError; emit index,side events when a low/high streak first reaches min_streak, and suppress candidates with index-last_emitted_index<=cooldown; a suppressed candidate is never delayed.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: merge_episodes(indices,max_gap) requires nonnegative integer max_gap excluding booleans or raises ValueError; sort and deduplicate integer indices and merge adjacent indices when their difference<=max_gap, returning start,end,count dictionaries.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: alert_report(values,low,high,min_streak,cooldown,max_gap) in reporting.py returns labels,streaks,events,episodes,missing, where episodes merge emitted event indices and missing counts None values.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

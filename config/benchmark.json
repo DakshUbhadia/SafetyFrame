@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "status": "validated_unfrozen",
+  "frozen": false,
+  "task_count": 16,
+  "requirements_per_task": 5,
+  "family_counts": {
+    "ingestion": 4,
+    "metrics": 4,
+    "experiments": 4,
+    "monitoring": 4
+  },
+  "catalogue_hash": "8ebeb9a6613ad2b9cbdc5cdb743f7d99e7fc9b409185b47738688e82470610be",
+  "selection_policy": "No final-task target-model calls, observed outcomes, or framing differences used in selection.",
+  "excluded_task_ids": [
+    "pilot_001_ingestion",
+    "pilot_002_windows",
+    "pilot_003_calibration",
+    "pilot_004_registry",
+    "pilot_005_intervals",
+    "pilot_006_jsonpatch",
+    "pilot_006_sampling",
+    "synthetic_domain_utils",
+    "synthetic_smoke"
+  ],
+  "sprint5_exit_criteria_met": true,
+  "not_before_sprint6": "Main study execution remains gated until preregistration and freeze.",
+  "tasks": [
+    {
+      "task_id": "task_001",
+      "family": "ingestion",
+      "title": "Escaped record-path projection",
+      "validation_record": "data/audits/final/task_001-ea20c5e511.json",
+      "validation_record_hash": "a7bd0612dafabf40c9532d28cd0a6f785f102e9e72cefc7b2c09dfd6738a84e5",
+      "artifact_hashes": {
+        "template": "11cc17265e314b328249fb4d221c47837c5759214525baa28ab448e9b6cc2a4a",
+        "C": "b11883f23ea3cad6d33c4c1e38f205a5b9e2d8d62ba0f9a1f8324561ea109a98",
+        "S": "3670986814d680297bcffc877b1409b84e6fdde22906cb6a7841b9edb2281a45"
+      }
+    },
+    {
+      "task_id": "task_002",
+      "family": "ingestion",
+      "title": "Typed CSV result ingestion",
+      "validation_record": "data/audits/final/task_002-aef2182588.json",
+      "validation_record_hash": "8f117c0205e2524d151ab778e5bff5fcbe2fff70a7f859e205d46af3e349e518",
+      "artifact_hashes": {
+        "template": "a204f9d058cce70184c1028137f47647ae8c01ba5d5c5b388d84601dfab3957c",
+        "C": "d8db8098ec9ab6c9e3f966bdd07c1fbd539a73e034b751581c1978c1506274c1",
+        "S": "1d18be71c8aa43539f4105c109c8b5ae0d2c9998088b827e2636a453820d5ce1"
+      }
+    },
+    {
+      "task_id": "task_003",
+      "family": "ingestion",
+      "title": "Record columnar round-trip",
+      "validation_record": "data/audits/final/task_003-a62d9edd04.json",
+      "validation_record_hash": "7ada747cc5b1e2f05a39798ab460902ba04a242ebbd0790e96768785947fd55c",
+      "artifact_hashes": {
+        "template": "2077aeb54f91809774e32e19b2ceb761aa61ed21b1596e84e159fa2e992af19d",
+        "C": "d9b620f597a70ca12b36cec1aa70e8daa557d8b35b76c8e1e370aec1d1d1bc86",
+        "S": "552e4ab866e2365bdf548bdf70c8ab9674a799efbb012b836bb305a1c1e94d80"
+      }
+    },
+    {
+      "task_id": "task_004",
+      "family": "ingestion",
+      "title": "Versioned score-table migration",
+      "validation_record": "data/audits/final/task_004-5c96d5fb97.json",
+      "validation_record_hash": "139c34d5241bd71dae52c5bc9911d0150a60dccfb5493a01f8142795dc56a98b",
+      "artifact_hashes": {
+        "template": "898d58562d43c7e4547301c962f7a9f7aaa514d50c110b1d5aed6bb60dd986aa",
+        "C": "e2508d93ad12e23ce68e013b326503a3d26dd157af37e93e4c5eb8894ff250f5",
+        "S": "82e71b4bc1079bf1a2252967c898acc7a2a172d3845af1caaeaa4cca8bd28b18"
+      }
+    },
+    {
+      "task_id": "task_005",
+      "family": "metrics",
+      "title": "Tied ranking evaluation",
+      "validation_record": "data/audits/final/task_005-e2cb183a4a.json",
+      "validation_record_hash": "e0de626987af728e80bf24e45999764037fbe98ce39d89de62cd7ca1159d44ee",
+      "artifact_hashes": {
+        "template": "9bfce3d77531b560bf5fb40f468c3ff302dfdad047be11aada940da43e64faa2",
+        "C": "d045b945890c9a3ce6de4f61b18a288e5af9713eb2aaedfb85245b429e3ac4f0",
+        "S": "25181f30f96f721b851755cf24ec6d29cb2d212acd76234e07203584a2fe09a7"
+      }
+    },
+    {
+      "task_id": "task_006",
+      "family": "metrics",
+      "title": "Cost-sensitive decision scoring",
+      "validation_record": "data/audits/final/task_006-adacc95995.json",
+      "validation_record_hash": "5e3ca5e3ee38173c2e21b545fd31ee74096d9b0c21cbd23ecad4cd30eea355dd",
+      "artifact_hashes": {
+        "template": "61c034b74e97bad94867acdae788683d9e5ef5637a00cdcca648e01ba6954701",
+        "C": "132b6e6679b9e8005daffb73ce50a71103023234c917db5fa71579bf17e7a9af",
+        "S": "3912c431eea0464e4dd9d49aebbf3f5c0b2abc4ee28c864abeabd847b3c895cd"
+      }
+    },
+    {
+      "task_id": "task_007",
+      "family": "metrics",
+      "title": "Paired seed-score comparison",
+      "validation_record": "data/audits/final/task_007-0b2b78d2f1.json",
+      "validation_record_hash": "1ad1b039eefcc74bdf9ec7fd5769704923ab7bb3426c782fd670afa2471cb94f",
+      "artifact_hashes": {
+        "template": "d9764cf37731ccb614f1a7b3db10196bf20130e83b5c11073d1a8cde69ed2b7d",
+        "C": "1c9bbd50659160ff8fa71ab44803ae71a9e13083bc53baa3f9123bbd043ba57f",
+        "S": "b31c59e653e25b605210049f0d8bab0062ea3da2ff1ed01172c5a3acf03c1ad7"
+      }
+    },
+    {
+      "task_id": "task_008",
+      "family": "metrics",
+      "title": "Hierarchical label aggregation",
+      "validation_record": "data/audits/final/task_008-2a8df41c48.json",
+      "validation_record_hash": "9b211c4427acfe0cfed23a742aaa48857ec766f0291b6b0df151cbbaf1973c15",
+      "artifact_hashes": {
+        "template": "0e94bd6239384a8902a97f73fbd47c0a6d2f491f1ba95c5a5c49f2f566bcaadf",
+        "C": "0653505b7c5dc35528b1a32d97c0ae592abbfd7369d0a6b4fa2482e3bcbba19e",
+        "S": "bfce1e34e82ead49beb1391900f3bdc2af29a8350337f942c32abda25b761157"
+      }
+    },
+    {
+      "task_id": "task_009",
+      "family": "experiments",
+      "title": "Dependency-aware batch scheduling",
+      "validation_record": "data/audits/final/task_009-5c5074aa2c.json",
+      "validation_record_hash": "77ae4c2a340e1a56609df48c751327219bfd573703a471b6996e6150e68995aa",
+      "artifact_hashes": {
+        "template": "a30a0bb1bedcea35db2947045fea1c8c5ddfd06623c3e9b3576bd5b3fe8eca55",
+        "C": "4508f18d106e516d3279454cdc40c893f26949fe75edd6be1dd9b4107fd7c4c6",
+        "S": "a56976f9eff03a927cf9a3ec369c655a5c5d1332e83d5aab76f472b811550ebe"
+      }
+    },
+    {
+      "task_id": "task_010",
+      "family": "experiments",
+      "title": "Layered configuration planning",
+      "validation_record": "data/audits/final/task_010-2bd4b52236.json",
+      "validation_record_hash": "ec7b14fa23e7591ef804a5486333313dbe3c3fa586df335121d91b369e07ef60",
+      "artifact_hashes": {
+        "template": "5d68ec15f7915fa294edf1c412712128c30bd96a0bd521a384be20d4576307b5",
+        "C": "f40eb51d75cf8d72c060138faf048cb6f60feba2c44a4dcbcc87133b7e11258e",
+        "S": "6179c8b8213e04712046933979b8bd4f39801770eefb22655d6f85b0b810834b"
+      }
+    },
+    {
+      "task_id": "task_011",
+      "family": "experiments",
+      "title": "Checkpoint replay and reconciliation",
+      "validation_record": "data/audits/final/task_011-590bae3b85.json",
+      "validation_record_hash": "e92ce82968d43573efbce52f8ef20363c38e0546b2c5ea9a1dd7ab2f041571a6",
+      "artifact_hashes": {
+        "template": "f13901a3381304925e2d078ffbd7274522e172fe1301ddb8cfbcb4c8d23a1ff1",
+        "C": "ddacabd790db43d818b36e42d81da5dc7fef12b33dd0fc0c04e5a935f258b8b0",
+        "S": "336bbd32ffe4101c52d8b3c0bd8a4f8123da1731a9e547f483c5f17bf8515d2c"
+      }
+    },
+    {
+      "task_id": "task_012",
+      "family": "experiments",
+      "title": "Balanced condition assignment",
+      "validation_record": "data/audits/final/task_012-75cfd7729e.json",
+      "validation_record_hash": "fc0bcc66f10354fb7db462df2f131cb3ad5fb55784b2fed55ca34913c601da9b",
+      "artifact_hashes": {
+        "template": "1e1f90697d338768ef2fb2129c045acaa846df5cbfdb4fd48025ed8f081abff4",
+        "C": "25f5da4eef20ba9d90317a73da5d1b23f4c36ed44af9e15546fd583b101d37a4",
+        "S": "5a9d83549d373b5c736c242066e72af816e02e01a0e6329d9b74472f853dd3e7"
+      }
+    },
+    {
+      "task_id": "task_013",
+      "family": "monitoring",
+      "title": "Consecutive-breach alert state machine",
+      "validation_record": "data/audits/final/task_013-ca031840ef.json",
+      "validation_record_hash": "a5bf3e9a49633629fd01eb1fe98930da03fdabb28dc6647de40ae4f0091b5733",
+      "artifact_hashes": {
+        "template": "0e76ff0a99ce03a0de112aefc813aeef04299f7dc69e192787914c60a4bfa06e",
+        "C": "eb7619c0abf98a91be51e8cdc009685a7bffcc0759597c42c5f337a7bbbb0216",
+        "S": "79788403ec00c81f853ace7075ae7c94bfad16efe5d3f5af2b72d6b92f71803a"
+      }
+    },
+    {
+      "task_id": "task_014",
+      "family": "monitoring",
+      "title": "Missing-aware time-series resampling",
+      "validation_record": "data/audits/final/task_014-74197e370f.json",
+      "validation_record_hash": "611d01c52ee13842c84242cc57eb9e8cafbc4b54981a52e8566c5a5178003166",
+      "artifact_hashes": {
+        "template": "2ff626a3c91f7a771e9c3c084fb99ad5fe9b576321092ad15d0e61bdc84e7bda",
+        "C": "d7840b71cfa3044f12442c3a95c9a8dfd71abfcbb2144844761d272b81f64752",
+        "S": "1c964cf0fb17f217d506768fac403008a4e5041acfb838bc609d4f570d1efe2f"
+      }
+    },
+    {
+      "task_id": "task_015",
+      "family": "monitoring",
+      "title": "Cohort distribution drift report",
+      "validation_record": "data/audits/final/task_015-357e11d10c.json",
+      "validation_record_hash": "78a5136a3a7fab5f3c0edadf2e8cb3ba4bea30feabc9d57e42e04808f77ff920",
+      "artifact_hashes": {
+        "template": "9d21a5292cb487b410873e9feb1bf91be804bf0ac29b79ea575e92293578b41d",
+        "C": "6d3ff6e72b5dd62600227327b2df8ed766dd1296951329c01d86a90edbe9597b",
+        "S": "111df77d94a8fdde74b88f26d18fb1dffb22ad27080c2607fe1b01e1ff3ee83b"
+      }
+    },
+    {
+      "task_id": "task_016",
+      "family": "monitoring",
+      "title": "Structured report diff and rendering",
+      "validation_record": "data/audits/final/task_016-0b9a448895.json",
+      "validation_record_hash": "da096d58e215725ac74713995621592be9901b45914b2c1bc7be0c078a623382",
+      "artifact_hashes": {
+        "template": "d96d5637e9e4246b1c3afedcb7d8d9329e883a47d6f8c69775ee5d6b4903ebc5",
+        "C": "0d205e042e26d6207a6183ab40fc4a1642be6223494ebc1de183f483f39034ee",
+        "S": "728c06507f7c027264746384b88016220c9ebabd5379e5a38a4b636e55e720f1"
+      }
+    }
+  ]
+}

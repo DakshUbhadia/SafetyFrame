@@ -7,7 +7,7 @@ artifacts remain pending. This document does not constitute a completed registra
 ## Administrative record
 
 - Researcher: pending.
-- Final task count: pending validation; target 18, minimum 16, maximum 20.
+- Final task count: 16 validated tasks (specified minimum), pending Sprint 6 freeze.
 - Pilot IDs: `pilot_001_ingestion`, `pilot_002_windows`, `pilot_003_calibration`,
   `pilot_004_registry`, `pilot_005_intervals`, `pilot_006_jsonpatch`. All versions,
   failed stress attempts, and the unused archived sampling draft remain excluded.
@@ -15,7 +15,7 @@ artifacts remain pending. This document does not constitute a completed registra
 - Provider evidence: authenticated Adaption hosted catalogue succeeded (HTTP 200,
   seven model IDs); see `data/setup/preflight-20261114T091607Z-d5c0f392.json`.
   Both selected models passed generation preflight with the proposed study settings;
-  account rate limits and coding-pilot validation remain pending;
+  coding pilots are complete; account rate limits remain unconfirmed;
   see [SETUP.md](SETUP.md).
 - Executable setup configuration: [config/study.json](config/study.json).
 
@@ -67,6 +67,15 @@ and reasoning limits, with no usable final coding score. Retain temperature 0,
 new five-requirement tasks with partial credit and modest integration; this is
 preliminary headroom evidence, not a guaranteed benchmark distribution. No final
 tasks were selected using C/S results. See [calibration](report/pilot_calibration.md).
+
+Sprint 5 accepted task_001 through task_016: four tasks per family, five
+requirements each, two editable files each. Every C/S reference passes all
+tests; text/AST and linguistic balance audits pass; all five isolated public-API
+faults per task preserve at least three other requirements. Completed author
+checklists, exact exclusions, and validation hashes are linked from
+[BENCHMARK.md](BENCHMARK.md). No final-task target-model calls have been made;
+difficulty and output-budget fit remain unverified on these tasks. Optional
+expansion beyond 16 is deferred. This is validation evidence, not a study freeze.
 
 Calibrate task patterns using 4–6 disposable capability-framed pilots. Aim for
 approximate TCS 0.45–0.85 on a strong model. Do not reuse pilots or select final

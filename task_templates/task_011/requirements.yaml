@@ -1,0 +1,32 @@
+task_id: task_011
+requirements:
+- id: R1
+  text: latest_checkpoints(events) chooses the event with greatest integer sequence per job, with later input occurrence winning equal sequences; return deep-copied events by job ID.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: resume_jobs(jobs,checkpoints) returns sorted unique job IDs whose checkpoint is absent or status is not complete; ignore checkpoint IDs outside jobs.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: reconcile_artifacts(expected,observed) compares path-to-hash dictionaries and returns sorted missing,changed,unexpected path lists; changed paths are present in both with unequal hashes.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: plan_retries(jobs,checkpoints,max_attempts) requires a positive integer limit excluding booleans or raises ValueError; return sorted eligible job IDs with absent checkpoint or status pending/failed and attempts below limit, treating absent attempts as zero; running/complete jobs are excluded.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: recovery_report(jobs,events,expected,observed,max_attempts) in reporting.py returns latest,resume,artifacts,retry from the four core functions.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

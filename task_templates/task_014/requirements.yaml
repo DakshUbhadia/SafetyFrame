@@ -1,0 +1,32 @@
+task_id: task_014
+requirements:
+- id: R1
+  text: bucket_samples(samples,width,origin) requires positive finite width or raises ValueError; group (time,value) pairs under integer floor((time-origin)/width), preserving input value order within each bucket and returning keys in ascending order.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: reduce_buckets(buckets) returns each bucket's mean excluding None, or None when no numeric values remain; preserve the input key set.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: fill_forward(values,max_missing) requires a nonnegative integer limit excluding booleans or raises ValueError; fill at most max_missing consecutive None entries after a known value, leaving leading missing values and longer-gap remainder as None; each observed value resets the gap.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: moving_average(values,window) requires a positive integer window excluding booleans or raises ValueError; at each index average non-None values among the most recent window positions including current, returning None when all are missing.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: series_report(samples,width,origin,start,end,max_missing,window) in reporting.py reduces buckets, builds values for every integer bucket start through end inclusive using None for absent buckets, forward-fills then smooths; return buckets,values,filled,smoothed and empty lists when start>end.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

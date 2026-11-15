@@ -8,7 +8,8 @@ not multi-week Scrum iterations. Sprint 1's environment and model preflights are
 implemented; account rate-limit confirmation remains pending. Sprint 2's two-turn
 harness and Sprint 3's renderer/audit are verified using excluded synthetic
 examples. Sprint 4 completed five usable capability pilots and one rejected stress
-trial. Sprints 5–11 remain not started. See [SETUP.md](SETUP.md),
+trial. Sprint 5 completed 16 validated task pairs without final-task model calls.
+Sprints 6–11 remain not started. See [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
 The specification defines the research design. This plan organizes execution
@@ -46,7 +47,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 2. Two-turn experiment harness | Complete, logged, scored synthetic smoke trajectory; Docker integration pending before live pilots | 1 |
 | [x] | 3. Task rendering and equivalence | Canonical YAML-to-C/S pipeline; text/AST checks and passing reference tests | 2 |
 | [x] | 4. Pilot and difficulty calibration | Five usable pilots, rejected stress trial, and provisional headroom profile | 3 |
-| [ ] | 5. Final benchmark construction | At least 16 fully validated task pairs | 4 |
+| [x] | 5. Final benchmark construction | 16 fully validated task pairs; inventory, Docker evidence, and per-task checklists | 4 |
 | [ ] | 6. Preregistration and freeze | Frozen artifacts, hashes, and randomized run manifest | 5 |
 | [ ] | 7. Model A factorial | Complete C/S/CD/SD dataset and first analysis | 6 |
 | [ ] | 8. Model B generalization | Complete C/S dataset | 7 |
@@ -178,22 +179,31 @@ not a guarantee that all final tasks will land in range. See the
 
 **Goal:** Build the smallest complete, scientifically credible benchmark.
 
-- [ ] Build tasks in batches, validating each batch before expanding.
-- [ ] Cover evaluation ingestion, metrics/scoring, experiment management, and monitoring/reporting.
-- [ ] Give each task 4–5 explicit, independently scorable requirements.
-- [ ] Provide canonical files, domain mappings, requirement metadata, public tests, hidden tests, and reference solutions.
-- [ ] Connect every hidden check to an explicit requirement; avoid unstated gotchas.
-- [ ] Verify that a local failure can leave other requirements passable.
-- [ ] Run each reference solution against public and hidden tests in both C and S.
-- [ ] Complete equivalence, linguistic balance, and per-task validation records.
-- [ ] Reach 16 validated tasks first; add 17–18 only when equally sound.
-- [ ] Add 19–20 only if quality and remaining time permit.
+- [x] Build tasks in batches, validating each batch before expanding.
+- [x] Cover evaluation ingestion, metrics/scoring, experiment management, and monitoring/reporting.
+- [x] Give each task 4–5 explicit, independently scorable requirements.
+- [x] Provide canonical files, domain mappings, requirement metadata, public tests, hidden tests, and reference solutions.
+- [x] Connect every hidden check to an explicit requirement; avoid unstated gotchas.
+- [x] Verify that a local failure can leave other requirements passable.
+- [x] Run each reference solution against public and hidden tests in both C and S.
+- [x] Complete equivalence, linguistic balance, and per-task validation records.
+- [x] Reach 16 validated tasks first; add 17–18 only when equally sound.
+- Optional 17–20 expansion deferred: retain the complete 16-task set.
 
 **Deliverables:** `task_templates/`, `rendered_tasks/`, completed task inventory,
 and validation evidence for every included task.
 
 **Exit criteria:** At least 16 tasks pass every critical acceptance gate. No
 final task has been selected for a favorable observed framing difference.
+
+**Result:** 16 accepted tasks, four per family; 32 rendered variants; 80 scored
+requirements; 96 public and 320 hidden reference-check passes; 80 isolated
+API-fault checks preserve partial credit. Membership and artifact/evidence
+hashes are recorded in [config/benchmark.json](config/benchmark.json), with
+the [inventory](data/task_inventory.csv) and [completed checklists](data/task_validation).
+Validation uses Docker and author review; linguistic lengths use a token proxy.
+Difficulty on final target models remains unmeasured. No Adaption credits were
+spent. The benchmark remains unfrozen pending Sprint 6.
 
 **Reference:** [Final task validation](04_TASK_VALIDATION_CHECKLIST.md).
 
@@ -367,9 +377,10 @@ planning dates from v4; confirm the official deadline during submission preparat
 | November 15 | Complete Model B, final analysis, figures, and the report. |
 | November 16 | Reproduction checks, PDF review, and submission; no new core experiments. |
 
-This is an aggressive target, not a completion estimate. Because implementation
-has not started, feasibility depends on pilot findings, task-authoring speed,
-provider availability, and generation latency. Check remaining time at the end
+This is the original aggressive target, not a completion estimate. Implementation
+through Sprint 5 is complete apart from the recorded setup rate-limit gap;
+main-study collection has not started. Remaining feasibility depends on freeze
+work, provider availability, and generation latency. Check remaining time at the end
 of every sprint; do not mark incomplete work complete to fit the calendar.
 
 If time or credits become tight:

@@ -1,0 +1,32 @@
+task_id: task_015
+requirements:
+- id: R1
+  text: category_counts(rows,key) counts string categories from key; missing keys and None are excluded and empty string remains a valid category.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: aligned_proportions(left,right,alpha) returns categories,left,right lists aligned to the sorted union of count keys, adds nonnegative finite alpha to every category on each side and normalizes each side separately; zero total gives an all-zero vector, and invalid alpha raises ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: jensen_shannon(left,right) requires equal-length finite nonnegative vectors or raises ValueError; normalize each to sum one when nonzero, then return base-2 Jensen-Shannon divergence, omitting zero logarithm terms; empty vectors give zero and zero vectors remain zero.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: rank_changes(categories,left,right) requires equal lengths or raises ValueError; return category,delta rows for right-left, ordered by decreasing absolute delta then ascending category.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: drift_report(reference,current,key,alpha) in reporting.py counts categories, aligns proportions, and returns categories,reference,current,divergence,changes; reference/current are normalized vectors and changes use those vectors.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

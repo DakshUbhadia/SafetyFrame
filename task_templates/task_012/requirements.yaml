@@ -1,0 +1,32 @@
+task_id: task_012
+requirements:
+- id: R1
+  text: rotate_conditions(conditions,offset) requires a nonempty list of unique string conditions or raises ValueError; return a left rotation by offset modulo length, supporting negative integer offsets.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: assign_blocks(tasks,conditions) requires unique task IDs and valid conditions or raises ValueError; preserve task order and return task,condition,position rows with each task's condition order rotated left by its task index and one-based positions.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: validate_assignments(rows,tasks,conditions) returns True exactly when task and condition lists are unique, conditions nonempty, each task/condition pair occurs once, no unknown IDs occur, and positions per task are exactly integers 1..number_of_conditions excluding booleans; otherwise return False.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: assignment_counts(rows) counts occurrences by condition, including repeated rows, returning a sorted-key dictionary; empty rows return an empty dictionary.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: assignment_report(tasks,conditions) in reporting.py returns rows,valid,counts,position_counts, where position_counts maps each condition to a list of counts at each position 1..number_of_conditions.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

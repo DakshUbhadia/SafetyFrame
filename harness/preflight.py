@@ -58,8 +58,8 @@ def validate_config(config: dict) -> None:
         raise ValueError("v4 requires two turns and the Turn-2 TCS endpoint")
     if study["analysis_unit"] != "task" or study["requirements_per_task"] != [4, 5]:
         raise ValueError("v4 requires task-level inference and 4..5 requirements")
-    if study["pilot_task_range"] != [4, 6] or study["frozen"] is not False:
-        raise ValueError("Sprint 1 requires 4..6 pilot tasks and an unfrozen design")
+    if study["pilot_task_range"] != [4, 6] or type(study["frozen"]) is not bool:
+        raise ValueError("Study requires 4..6 pilot tasks and an explicit boolean freeze state")
     for provider in config["providers"].values():
         url = urlsplit(provider["base_url"])
         if url.scheme != "https" or not url.netloc or url.username or url.password or url.query or url.fragment:

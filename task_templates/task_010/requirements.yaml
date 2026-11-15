@@ -1,0 +1,32 @@
+task_id: task_010
+requirements:
+- id: R1
+  text: deep_merge(base,override) recursively merges dictionaries; non-dictionary overrides, including lists and None, replace base values; return a deep copy and preserve both inputs.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: expand_grid(grid) returns dictionaries for the Cartesian product of value lists, with dimensions sorted by key and values in supplied order; an empty grid yields [{}], any empty dimension yields [], and repeated values remain repeated.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: select_shard(items,index,count) returns deep copies of items at positions p where p%count==index; count must be a positive integer and index an integer in [0,count), excluding booleans, otherwise raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: canonical_fingerprint(config) returns SHA-256 hex of UTF-8 JSON with recursively sorted keys, separators comma/colon without spaces, ensure_ascii=False, and allow_nan=False; nonfinite numbers raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: configuration_report(base,grid,index,count) in reporting.py merges each grid combination into base, selects the positional shard, and returns configurations,fingerprints,total where total is the full combination count before sharding.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "schedule_seed": 2026111506,
+  "researcher": "Daksh Ubhadia (repository account DakshUbhadia; name inferred from account)",
+  "freeze_authority": "User instruction to implement Sprint 6; automated local freeze by Codex, not a human signature or external registration",
+  "phases": ["A", "B"],
+  "block_order": "Shuffle all task/model blocks, then project A before B; preserve randomized relative block order within each model phase",
+  "within_block": "shuffle configured conditions independently in the same seeded random stream",
+  "maximum_retries_per_turn": 2,
+  "retryable": ["timeout", "5xx", "transport"],
+  "backoff_seconds": [1, 2],
+  "nonretryable": ["rate_limit", "provider_filter", "provider_rejection", "invalid_provider_response", "provider_error", "model_mismatch"],
+  "provider_pacing": {
+    "minimum_request_start_interval_seconds": 60,
+    "scope": "one collector; persistent shared start-time state, including retries and both models",
+    "basis": "Self-imposed conservative 1 request/minute, not a verified provider/account limit",
+    "on_429": "record terminal rate_limit for the trajectory; stop collection for operator review, no automatic retry"
+  },
+  "collection": {
+    "output": "data/main",
+    "serial": true,
+    "restart": "resume identical frozen run ID; persist request before sending; ambiguous request without outcome requires account reconciliation, never blind resend",
+    "selection": "execute only frozen manifest entries in phase/block/condition order; never replace terminal low scores or provider failures",
+    "pause_on_failure": ["rate_limit", "provider_rejection", "model_mismatch", "missing_credentials", "provider_error", "invalid_provider_response"],
+    "budget_spend_ceiling_credits": 40,
+    "protected_account_reserve_credits": 700,
+    "balance_evidence": "3,500 credits user-reported; not account-verified; existing unknown pilot liabilities remain reserved"
+  },
+  "executor": {
+    "backend": "docker",
+    "image": "python:3.13-slim",
+    "image_id": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "timeout_seconds": 10,
+    "cpus": 1,
+    "memory": "256m",
+    "pids": 64,
+    "network": "none",
+    "user": "65534:65534"
+  }
+}

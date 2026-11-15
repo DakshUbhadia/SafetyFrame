@@ -7,8 +7,9 @@ The Python environment, model preflight, draft preregistration, report skeleton,
 two-turn experiment harness, canonical renderer, and equivalence audit are implemented. Qwen and DeepSeek passed model
 access checks; account rate limits remain unconfirmed. The harness passes an
 offline synthetic repair trajectory and a paired reference audit. Sprint 4 has
-five usable excluded capability pilots and a documented stress trial. Final
-benchmark construction, main-study collection, and analysis remain to be built.
+five usable excluded capability pilots and a documented stress trial. Sprint 5
+adds 16 validated final task pairs across four families, with five requirements
+each. Preregistration/freeze, main-study collection, and analysis remain pending.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -19,9 +20,11 @@ See [RENDERING.md](RENDERING.md) for canonical YAML authoring, C/S rendering,
 reference validation, and balance diagnostics.
 See [PILOTS.md](PILOTS.md) and [calibration results](report/pilot_calibration.md)
 for measured pilot outcomes and the provisional task-shape recommendation.
+See [BENCHMARK.md](BENCHMARK.md) for the accepted task inventory, completed
+checklists, Docker reference/fault evidence, and reproduction commands.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
-design. The default study targets 18 validated tasks (16 minimum, 20 maximum),
+design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),
 Model A in C/S/CD/SD, Model B in C/S, and two turns per trajectory.
 
 ## Execution materials

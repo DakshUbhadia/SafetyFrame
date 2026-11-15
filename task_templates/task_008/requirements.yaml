@@ -1,0 +1,32 @@
+task_id: task_008
+requirements:
+- id: R1
+  text: ancestors(label,parents) returns the label and its successive parents, stopping at None or an absent parent entry; repeated nodes indicate a cycle and raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R1_case1
+  - test_hidden.Requirements.test_R1_case2
+- id: R2
+  text: label_credit(expected,predicted,parents) returns 1/(1+distance) if predicted occurs on expected's ancestor chain, otherwise zero; distance zero is an exact match and cycles raise ValueError.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R2_case1
+  - test_hidden.Requirements.test_R2_case2
+- id: R3
+  text: aggregate_labels(rows) groups rows by label and returns count,total,mean for each label using the __SF_PRIMARY_SCORE__ field, preserving empty input as an empty dictionary.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R3_case1
+  - test_hidden.Requirements.test_R3_case2
+- id: R4
+  text: macro_groups(groups) returns the unweighted mean of nonempty groups' mean values, ignoring groups with count zero; return None when none are nonempty.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R4_case1
+  - test_hidden.Requirements.test_R4_case2
+- id: R5
+  text: label_report(rows,parents) in reporting.py scores each expected/predicted pair with label_credit, aggregates by expected label, and returns credits,groups,macro in original row order for credits.
+  scoring_rule: all_core_checks_pass
+  hidden_checks:
+  - test_hidden.Requirements.test_R5_case1
+  - test_hidden.Requirements.test_R5_case2

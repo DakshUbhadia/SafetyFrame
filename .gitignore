@@ -14,3 +14,5 @@ data/smoke/
 data/pilot/
 data/usage_ledger.json
 data/usage_ledger.lock
+# Superseded, unregistered benchmark drafts; current audit records stay tracked.
+data/benchmark_revisions/

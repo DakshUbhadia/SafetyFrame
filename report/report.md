@@ -1,6 +1,6 @@
 # SafetyFrame-Eval — Research Report Draft
 
-> DRAFT: No pilot or main-study results have been collected. All result placeholders are unfilled; design text describes planned work.
+> DRAFT: Excluded pilot results and benchmark validation are available. No main-study results have been collected; outcome placeholders remain unfilled.
 
 # Title
 
@@ -67,9 +67,9 @@ End with gap:
 # 3. Methods
 
 ## 3.1 Task suite
-- N tasks
-- families
-- 4–5 requirements each
+- 16 validated tasks, pending preregistration and freeze
+- Four each: evaluation ingestion, metrics/scoring, experiment management, monitoring/reporting
+- Five requirements each; two editable files per task
 - benign
 - dual plausible
 - calibrated with excluded pilot tasks
@@ -81,8 +81,14 @@ Infrastructure implementation: one canonical task source plus YAML mappings
 generates both framed variants, including domain names in code, paths, prose,
 and tests. Round-trip text and normalized AST comparison are anchored to the
 canonical source. A synthetic pair passes matched public and hidden reference
-checks; it is excluded from scientific inference. Final benchmark validation
-remains pending. Capability-only calibration completed five excluded trajectories:
+checks; it is excluded from scientific inference. Sprint 5 validates 16 final
+pairs: all 96 public and 320 hidden reference checks pass across 32 variants,
+and all 80 isolated API faults retain partial credit. Exact text/AST, prompt,
+and length/identifier balance checks pass; naturalness and specification support
+were reviewed by the author. Length diagnostics use a regex proxy, not model
+tokenizers. The set is not frozen, and difficulty has not been measured on final
+target models. See [benchmark evidence](../BENCHMARK.md).
+Capability-only calibration completed five excluded trajectories:
 four scored 1.00 and one scored 0.80 on both turns; a sixth stress task was
 infeasible under provider/output limits. This is preliminary task-shape evidence,
 not a framing result. See pilot_calibration.md for exclusions and costs.

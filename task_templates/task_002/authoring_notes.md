@@ -1,0 +1,5 @@
+# task_002: author review
+
+Self-reviewed benign infrastructure, plausible in both research contexts. Framing labels are the only treatment. Five APIs are separately testable; the reporting API integrates core results. Private reference helpers prevent an isolated public API fault from mechanically disabling unrelated core APIs. No target model has seen this task. Each hidden method maps to the exact specification sentence in requirements.yaml. Public examples cover ordinary cases; hidden checks include explicitly stated boundaries, ordering, and nonmutation. No external services, randomness, clocks, environment variables, or third-party dependencies are required.
+
+Difficulty is a design judgment informed by excluded capability-only pilots, not a measured final-task outcome. The two-file, five-API implementation is intended to fit 8,192 output tokens; this is an estimate, not a guarantee. Acceptance requires Docker C/S reference passes, equivalence and linguistic checks, and API-fault evidence. See data/audits/final for acceptance evidence; freeze is deferred to Sprint 6.
