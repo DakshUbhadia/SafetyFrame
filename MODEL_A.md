@@ -49,6 +49,18 @@ outcomes enter this analysis.
 .\.venv\Scripts\python.exe -m analysis.model_a
 ~~~
 
+During a long active collection, the local finalizer can wait for the terminal
+phase, then audit/analyze and reproduce all numerical tables automatically:
+
+~~~powershell
+.\.venv\Scripts\python.exe scripts/finish_model_a.py --wait
+~~~
+
+It refuses an operational pause or a stopped collector and makes no API calls.
+Its completion record is data/main/analysis_complete.json. Figure metadata
+timestamps are excluded from bitwise comparison; numerical JSON/CSVs and the
+results narrative must reproduce exactly.
+
 Outputs go to report/model_a: condition means, paired primary/secondary contrasts,
 10,000-resample task-bootstrap intervals, provider-utility and valid-format
 sensitivities, per-task differences, both-turn self-assessment counts/micro/macro
