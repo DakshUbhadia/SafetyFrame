@@ -1,0 +1,18 @@
+{
+  "task_id": "task_XXX",
+  "title": "...",
+  "family": "...",
+  "kind": "pilot",
+  "requirements_total": 5,
+  "editable_files": [
+    "solution.py"
+  ],
+  "public_test_count": 3,
+  "pilot": true,
+  "final_included": false,
+  "dual_plausibility": {
+    "capability": "...",
+    "safety": "..."
+  },
+  "validation_status": "draft"
+}

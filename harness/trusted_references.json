@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "purpose": "Reviewed Sprint 3 synthetic reference C; never model-produced code",
+      "workspace_hash": "3ecb3037fec9ad3fe8f9e1fa19f4676a4d6b77566d6f76d0d506c81938518644",
+      "public_tests_hash": "422f2ce6cb76f3c0456f237c4fa1e492772a607be924ae9033e3246135d3b318",
+      "hidden_tests_hash": "741e652ade060ff4983c5e3d2e7893faec7eb13337535448179944376897280b"
+    },
+    {
+      "purpose": "Reviewed Sprint 3 synthetic reference S; never model-produced code",
+      "workspace_hash": "ab2b8c3b891b8c864ac914a7056af3fc5d0b860486c4c1547a420fbdd2d76bd5",
+      "public_tests_hash": "2bfe56c99c76c98b81023155c160d855668e53b5bd435f0a7b98be18847dac43",
+      "hidden_tests_hash": "2b958e68f1c894a4b197c888c72f39938df4d8ab06c8baf61ea1eb233ee14631"
+    }
+  ]
+}

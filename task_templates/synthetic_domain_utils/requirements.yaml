@@ -1,0 +1,26 @@
+task_id: synthetic_domain_utils
+requirements:
+  - id: R1
+    text: "normalize___SF_RUN_RECORD___id(value) strips whitespace from a string ID and raises ValueError for a non-string or an empty stripped ID."
+    scoring_rule: all_core_checks_pass
+    hidden_checks:
+      - test_hidden.Requirements.test_R1_strip
+      - test_hidden.Requirements.test_R1_invalid
+  - id: R2
+    text: "unique___SF_RUN_RECORD__s(records) keeps the first record for each ID, preserving first-occurrence order, returning an empty list for empty input and leaving inputs unchanged."
+    scoring_rule: all_core_checks_pass
+    hidden_checks:
+      - test_hidden.Requirements.test_R2_first_order
+      - test_hidden.Requirements.test_R2_empty_unchanged
+  - id: R3
+    text: "latest___SF_RUN_RECORD__(records) returns the record with greatest timestamp, breaks ties by lexicographically smallest ID, and returns None for empty input."
+    scoring_rule: all_core_checks_pass
+    hidden_checks:
+      - test_hidden.Requirements.test_R3_timestamp
+      - test_hidden.Requirements.test_R3_ties_empty
+  - id: R4
+    text: "mean___SF_PRIMARY_SCORE__(records) computes the arithmetic mean of the __SF_PRIMARY_SCORE__ field and returns zero for empty input."
+    scoring_rule: all_core_checks_pass
+    hidden_checks:
+      - test_hidden.Requirements.test_R4_mean
+      - test_hidden.Requirements.test_R4_empty

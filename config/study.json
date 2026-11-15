@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "study": {
+    "task_target": 18,
+    "task_minimum": 16,
+    "task_maximum": 20,
+    "requirements_per_task": [
+      4,
+      5
+    ],
+    "pilot_task_range": [
+      4,
+      6
+    ],
+    "turns_per_trajectory": 2,
+    "primary_endpoint": "tcs_turn2",
+    "analysis_unit": "task",
+    "frozen": false
+  },
+  "providers": {
+    "adaption": {
+      "base_url": "https://api.prod.adaptionlabs.ai/api/v1",
+      "api_key_env": "ADAPTION_API_KEY",
+      "models_path": "/models?type=hosted",
+      "responses_path": "/responses",
+      "timeout_seconds": 60,
+      "requests_per_minute": null,
+      "rate_limit_source": null
+    }
+  },
+  "models": {
+    "A": {
+      "provider": "adaption",
+      "model_id": "qwen3.5-397b",
+      "family": "Qwen",
+      "selection_rationale": "Primary coding candidate from the accessible Qwen family. Completed preflight at temperature 0 with an 8192-token cap. GLM-5.2 was excluded after two setup transport/timeouts (45s and 60s), before study outcomes. Pilot validation still required.",
+      "conditions": [
+        "C",
+        "S",
+        "CD",
+        "SD"
+      ],
+      "generation": {
+        "max_output_tokens": 8192,
+        "temperature": 0
+      },
+      "settings_verified": true,
+      "settings_evidence": "data/setup/preflight-20261114T093213Z-fb983287.json: smoke.B accepted qwen3.5-397b at temperature 0, max_output_tokens 8192; completed in 12.96s. Does not verify maximum context or coding quality.",
+      "estimated_cost_per_trajectory": 0.071,
+      "pricing": {
+        "input_credits_per_million": 0.55,
+        "output_credits_per_million": 3.5,
+        "source": "https://docs.adaptionlabs.ai/inference-stacks/models",
+        "checked_on": "2026-11-14",
+        "assumed_input_tokens_per_trajectory": 24000,
+        "assumed_output_tokens_per_trajectory": 16384,
+        "cache_discount_assumed": false
+      }
+    },
+    "B": {
+      "provider": "adaption",
+      "model_id": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "selection_rationale": "Distinct model family for independent framing generalization, present in the account catalogue with published hosted token rates; pending setup generation check and excluded coding pilots.",
+      "conditions": [
+        "C",
+        "S"
+      ],
+      "generation": {
+        "max_output_tokens": 8192,
+        "temperature": 0
+      },
+      "settings_verified": true,
+      "settings_evidence": "data/setup/preflight-20261114T093258Z-8de026bd.json: smoke.B completed at temperature 0 and max_output_tokens 8192. Does not verify maximum context or coding quality.",
+      "estimated_cost_per_trajectory": 0.0034,
+      "pricing": {
+        "input_credits_per_million": 0.045,
+        "output_credits_per_million": 0.14,
+        "source": "https://docs.adaptionlabs.ai/inference-stacks/models",
+        "checked_on": "2026-11-14",
+        "assumed_input_tokens_per_trajectory": 24000,
+        "assumed_output_tokens_per_trajectory": 16384,
+        "cache_discount_assumed": false
+      }
+    }
+  },
+  "budget": {
+    "unit": "Adaption credits",
+    "available": 3500,
+    "balance_status": "user_reported_not_account_verified",
+    "protected_reserve": 700,
+    "pilot_allowance": 10,
+    "retry_allowance": 20,
+    "source": "User reports current balance 3,500 credits. Hosted token rates checked at https://docs.adaptionlabs.ai/inference-stacks/models on 2026-11-14. Balance not independently verified; token volumes and allowances are planning assumptions, not measured charges."
+  }
+}

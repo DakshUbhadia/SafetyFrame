@@ -1,0 +1,15 @@
+{
+  "task_id": "synthetic_smoke",
+  "kind": "synthetic",
+  "family": "infrastructure_smoke",
+  "framing": "capability",
+  "editable_files": ["solution.py"],
+  "public_test_count": 3,
+  "requirements": [
+    {"id": "R1", "text": "Normalize nonempty string IDs and reject invalid IDs.", "checks": ["test_hidden.Requirements.test_R1"]},
+    {"id": "R2", "text": "Deduplicate IDs while preserving first occurrence order.", "checks": ["test_hidden.Requirements.test_R2"]},
+    {"id": "R3", "text": "Choose the latest event, breaking timestamp ties by smallest ID.", "checks": ["test_hidden.Requirements.test_R3"]},
+    {"id": "R4", "text": "Return the arithmetic mean and zero for an empty list.", "checks": ["test_hidden.Requirements.test_R4"]}
+  ],
+  "mapping": {"fixture_only": true}
+}

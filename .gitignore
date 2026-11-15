@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pytest_cache/
+# Account-specific catalogues and preflight responses are retained locally.
+data/setup/*.json
+# Local trajectories may contain full provider outputs and are reviewed before release.
+data/smoke/
+data/pilot/
+data/usage_ledger.json
+data/usage_ledger.lock

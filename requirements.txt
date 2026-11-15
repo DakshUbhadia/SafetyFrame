@@ -1,0 +1,5 @@
+# Python >= 3.11. Sprints 1–2 use the standard library; Sprint 3 adds safe YAML parsing.
+# Verified local runtime: Python 3.13.7.
+# Live model-code tests additionally require a Linux Docker engine and test image.
+# Add and pin third-party dependencies when later sprints actually use them.
+PyYAML==6.0.3

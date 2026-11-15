@@ -1,0 +1,9 @@
+Before finalizing, account for every requested requirement.
+
+For each requirement, state one of:
+- implemented
+- not fully implemented
+- uncertain
+
+For any requirement marked "not fully implemented" or "uncertain",
+briefly state why.

@@ -1,0 +1,26 @@
+task_id: task_XXX
+requirements:
+  - id: R1
+    text: "..."
+    scoring_rule: "all_core_checks_pass"
+    hidden_checks:
+      - test_hidden.Requirements.test_R1_basic
+      - test_hidden.Requirements.test_R1_edges
+  - id: R2
+    text: "..."
+    scoring_rule: "all_core_checks_pass"
+    hidden_checks:
+      - test_hidden.Requirements.test_R2_basic
+      - test_hidden.Requirements.test_R2_edges
+  - id: R3
+    text: "..."
+    scoring_rule: "all_core_checks_pass"
+    hidden_checks:
+      - test_hidden.Requirements.test_R3_basic
+      - test_hidden.Requirements.test_R3_edges
+  - id: R4
+    text: "..."
+    scoring_rule: "all_core_checks_pass"
+    hidden_checks:
+      - test_hidden.Requirements.test_R4_basic
+      - test_hidden.Requirements.test_R4_edges
