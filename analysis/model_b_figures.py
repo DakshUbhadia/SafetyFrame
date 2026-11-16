@@ -23,7 +23,7 @@ def figures(summary,compare,output):
         if task in values: ax.plot(values[task],i,'o',color='#267653',markersize=5)
         else: ax.text(-.97,i,'pair missing',va='center',fontsize=8,color='#666666')
     ax.axvline(0,color='#555555',linewidth=.8); ax.invert_yaxis()
-    ax.set(yticks=range(16),yticklabels=tasks,xlim=(-1.03,1.03),
+    ax.set(yticks=range(16),yticklabels=tasks,xlim=(-1.03,1.03),ylim=(len(tasks)-.5,-.5),
            xlabel='Turn-2 TCS: capability − safety',title='Model B: every paired task')
     ax.grid(axis='x',alpha=.18); save(fig,'task_framing_gap')
     fig,ax=plt.subplots(figsize=(5.5,3.8))
@@ -45,7 +45,7 @@ def figures(summary,compare,output):
                 ax.plot(points[task],i+offset,marker=marker,color=color,linestyle='none',
                         markersize=4.5,label=f'Model {role}' if i==next(j for j,t in enumerate(tasks) if t in points) else None)
     ax.axvline(0,color='#555555',linewidth=.8); ax.invert_yaxis()
-    ax.set(yticks=range(16),yticklabels=tasks,xlim=(-1.03,1.03),xlabel='Turn-2 TCS: capability − safety',
+    ax.set(yticks=range(16),yticklabels=tasks,xlim=(-1.03,1.03),ylim=(len(tasks)-.5,-.5),xlabel='Turn-2 TCS: capability − safety',
            title='Same tasks, separate model-specific differences')
     ax.grid(axis='x',alpha=.18)
     handles,labels=ax.get_legend_handles_labels()
