@@ -2,20 +2,20 @@
 
 ## Scope and starting point
 
-This plan breaks [SPECIFICATION_v4.md](SPECIFICATION_v4.md) into sequential,
-deliverable-based work sprints for one researcher. These are focused work blocks,
-not multi-week Scrum iterations. Sprint 1's environment and model preflights are
-implemented; account rate-limit confirmation remains pending. Sprint 2's two-turn
-harness and Sprint 3's renderer/audit are verified using excluded synthetic
-examples. Sprint 4 completed five usable capability pilots and one rejected stress
-trial. Sprint 5 completed 16 validated task pairs without final-task model calls.
-Sprint 6 fixes the preregistration, analysis policies, randomized plan, and
-committed integrity freeze. Sprint 7 resolves all 64 Model-A trajectories
-(61 completed, three provider-failed), with audited and reproduced initial
-analysis and figures. Sprint 8 resolves all 32 Model-B trajectories with
-independent estimates and response-budget diagnostics. Sprint 9 completes the
-unified offline analysis, sensitivity tables and Figures 1–5. Sprint 10 completes
-the report draft, primary-source checks and appendices. Sprint 11 remains not started.
+**Current status:** Study 1 collection, final analysis and manuscript content are
+complete: 96 terminal trajectories, 90 completed and six provider failures.
+[Final results](FINAL_RESULTS.md) lead with the 20/20 unacknowledged failed
+requirements; [the report](report/report.md) retains the inconclusive framing
+estimate and operational sensitivities. **PDF packaging and submission remain
+pending**, confirmed by the author on November 16, 2026. Prepared form fields and
+summary are in [SUBMISSION.md](SUBMISSION.md).
+
+This plan breaks [SPECIFICATION_v4.md](SPECIFICATION_v4.md) into sequential work
+blocks for one researcher. Sprints 2–10 are complete. Sprint 1's provider
+preflights passed; account rate-limit/balance reconciliation remains unconfirmed.
+Sprint 11 release and submission checks are still open. Historical implementation
+notes below retain the status observed during their original sprint; they are
+not current claims that model collection or final analysis is pending.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
@@ -31,8 +31,8 @@ The required research outcomes are:
 
 | Design choice | Default |
 |---|---|
-| Final benchmark | Target 18 tasks; minimum 16; maximum 20 |
-| Requirements | 4–5 independently scored requirements per task |
+| Final benchmark | 16 accepted matched tasks; original design allowed 16–20 |
+| Requirements | Five independently scored requirements per accepted task |
 | Pilot | 4–6 throwaway tasks, excluded from final inference |
 | Model A | C, S, CD, SD |
 | Model B | C, S |
@@ -51,7 +51,7 @@ Mark a sprint complete only when its exit criteria are met.
 | Done | Sprint | Main deliverable | Depends on |
 |---|---|---|---|
 | [ ] | 1. Scope, access, and environment — local setup implemented; live acceptance pending | Working provider preflight and recorded study choices | — |
-| [x] | 2. Two-turn experiment harness | Complete, logged, scored synthetic smoke trajectory; Docker integration pending before live pilots | 1 |
+| [x] | 2. Two-turn experiment harness | Logged synthetic checks and completed Docker-based main trajectories | 1 |
 | [x] | 3. Task rendering and equivalence | Canonical YAML-to-C/S pipeline; text/AST checks and passing reference tests | 2 |
 | [x] | 4. Pilot and difficulty calibration | Five usable pilots, rejected stress trial, and provisional headroom profile | 3 |
 | [x] | 5. Final benchmark construction | 16 fully validated task pairs; inventory, Docker evidence, and per-task checklists | 4 |
@@ -402,6 +402,10 @@ and [verification evidence](report/report_verification.json).
 ## Sprint 11 — Reproducibility, packaging, and submission
 
 **Goal:** Produce an inspectable research artifact and a checked submission.
+
+Presentation updates surface the completed results, existing claim-versus-ground-
+truth figure, and prepared form fields. They introduce no new experiments and
+do not mark PDF export, clean-environment checks, or submission complete.
 
 - [ ] Record the runtime, dependencies, model settings, artifact locations, and reproduction commands.
 - [ ] Verify a clean environment can render a task pair, pass reference tests,

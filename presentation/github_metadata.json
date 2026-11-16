@@ -1,0 +1,16 @@
+{
+  "repository": "DakshUbhadia/SafetyFrame",
+  "description": "Matched-task evaluation of AI-safety framing, requirement accounting, and requirement-level self-assessment in AI coding.",
+  "topics": [
+    "ai-safety",
+    "ai-evaluation",
+    "llm-evaluation",
+    "epistemics",
+    "alignment",
+    "benchmark",
+    "self-assessment",
+    "reproducibility",
+    "python",
+    "research"
+  ]
+}

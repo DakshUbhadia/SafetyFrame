@@ -1,0 +1,25 @@
+{
+  "repository": "DakshUbhadia/SafetyFrame",
+  "url": "https://github.com/DakshUbhadia/SafetyFrame",
+  "verified_at_utc": "2026-11-16T11:35:11.520143+00:00",
+  "before": {
+    "description": null,
+    "topics": []
+  },
+  "after": {
+    "description": "Matched-task evaluation of AI-safety framing, requirement accounting, and requirement-level self-assessment in AI coding.",
+    "topics": [
+      "ai-evaluation",
+      "ai-safety",
+      "alignment",
+      "benchmark",
+      "epistemics",
+      "llm-evaluation",
+      "python",
+      "reproducibility",
+      "research",
+      "self-assessment"
+    ]
+  },
+  "verified": true
+}

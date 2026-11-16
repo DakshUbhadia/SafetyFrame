@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-16T10:23:45.688891+00:00",
-  "report_text_hash": "14a75799005381c202dbf8f4a41af23a2ed7eccfb708141393d8358b3aa49a21",
-  "source_checkpoint": "adf592f32ca9e901a9c0d9efadba117f66f8f7e7",
+  "generated_at_utc": "2026-11-16T11:33:42.858217+00:00",
+  "report_text_hash": "99f2028bfc4a702ee1d7d0f0ed82a7579dab0e5bc4bc1b470eed6cbd4d967d11",
+  "source_checkpoint": "036c2ef22a9bb3cc45a921da223ef65e0dd2d437",
   "freeze_hash": "8f98b8ad025f4ee2773620ea989bbf50db201b3919db591b5759632ce5b87c13",
   "abstract_words": 177,
   "exact_tables": 7,
   "exact_prompt_blocks": 5,
   "narrative_checks": 27,
-  "local_links_checked": 40,
+  "local_links_checked": 43,
   "editorial_claim_figure_data_hash": "d580e424c16e2228fa7fa772880962dda464a3f66a79c26be7beaee0db3b10eb",
   "editorial_claim_figure_sha256": {
     "figures/claim_ground_truth.png": "69eb451c68c0554e77627e455925de20a29d9375902598e8bf3a9608778ee5f4",

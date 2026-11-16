@@ -2,8 +2,15 @@
 
 **Daksh Ubhadia — Independent researcher**
 
-Research report draft, November 16, 2026. Template layout, PDF page-count
-inspection and submission remain Sprint 11 tasks.
+**Research report — AI × Epistemics Research Sprint, November 2026**
+
+Manuscript content and final analysis are complete. Official-template layout,
+PDF export/page inspection and submission remain pending; no submitted PDF is
+currently designated authoritative. [Final results](../FINAL_RESULTS.md) ·
+[Submission materials](../SUBMISSION.md) · [Frozen study](../FROZEN_STUDY.md).
+
+This opening was updated after collection for navigation and status clarity.
+The scientific narrative, tables, figures, frozen design and outcomes are unchanged.
 
 ## Abstract
 

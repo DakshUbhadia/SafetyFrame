@@ -1,4 +1,13 @@
-# Research report — Sprint 10
+# Research report — completed manuscript, submission pending
+
+The manuscript content and final analysis are complete. See the
+[final results overview](FINAL_RESULTS.md), [full manuscript](report/report.md),
+and [prepared submission materials](SUBMISSION.md). No final report PDF or
+submission confirmation is recorded. The author confirmed that submission is
+still pending on November 16, 2026. Template, PDF and release checks remain
+Sprint 11 work; no submission or page-limit compliance is implied below.
+
+The remaining notes describe the completed Sprint 10 content and its provenance.
 
 The [complete report draft](report/report.md) is authored as **Daksh Ubhadia,
 Independent researcher**, confirmed by the user. It covers Introduction,

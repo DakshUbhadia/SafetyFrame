@@ -1,108 +1,99 @@
 # SafetyFrame-Eval
 
-Research plan and starter templates for evaluating framing sensitivity,
-requirement accounting, and requirement-level self-assessment on benign coding tasks.
+**SafetyFrame-Eval: Safety Framing, Requirement Accounting, and Self-Assessment in AI Coding**
 
-The Python environment, model preflight, local preregistration, report skeleton,
-two-turn experiment harness, canonical renderer, and equivalence audit are implemented. Qwen and DeepSeek passed model
-access checks; account rate limits remain unconfirmed. The harness passes an
-offline synthetic repair trajectory and a paired reference audit. Sprint 4 has
-five usable excluded capability pilots and a documented stress trial. Sprint 5
-adds 16 validated final task pairs across four families, with five requirements
-each. Sprint 6 freezes the validated study and randomized 96-trajectory plan.
-Sprint 7 resolves all 64 Model-A trajectories: 61 completed and three
-provider-failed, with audited initial analysis and scientific figures.
-Sprint 8 resolves all 32 Model-B trajectories: 29 completed and three
-provider-failed, with separate-model estimates and reproducible figures.
-Model B exhausted its reasoning budget without emitting code in 50/59 replies;
-this materially limits the generalization result. Sprint 9 completes the unified
-offline analysis, all sensitivity tables and Figures 1–5. Sprint 10 completes the
-research report, primary-source checks and appendices. PDF packaging, release
-checks and submission remain Sprint 11.
+Research for the **AI × Epistemics Research Sprint, November 2026**. We test
+whether AI-safety framing changes performance on matched benign coding tasks,
+whether requirement accounting changes that relationship, and whether completion
+claims identify unmet requirements.
 
-See [SETUP.md](SETUP.md) for environment commands, local credential setup,
-account discovery, budget configuration, and live acceptance. Track work in
-[SPRINT_PLAN.md](SPRINT_PLAN.md). Initial study choices are in
-[config/study.json](config/study.json). See [HARNESS.md](HARNESS.md) for two-turn
-smoke commands, pilot task input, execution isolation, resumability, and result files.
-See [RENDERING.md](RENDERING.md) for canonical YAML authoring, C/S rendering,
-reference validation, and balance diagnostics.
-See [PILOTS.md](PILOTS.md) and [calibration results](report/pilot_calibration.md)
-for measured pilot outcomes and the provisional task-shape recommendation.
-See [BENCHMARK.md](BENCHMARK.md) for the accepted task inventory, completed
-checklists, Docker reference/fault evidence, and reproduction commands.
-See [FROZEN_STUDY.md](FROZEN_STUDY.md) for the committed freeze, analysis choices,
-planned run schedule, and commands that verify integrity without inference.
-See [MODEL_A.md](MODEL_A.md) and [Model A initial results](report/model_a/results.md)
-for execution, scored data, bootstrap contrasts, self-assessment, missingness,
-repair summaries, and reproducible figures.
+## Headline result: every failed requirement was claimed implemented
 
-See [MODEL_B.md](MODEL_B.md) and [Model B results](report/model_b/results.md)
-for audited outcomes, response-budget diagnostics, and the separate-model comparison.
+Across **29 completed Qwen requirement-accounting trajectories**, all **145/145
+final requirement-status claims** said `implemented`. **13/29 trajectories
+(44.8%)** contained at least one failed artifact requirement, yet **20/20 failed
+requirements** were still claimed implemented. None was acknowledged incomplete
+or uncertain: strict unmet-requirement disclosure rate (URDR) **0.0000**;
+false-completion rate **1.0000**.
 
-See [FINAL_ANALYSIS.md](FINAL_ANALYSIS.md) and [final results](report/final_analysis/results.md)
-for the Sprint 9 reproduction command, all three result channels, matched-subset
-means, failure accounting, repair denominators, and scientific figures.
+![Failed requirements and completion claims](report/figures/claim_ground_truth.png)
 
-See [RESEARCH_REPORT.md](RESEARCH_REPORT.md) and the [complete report draft](report/report.md)
-for the Sprint 10 manuscript, user-confirmed authorship, evidence-linked results,
-source verification, prompt/task appendices and disclosed incidents.
+*All 20 failed final artifact requirements were labeled implemented. These are
+descriptive counts nested within tasks, not 20 independent experimental units.
+[Counts and dataset provenance](report/claim_figure_data.json).*
 
-Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
-design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),
-Model A in C/S/CD/SD, Model B in C/S, and two turns per trajectory.
+A model-generated completion checklist should be checked against external tests,
+requirement-linked evidence, or independent review before it is trusted as a
+validation signal.
 
-## Execution materials
+**[Final results](FINAL_RESULTS.md) · [Research report](report/report.md) ·
+[Frozen study](FROZEN_STUDY.md) · [Reproduce the analysis](FINAL_ANALYSIS.md)**
 
-| File | Purpose |
-|---|---|
-| [01_PREREGISTRATION_TEMPLATE.md](01_PREREGISTRATION_TEMPLATE.md) | Record choices before final-study calls. |
-| [02_EXPERIMENT_PROTOCOL.md](02_EXPERIMENT_PROTOCOL.md) | Execute independent, blocked, two-turn trajectories. |
-| [03_TASK_AUTHORING_GUIDE.md](03_TASK_AUTHORING_GUIDE.md) | Construct canonical tasks and domain mappings. |
-| [04_TASK_VALIDATION_CHECKLIST.md](04_TASK_VALIDATION_CHECKLIST.md) | Validate each final task and its tests. |
-| [05_PROMPT_PROTOCOL.md](05_PROMPT_PROTOCOL.md) | Define condition prompts, output format, and feedback. |
-| [06_MODEL_PROVIDER_SETUP.md](06_MODEL_PROVIDER_SETUP.md) | Record provider access, model IDs, settings, and preflight checks. |
-| [07_RUNBOOK.md](07_RUNBOOK.md) | Follow the setup, pilot, freeze, experiment, and analysis workflow. |
-| [08_DATA_DICTIONARY.md](08_DATA_DICTIONARY.md) | Define trajectory, requirement, and metadata fields. |
-| [09_SCORING_ANALYSIS_PLAN.md](09_SCORING_ANALYSIS_PLAN.md) | Define scores, paired estimates, bootstrap intervals, and figures. |
-| [10_SELF_ASSESSMENT_RUBRIC.md](10_SELF_ASSESSMENT_RUBRIC.md) | Classify requirement claims against hidden-test ground truth. |
-| [11_DEVIATION_LOG_TEMPLATE.md](11_DEVIATION_LOG_TEMPLATE.md) | Record changes and incidents after freeze. |
-| [13_REPORT_TEMPLATE.md](13_REPORT_TEMPLATE.md) | Draft the research report from observed results. |
-| [15_REPRODUCIBILITY_CHECKLIST.md](15_REPRODUCIBILITY_CHECKLIST.md) | Check the environment, artifacts, data, and release. |
-| [18_FREEZE_MANIFEST_GUIDE.md](18_FREEZE_MANIFEST_GUIDE.md) | Define the machine-readable integrity manifest. |
+## What was tested
 
-The existing document numbers are preserved so references remain stable.
-Where materials differ, use v4 for the design, the completed preregistration for
-frozen study choices, and the relevant protocol for implementation details.
+The frozen study uses **16 matched Python tasks**, each with **five independently
+scored hidden requirements**, in a two-turn implementation-and-repair protocol.
+Capability (C) and safety (S) variants are computationally matched. CD/SD add
+explicit requirement accounting. Inference uses paired tasks and 10,000
+task-bootstrap resamples, preserving dependence among requirements.
 
-## Starter templates
+| Result | Estimate and uncertainty | Interpretation |
+| --- | --- | --- |
+| Qwen 3.5 397B capability − safety TCS | **0.0125**, 95% CI **[−0.0500, 0.1000]**; 16 matched task pairs | Inconclusive; does not establish equivalence. |
+| Qwen accounting × framing interaction | **−0.1286**, 95% CI **[−0.2714, −0.0143]**; 14 complete task quadruples | Nominal but sensitivity-dependent; not robust mitigation evidence. |
+| DeepSeek V4 Flash framing comparison | **50/59 observed replies** exhausted the frozen output budget in reasoning without emitting final code; only one valid-format C/S pair remained | Operationally confounded; not a clean cross-model correctness replication. |
 
-| File | Purpose |
-|---|---|
-| [task_spec_template.md](templates/task_spec_template.md) | Canonical task specification and validation notes. |
-| [mapping_template.yaml](templates/mapping_template.yaml) | Capability/safety domain substitutions. |
-| [requirements_template.yaml](templates/requirements_template.yaml) | Requirement IDs and hidden-check mapping. |
-| [task_metadata_template.json](templates/task_metadata_template.json) | Per-task metadata and editable files. |
-| [task_inventory_template.csv](templates/task_inventory_template.csv) | Benchmark-wide inclusion and validation record. |
-| [run_manifest_template.csv](templates/run_manifest_template.csv) | Block order and trajectory status. |
-| [results_template.csv](templates/results_template.csv) | Starting trajectory results table. |
-| [requirement_results_template.csv](templates/requirement_results_template.csv) | Requirement-level pass/fail and claims for each turn. |
-| [deviation_log_template.csv](templates/deviation_log_template.csv) | Structured incident record. |
+The accounting interaction weakens in both prespecified sensitivities:
+provider utility **−0.0375 [−0.2125, 0.1750]** (16 tasks), and valid format
+**−0.0769 [−0.1692, 0.0000]** (13 tasks).
+[Exact contrasts and matched denominators](report/final_analysis/contrasts.csv).
 
-These are unfilled starters. The result CSVs now match the Sprint 2 trajectory
-and requirement schemas, including v4 metadata and self-assessment counts.
-Validate actual pilot logging before freezing.
+## Study and submission status
 
-## Implementation boundary
+**Study 1 collection, final analysis, and manuscript content are complete.** All
+96 planned trajectories reached terminal status: 90 completed and six provider
+failures under the frozen retry policy. Mixed, null, malformed, and operationally
+limited outcomes were retained; no selective replacement runs were used.
 
-The initial runtime directories follow v4 section 62. `requirements.txt` documents
-the Python harness and pinned PyYAML parser; live test execution also requires a
-working Docker engine and an explicitly installed image. Later dependencies will be added
-when used. [preregistration.md](preregistration.md) is a completed local registration and
-[report/report.md](report/report.md) contains the completed Sprint 10 report draft.
-Sprint 6 records the freeze manifest and randomized planned run manifest from
-actual validated tasks and verified model choices. No human signature is asserted.
+**PDF packaging and submission remain pending.** No final report PDF or submission
+confirmation is recorded, and the author confirmed that the project has not yet
+been submitted. Figure PDFs are available but are not the submission manuscript.
+[Submission materials and remaining steps](SUBMISSION.md).
 
-The superseded v3 specification and duplicate navigation, daily scheduling,
-resource, interpretation, and decision guides were removed during cleanup.
-Their core workflow and interpretation guidance remain in v4 and the protocols above.
+## Methods, evidence, and reproducibility
+
+| Artifact | Purpose |
+| --- | --- |
+| [Final results](FINAL_RESULTS.md) | Headline findings, denominator definitions, and limitations. |
+| [Research report](report/report.md) | Full methods, narrative, references, and appendices. |
+| [Exact final analysis](report/final_analysis/results.md) | Primary estimates, sensitivities, repair, and failure accounting. |
+| [Frozen study](FROZEN_STUDY.md) | Committed freeze, hashes, randomized run plan, and integrity checks. |
+| [Benchmark](BENCHMARK.md) | Canonical task definitions, C/S variants, public and hidden tests, requirement mappings, and validation. |
+| [Model A provenance](MODEL_A.md) / [Model B provenance](MODEL_B.md) | Scored datasets, operational records, and model-specific limitations. |
+| [Preregistration](preregistration.md) | Original local registration, preserved unchanged. |
+| [Experiment protocol](02_EXPERIMENT_PROTOCOL.md) / [Scoring plan](09_SCORING_ANALYSIS_PLAN.md) | Two-turn procedure, requirement scoring, estimands, and bootstrap. |
+| [Analysis reproduction](FINAL_ANALYSIS.md) / [Report verification](RESEARCH_REPORT.md) | Offline commands, evidence checks, and plotting dependencies. |
+
+The repository releases scored outcomes and claims without response/reasoning
+text. Credentials, raw provider records, and account-specific metadata stay local
+pending release review. The registration/scoring timing discrepancy is disclosed
+in the report. Internal task review is not independent validation; the local
+preregistration is not an external registration.
+
+## Scope and interpretation
+
+The framing estimate is inconclusive, accounting is not a robust mitigation, and
+the clearest descriptive result is inaccurate requirement-level self-assessment.
+Hidden outcomes establish a mismatch between claims and artifact behavior; they
+do not establish awareness, deception, scheming, or intentional concealment.
+The small benign benchmark, single generation per condition, fixed provider
+systems, and DeepSeek budget limitation restrict generalization.
+
+The separately frozen [Study 2 audit implementation](https://github.com/DakshUbhadia/SafetyFrame/tree/followup/self-assessment-audit/study_2_audit)
+tests fresh and evidence-grounded verification in a follow-up namespace.
+Its collection has not started and contributes no results to this sprint study.
+No new confirmatory experiments are part of these presentation updates.
+
+For development, see [setup](SETUP.md), [harness](HARNESS.md),
+[rendering](RENDERING.md), [pilots](PILOTS.md), and the
+[sprint history and remaining release work](SPRINT_PLAN.md).
