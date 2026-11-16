@@ -109,6 +109,9 @@ def main():
         raise ValueError('Published Model A summary changed')
     summary=summarize(dataset,config)
     compare=comparison(read_json(a_path),summary)
+    summary['requested_model_id']=manifest['models']['B']['model_id']
+    for role,entry in compare['models'].items():
+        entry['requested_model_id']=manifest['models'][role]['model_id']
     args.output.mkdir(parents=True,exist_ok=True)
     write_json(args.output/'scored_dataset.json',dataset)
     write_json(args.output/'summary.json',summary)
