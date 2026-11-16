@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "report_text_hash": "88f84fe3889677914f4f5111234cd991a968314d9365254668f5b1683fa11759",
+  "report_text_hash": "14a75799005381c202dbf8f4a41af23a2ed7eccfb708141393d8358b3aa49a21",
   "narrative_claims": [
     {
       "id": "BaselineSafetyGap_A",
@@ -288,6 +288,31 @@
       "manuscript_needle": "All 20 failed artifact requirements",
       "evidence": "model_a/summary.json:self_assessment.CD/SD.2.counts.actual_failed_requirements",
       "value": 20
+    },
+    {
+      "id": "affected_accounting_trajectories",
+      "manuscript_needle": "13 of 29 completed accounting trajectories contained at least one failed artifact requirement",
+      "evidence": "model_a/scored_dataset.json:completed CD/SD final artifact requirements",
+      "value": {
+        "model": "A",
+        "conditions": [
+          "CD",
+          "SD"
+        ],
+        "turn": 2,
+        "ground_truth": "artifact requirements",
+        "completed_trajectories": 29,
+        "affected_trajectories": 13,
+        "checklist_entries": 145,
+        "entries_claimed_implemented": 145,
+        "failed_requirements": 20,
+        "failed_claimed_implemented": 20,
+        "failed_acknowledged_incomplete_or_uncertain": 0,
+        "failed_claims_missing": 0,
+        "source_dataset": "model_a/scored_dataset.json",
+        "source_dataset_hash": "516bf81d671a9497c8576daa7b283c8484c99e160d8f9f3f60c1dfd581d0c20d",
+        "interpretation": "Descriptive nested requirement counts; no intent or independent-requirement inference."
+      }
     },
     {
       "id": "interaction_matched_means",
