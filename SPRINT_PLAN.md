@@ -12,7 +12,8 @@ trial. Sprint 5 completed 16 validated task pairs without final-task model calls
 Sprint 6 fixes the preregistration, analysis policies, randomized plan, and
 committed integrity freeze. Sprint 7 resolves all 64 Model-A trajectories
 (61 completed, three provider-failed), with audited and reproduced initial
-analysis and figures. Sprints 8–11 remain not started.
+analysis and figures. Sprint 8 resolves all 32 Model-B trajectories with
+independent estimates and response-budget diagnostics. Sprints 9–11 remain not started.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
@@ -54,7 +55,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 5. Final benchmark construction | 16 fully validated task pairs; inventory, Docker evidence, and per-task checklists | 4 |
 | [x] | 6. Preregistration and freeze | Local registration, committed integrity freeze, 96 planned runs, and design-sensitivity table | 5 |
 | [x] | 7. Model A factorial | 64 terminal trajectories, audited scored dataset, first analysis and figures | 6 |
-| [ ] | 8. Model B generalization | Complete C/S dataset | 7 |
+| [x] | 8. Model B generalization | 32 terminal C/S trajectories, audited results and separate-model comparison | 7 |
 | [ ] | 9. Final analysis and figures | Reproducible tables, intervals, and figures | 8 |
 | [ ] | 10. Research report | Complete report supported by observed results | 9 |
 | [ ] | 11. Reproducibility and submission | Checked release artifacts and submission package | 10 |
@@ -291,17 +292,32 @@ reproduce exactly. See [Model A results](report/model_a/results.md),
 
 **Goal:** Test the framing comparison on a second model family.
 
-- [ ] Run C/S on the same frozen final task set using Model B's manifest.
-- [ ] Preserve the same two-turn procedure, scoring rules, and logging standards.
-- [ ] Report condition-specific provider failures and missingness.
-- [ ] Compute Model B's paired C−S estimate and task-bootstrap interval.
-- [ ] Produce its task-level framing plot.
-- [ ] Describe similarities and differences between models without pooling them into a universal effect.
+- [x] Run C/S on the same frozen final task set using Model B's manifest.
+- [x] Preserve the same two-turn procedure, scoring rules, and logging standards.
+- [x] Report condition-specific provider failures and missingness.
+- [x] Compute Model B's paired C−S estimate and task-bootstrap interval.
+- [x] Produce its task-level framing plot.
+- [x] Describe similarities and differences between models without pooling them into a universal effect.
 
 **Deliverables:** Model B raw and scored datasets and generalization results.
 
 **Exit criteria:** All planned Model B C/S trajectories have terminal statuses
 and the second model's framing result is reproducible.
+
+**Result:** 29 completed trajectories, three terminal HTTP-5xx failures, and
+59 saved/scored responses. C-minus-S is -0.200, 95% task-bootstrap CI
+[-0.431, 0.000], on 13 complete pairs; provider-utility sensitivity is
+-0.1625 [-0.350, 0.000], N=16. All 87 attempts and 25 retries were audited.
+Known reported cost is 0.061897 credits; unknown usage remains reserved.
+
+**Material limitation:** 50/59 replies exhausted the frozen 8,192-token cap
+on reasoning and emitted no code. Only one task has valid Turn-2 file format
+in both conditions. The end-to-end contrast is therefore dominated by code
+emission under the fixed budget, and cannot cleanly establish a correctness
+generalization. Scores and collection settings remain unchanged. Model A
+outputs are preserved, and models are compared separately without pooling.
+Numerical/narrative outputs reproduce exactly; see [Model B results](report/model_b/results.md),
+[integrity evidence](report/model_b/integrity.json), and [MODEL_B.md](MODEL_B.md).
 
 ## Sprint 9 — Final analysis and figures
 

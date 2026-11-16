@@ -12,7 +12,11 @@ adds 16 validated final task pairs across four families, with five requirements
 each. Sprint 6 freezes the validated study and randomized 96-trajectory plan.
 Sprint 7 resolves all 64 Model-A trajectories: 61 completed and three
 provider-failed, with audited initial analysis and scientific figures.
-Model-B collection and combined results remain pending.
+Sprint 8 resolves all 32 Model-B trajectories: 29 completed and three
+provider-failed, with separate-model estimates and reproducible figures.
+Model B exhausted its reasoning budget without emitting code in 50/59 replies;
+this materially limits the generalization result. Final analysis and report
+remain for Sprints 9?11.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -30,6 +34,9 @@ planned run schedule, and commands that verify integrity without inference.
 See [MODEL_A.md](MODEL_A.md) and [Model A initial results](report/model_a/results.md)
 for execution, scored data, bootstrap contrasts, self-assessment, missingness,
 repair summaries, and reproducible figures.
+
+See [MODEL_B.md](MODEL_B.md) and [Model B results](report/model_b/results.md)
+for audited outcomes, response-budget diagnostics, and the separate-model comparison.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),

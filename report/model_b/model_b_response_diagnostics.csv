@@ -1,0 +1,5 @@
+condition,turn,observed_responses,metadata_known,format_failures,incomplete_responses,reasoning_only_budget_exhaustions,empty_final_text,extraction_mismatches
+C,1,14,14,13,13,13,13,0
+C,2,14,14,13,13,13,13,0
+S,1,16,16,13,13,13,13,0
+S,2,15,15,11,11,11,11,0

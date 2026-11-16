@@ -1,0 +1,2 @@
+contrast,paired_tasks,estimate,lower,upper,utility_estimate,valid_format_estimate
+BaselineSafetyGap_B,13,-0.2,-0.43076923076923074,0.0,-0.1625,0.0

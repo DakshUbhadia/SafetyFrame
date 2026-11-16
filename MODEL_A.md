@@ -26,7 +26,8 @@ These results do not establish intent or a robust mitigation effect.
 Raw responses, public feedback, both workspaces, and terminal identities remain
 local under data/main. All 74 original tests and 15 new tooling tests passed.
 Eight numerical/narrative outputs reproduce exactly, and the original freeze
-still verifies. Model B has not been run.
+still verifies. Model B is now complete; see [MODEL_B.md](MODEL_B.md) for its
+separate comparison and substantial response-budget limitation.
 
 There were 148 recorded attempts, 23 frozen-policy retries, and 26 outcomes
 without complete usage. Known reported cost is 1.290671 credits; unknown

@@ -7,6 +7,24 @@ and shared 40-credit ledger ceiling. No CD/SD extension is collected.
 
 ## Collection and resumption
 
+**Completed:** all 32 planned trajectories are terminal: 29 completed and three
+HTTP-5xx provider failures. There are 59 saved/scored responses. The paired
+C-minus-S estimate is -0.200 (95% task-bootstrap CI [-0.431, 0.000], 13 pairs).
+See [results and figures](report/model_b/results.md) and
+[integrity evidence](report/model_b/integrity.json).
+
+**Major limitation:** 50/59 replies used all 8,192 output tokens on reasoning
+and emitted no final text. Raw-payload audits found no text-extraction loss.
+These remain format-failure zeros under the frozen policy. Only one task has
+valid Turn-2 file output in both frames, so this is chiefly a budget-constrained
+code-emission result, not a clean comparison of coding correctness. No limits,
+scores, exclusions, or retry rules were changed after collection.
+
+Known reported B usage cost is 0.061897 credits; retained B liability including
+unknown usage is 0.11046535 credits. Actual account debits remain unverified.
+Collection commands below are retained for provenance and idempotent resumption;
+the completed phase does not need to be run again.
+
 ~~~powershell
 .\.venv\Scripts\python.exe -m harness.freeze
 .\.venv\Scripts\python.exe scripts/collect_frozen.py --role B --execute

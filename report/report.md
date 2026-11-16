@@ -1,6 +1,6 @@
 # SafetyFrame-Eval — Research Report Draft
 
-> DRAFT: Model-A collection and initial analysis are complete: 61 completed trajectories and three terminal provider failures. Model-B generalization and the final report remain pending. All Model-A outcomes, missingness, and sensitivities are reported.
+> DRAFT: Model-A collection and initial analysis are complete: 61 completed trajectories and three terminal provider failures. Model-B collection is also complete (29 completed, three provider-failed), with substantial reasoning-budget exhaustion. The final analysis and report remain pending. All Model-A outcomes, missingness, and sensitivities are reported.
 
 # Title
 
@@ -86,9 +86,9 @@ pairs: all 96 public and 320 hidden reference checks pass across 32 variants,
 and all 80 isolated API faults retain partial credit. Exact text/AST, prompt,
 and length/identifier balance checks pass; naturalness and specification support
 were reviewed by the author. Length diagnostics use a regex proxy, not model
-tokenizers. Difficulty has not been measured on final target models. Sprint 6
+tokenizers. Difficulty was unmeasured on final target models at freeze. Sprint 6
 locally preregisters and freezes the set, analysis policies, and randomized
-96-trajectory plan; no main-study outcomes are available.
+96-trajectory plan before main-study outcomes were observed.
 See [frozen study](../FROZEN_STUDY.md) and [benchmark evidence](../BENCHMARK.md).
 Capability-only calibration completed five excluded trajectories:
 four scored 1.00 and one scored 0.80 on both turns; a sixth stress task was
@@ -99,7 +99,7 @@ not a framing result. See pilot_calibration.md for exclusions and costs.
 Table: C, S, CD, SD.
 
 ## 3.4 Models
-Sprint 1 setup: Python 3.13.7, standard-library preflight, configuration in config/study.json. Selected candidates: Qwen3.5-397B as Model A and DeepSeek V4 Flash as Model B; both completed setup calls at temperature 0 with an 8,192-token cap. GLM-5.2 was excluded after setup timeouts before study outcomes. The user reports 3,500 Adaption credits; published rates and token assumptions are recorded in ../SETUP.md. Coding-pilot validation, final study settings, account rate limits, and balance reconciliation remain pending. No main-study calls have been made.
+Sprint 1 setup: Python 3.13.7, standard-library preflight, configuration in config/study.json. Selected candidates: Qwen3.5-397B as Model A and DeepSeek V4 Flash as Model B; both completed setup calls at temperature 0 with an 8,192-token cap. GLM-5.2 was excluded after setup timeouts before study outcomes. The user reports 3,500 Adaption credits; published rates and token assumptions are recorded in ../SETUP.md. Capability pilots and the final settings were subsequently completed before freeze. Both frozen main phases are now terminal. Official account rate limits and actual balance reconciliation remain unverified.
 
 Exact provider/model IDs and settings.
 
@@ -152,8 +152,34 @@ and [full scored dataset](model_a/scored_dataset.json) preserve every outcome.
 
 ## 4.2 Model-B generalization
 
-Pending Sprint 8. No Model-B main-study calls or generalization estimates
-are included in this Model-A report.
+All 32 planned DeepSeek C/S trajectories are terminal: 29 completed, three
+HTTP-5xx failures (task_015 C and task_016 C at Turn 1; task_002 S at Turn 2).
+There are 59 saved/scored replies. Completed-condition Turn-2 means are
+C=0.0571 (14/16 completed) and S=0.2267 (15/16 completed). On 13 complete
+pairs, mean C-minus-S is -0.200, 95% paired task-bootstrap CI [-0.431, 0.000].
+The provider-utility sensitivity is -0.1625 [-0.350, 0.000], N=16.
+
+**Major constraint:** 50/59 responses consumed the entire 8,192-token cap
+as reasoning, with incomplete/max_output_tokens status and no final text.
+Raw-response checks found zero text-extraction mismatches. These are frozen
+format-failure zeros, distinct from provider failures. Only one task has valid
+Turn-2 file format in both frames; its gap is zero and its CI is undefined.
+Thus the primary gap chiefly concerns final-code emission under the fixed
+budget, rather than correctness conditional on available code. Settings,
+scoring and exclusions were not changed, and no replacement calls were made.
+
+Model A's separate baseline estimate is 0.0125 [-0.050, 0.100], N=16;
+Model B's interval reaches zero and uses a different complete-pair subset.
+These fixed-system estimates are not pooled and do not establish a universal
+framing effect or a model-by-framing interaction.
+
+![Separate-model task comparison](model_b/models_task_comparison.png)
+
+All 87 B attempts and 25 retries passed the audit. Known reported B cost is
+0.061897 credits, with 28 outcomes lacking full usage and reservations retained.
+See [B results and diagnostics](model_b/results.md), [integrity](model_b/integrity.json),
+and [scored data](model_b/scored_dataset.json). Model A's reviewed numerical
+release remains unchanged; all ten B numerical/narrative files reproduce exactly.
 
 ## 4.3 Requirement-accounting interaction
 
