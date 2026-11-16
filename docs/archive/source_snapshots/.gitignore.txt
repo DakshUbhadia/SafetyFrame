@@ -1,0 +1,33 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pytest_cache/
+# Account-specific catalogues and preflight responses are retained locally.
+data/setup/*.json
+# Local trajectories may contain full provider outputs and are reviewed before release.
+data/smoke/
+data/pilot/
+data/usage_ledger.json
+data/usage_ledger.lock
+# Superseded, unregistered benchmark drafts; current audit records stay tracked.
+data/benchmark_revisions/
+# Main-study responses, snapshots, operational state, and keys stay local.
+# The immutable planned schedule data/run_manifest.csv remains tracked.
+data/main/
+# Local Study 2 material also stays private on the sprint presentation branch.
+study_2_audit/inputs/
+study_2_audit/raw/
+study_2_audit/parsed/
+study_2_audit/scored/
+study_2_audit/logs/
+study_2_audit/reviews/
+study_2_audit/review_exports/
+study_2_audit/analysis/
+study_2_audit/figures/
+# Local source brief; publish the implemented presentation, not the planning notes.
+SafetyFrame_Last_Mile_Winning_Plan.md
