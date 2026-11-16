@@ -65,14 +65,16 @@ def audit_attempts(raw_dir,model,execution,expected_context):
     return entries
 
 
-def load_phase(output=ROOT/'data/main'):
+def load_phase(output=ROOT/'data/main',role='A'):
     """Validate all terminal identities and workspaces before releasing summaries."""
+    if role not in ('A','B'): raise ValueError('Unknown frozen model role')
     manifest=verify_freeze()
-    rows=[r for r in planned_rows() if r['role']=='A']
+    rows=[r for r in planned_rows() if r['role']==role]
+    if len(rows)!=(64 if role=='A' else 32): raise ValueError('Incomplete frozen phase schedule')
     missing=[r['run_id'] for r in rows if not (output/'scored'/f"{r['run_id']}.json").exists()]
-    if missing: raise ValueError(f'Model A is incomplete: {len(missing)} planned runs lack terminal records')
+    if missing: raise ValueError(f'Model {role} is incomplete: {len(missing)} planned runs lack terminal records')
     release=[]
-    model=read_json(ROOT/'config/study.json')['models']['A']
+    model=read_json(ROOT/'config/study.json')['models'][role]
     execution=read_json(ROOT/'config/execution.json')
     for planned in rows:
         run=planned['run_id']
@@ -85,7 +87,7 @@ def load_phase(output=ROOT/'data/main'):
                 or row['model_id']!=planned['model_id'] or row['condition']!=planned['condition']
                 or row['block_id']!=planned['block_id'] or row['phase']!='final'
                 or int(row['within_block_order'])!=int(planned['within_block_order'])
-                or identity['role']!='A' or identity['configuration_hash']!=manifest['configuration_hash']
+                or identity['role']!=role or identity['configuration_hash']!=manifest['configuration_hash']
                 or identity['condition']!=planned['condition']):
             raise ValueError('Terminal identity/checksum mismatch: '+run)
         public_turns=[]
@@ -124,7 +126,7 @@ def load_phase(output=ROOT/'data/main'):
                 estimated_cost=estimated,input_tokens=usage.get('input_tokens'),output_tokens=usage.get('output_tokens')))
         release.append(dict(trajectory={key:row.get(key) for key in PUBLIC_FIELDS},turns=public_turns,
                             attempts=attempts,record_hash=digest(record),identity_hash=digest(identity)))
-    return dict(schema_version=1,role='A',freeze_hash=digest(manifest),source_checkpoint=manifest['git_commit'],
+    return dict(schema_version=1,role=role,freeze_hash=digest(manifest),source_checkpoint=manifest['git_commit'],
                 analysis_config_hash=digest(read_json(ROOT/'config/analysis.json')),records=release)
 
 
