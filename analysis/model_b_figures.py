@@ -71,7 +71,30 @@ def report_text(summary,compare):
     rows+=['','Turn-2 condition means and repair gains use completed trajectories. Turn-1 means retain every observed first turn, '
            'including a trajectory whose second turn later had a provider failure. Paired contrasts use only complete tasks; '
            'preserved-artifact scores remain separately available.',
-           '','![Model B condition means](condition_means.png)','','## Model-B framing estimate','',
+           '','![Model B condition means](condition_means.png)']
+    quality=summary['response_diagnostics']
+    if quality['metadata_known']:
+        rows+=['','## Post-collection response-budget diagnostics','',
+            f"{quality['reasoning_only_budget_exhaustions']}/{quality['observed_responses']} saved responses exhausted "
+            f"the entire configured output cap {quality['output_token_caps']} as reasoning and emitted no final text. "
+            f"All {quality['metadata_known']} observed responses have audited status metadata. "
+            f"Text-extraction mismatches: {quality['extraction_mismatches']}.",
+            '','| Condition | Turn | Observed responses | File-format failures | Reasoning-only budget exhaustion |',
+            '|---|---:|---:|---:|---:|']
+        for row in quality['rows']:
+            rows.append(f"| {row['condition']} | {row['turn']} | {row['observed_responses']} | "
+                        f"{row['format_failures']} | {row['reasoning_only_budget_exhaustions']} |")
+        rows+=['','The budget-exhausted responses report status incomplete and reason max_output_tokens; the raw payload '
+            'has no final message text to recover. Under the frozen policy these are model-behavior format failures, '
+            'retained as zero end-to-end TCS, separate from genuine provider failures. This post-collection diagnostic '
+            'does not change scores, exclusions, token limits, or retries, and makes no new inference calls.']
+        if quality['reasoning_only_budget_exhaustions']>quality['observed_responses']/2:
+            rows+=['',f"**Interpretation constraint:** reasoning-only budget exhaustion dominates this Model-B run. "
+                f"Only {contrast['valid_format_sensitivity']['tasks']} task pairs have valid Turn-2 file formats in both conditions. "
+                'The primary end-to-end gap therefore chiefly reflects whether final code was emitted under the frozen budget; '
+                'it does not provide a clean comparison of coding correctness when both outputs are available. '
+                'A different token/reasoning budget would require a separately registered follow-up, not replacement of these outcomes.']
+    rows+=['','## Model-B framing estimate','',
            f"BaselineSafetyGap_B = mean(C−S): **{interval(contrast)}**, using {contrast['tasks']} complete task pairs. "
            'Positive values favor capability framing. Intervals use 10,000 paired task resamples, seed 2026111509.',
            '',f"Matched condition means: C={fmt(contrast['matched_condition_means']['C'])}, S={fmt(contrast['matched_condition_means']['S'])}.",

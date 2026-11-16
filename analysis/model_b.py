@@ -4,6 +4,7 @@ from collections import Counter
 from pathlib import Path
 
 from .model_a import PUBLIC_FIELDS,load_phase,mean,write_csv
+from .response_quality import enrich,summarize as summarize_response_quality
 from harness.artifacts import digest,read_json,write_json
 from harness.bootstrap import complete_contrast,paired_bootstrap
 from harness.freeze import verify_freeze
@@ -58,6 +59,7 @@ def summarize(dataset,config):
     return dict(schema_version=1,role='B',planned=32,terminal=32,task_count=16,
         freeze_hash=dataset['freeze_hash'],dataset_hash=digest(dataset),analysis_config_hash=digest(config),
         conditions=conditions,contrasts={'BaselineSafetyGap_B':gap},task_outcomes=task_rows,costs=costs,
+        response_diagnostics=summarize_response_quality(records,CONDITIONS),
         no_pooled_model_effect=True,self_assessment='Not requested in the frozen B C/S design; not scored.')
 
 
@@ -91,6 +93,8 @@ def tables(dataset,summary,compare,output):
         [dict(model_role=role,paired_tasks=v['tasks'],estimate=v['estimate'],lower=v['lower'],upper=v['upper'],
               matched_C=v['matched_condition_means']['C'],matched_S=v['matched_condition_means']['S'])
          for role,v in compare['models'].items()])
+    quality=summary['response_diagnostics']['rows']
+    write_csv(output/'model_b_response_diagnostics.csv',list(quality[0]),quality)
 
 
 def main():
@@ -98,7 +102,8 @@ def main():
     parser.add_argument('--dataset',type=Path)
     parser.add_argument('--output',type=Path,default=ROOT/'report/model_b')
     args=parser.parse_args()
-    dataset=read_json(args.dataset) if args.dataset else load_phase(role='B')
+    dataset=read_json(args.dataset) if args.dataset else enrich(load_phase(role='B'),ROOT,
+        read_json(ROOT/'config/study.json')['models']['B']['generation']['max_output_tokens'])
     manifest=verify_freeze(); config=read_json(ROOT/'config/analysis.json')
     if dataset['freeze_hash']!=digest(manifest) or dataset['analysis_config_hash']!=digest(config):
         raise ValueError('Dataset belongs to a different freeze or analysis policy')

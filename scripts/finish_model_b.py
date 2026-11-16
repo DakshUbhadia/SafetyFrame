@@ -12,7 +12,7 @@ from harness.freeze import verify_freeze
 
 NUMERICAL_FILES=('scored_dataset.json','summary.json','models_comparison.json',
     'model_b_trajectories.csv','model_b_conditions.csv','model_b_contrasts.csv',
-    'model_b_task_differences.csv','models_comparison.csv','results.md')
+    'model_b_task_differences.csv','models_comparison.csv','model_b_response_diagnostics.csv','results.md')
 
 
 def ready(root=ROOT):

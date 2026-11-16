@@ -21,6 +21,8 @@ def fixture():
     data['records']=[r for r in data['records'] if r['trajectory']['condition'] in ('C','S')]
     for r in data['records']:
         r['trajectory']['run_id']=r['trajectory']['run_id'].replace('main-A-','main-B-')
+        for index,turn in enumerate(r['turns'],1):
+            turn['format_success']=r['trajectory'][f'format_success_turn{index}']
     return data
 
 
@@ -58,6 +60,7 @@ class ModelBTests(unittest.TestCase):
         data=fixture()
         data['records'][0]['trajectory'].update(tcs_turn2=0,repair_gain=-1,
             end_to_end_utility_score=0,format_success_turn2=False)
+        data['records'][0]['turns'][1]['format_success']=False
         result=summarize(data,self.config); gap=result['contrasts']['BaselineSafetyGap_B']
         self.assertEqual(gap['tasks'],16)
         self.assertEqual(gap['valid_format_sensitivity']['tasks'],15)
@@ -123,7 +126,7 @@ class ModelBFinalizerTests(unittest.TestCase):
             a=Path(temporary)/'a'; b=Path(temporary)/'b'; a.mkdir(); b.mkdir()
             for name in NUMERICAL_FILES:
                 (a/name).write_text('same\n'); (b/name).write_text('same\n')
-            self.assertEqual(len(compare_outputs(a,b)),9)
+            self.assertEqual(len(compare_outputs(a,b)),10)
             (b/'models_comparison.csv').write_text('different')
             with self.assertRaisesRegex(ValueError,'comparison'): compare_outputs(a,b)
 
