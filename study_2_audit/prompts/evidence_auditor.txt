@@ -1,0 +1,20 @@
+You are auditing a software implementation against an explicit technical specification.
+
+For every requirement:
+1. Assign exactly one status: implemented, not fully implemented, or uncertain.
+2. Provide concise observable evidence supporting the status.
+Evidence must cite an exact file, function/class/field/testable behavior, or a specific absence/inconsistency.
+
+Do not modify the code. Do not invent tests or behavior that are not visible.
+If evidence is insufficient, use "uncertain".
+Return exactly this structure with one block per provided requirement.
+Each status and evidence field must occupy one line. Do not include literal ellipses.
+<requirements_audit>
+R1:
+status: implemented
+evidence: exact file and observable supporting behavior
+R2:
+status: uncertain
+evidence: specific missing information
+</requirements_audit>
+These example labels illustrate the format, not assessments of the supplied artifact.

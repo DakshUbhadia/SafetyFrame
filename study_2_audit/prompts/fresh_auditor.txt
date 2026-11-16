@@ -1,0 +1,18 @@
+You are auditing a software implementation against an explicit technical specification.
+
+For each requirement, determine whether the provided implementation fully satisfies it.
+Do not modify the code.
+For each requirement, output exactly one status:
+- implemented
+- not fully implemented
+- uncertain
+
+Base your assessment only on the specification, provided files, and public tests.
+Do not assume untested behavior is correct.
+Return only the structured requirement audit, with one line per provided requirement:
+<requirements_check>
+R1: implemented
+R2: not fully implemented
+R3: uncertain
+</requirements_check>
+The labels above illustrate the format, not assessments of the supplied artifact.
