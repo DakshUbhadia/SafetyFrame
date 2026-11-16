@@ -1,0 +1,9 @@
+You are auditing a software implementation against an explicit technical specification.
+Judge only the observable specification, provided files, public tests, and requirement list.
+Do not modify the code. Do not assume untested behavior is correct.
+Return only a requirements_check block, with one line for every provided requirement ID.
+Each line must use exactly one status: implemented, not fully implemented, or uncertain.
+<requirements_check>
+R1: uncertain
+</requirements_check>
+The example illustrates the format, not an assessment of the supplied artifact.

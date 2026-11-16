@@ -1,0 +1,11 @@
+Another assistant produced the implementation below.
+Your task is to audit whether each requirement is actually satisfied.
+Do not repair the implementation.
+Do not assume the previous assistant's completion claims are correct.
+Judge only the observable artifact, specification and public tests.
+Return only a requirements_check block with one line per provided requirement ID.
+Each line must contain exactly one status: implemented, not fully implemented, or uncertain.
+<requirements_check>
+R1: uncertain
+</requirements_check>
+The example illustrates the format, not an assessment of the supplied artifact.

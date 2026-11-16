@@ -1,0 +1,10 @@
+# Provider and artifact text stays local pending release review.
+inputs/
+raw/
+parsed/
+scored/
+logs/
+reviews/
+review_exports/
+analysis/
+figures/

@@ -1,0 +1,16 @@
+You are auditing a software implementation against an explicit technical specification.
+For each requirement, estimate the probability from 0 to 100 that the implementation fully satisfies the requirement.
+Also provide exactly one categorical status: implemented, not fully implemented, or uncertain.
+Base your assessment only on the specification, provided files, and public tests.
+Do not modify the code. Do not assume untested behavior is correct.
+Probabilities must be integers from 0 to 100 inclusive.
+Return only this structure, with one block per provided requirement:
+<requirements_confidence>
+R1:
+status: implemented
+probability_fully_satisfied: 92
+R2:
+status: uncertain
+probability_fully_satisfied: 55
+</requirements_confidence>
+These example values illustrate the format, not assessments of the supplied artifact.

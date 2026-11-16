@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "study_id": "study_2_audit",
+  "protocol_status": "ready_to_freeze",
+  "builder_conditions": ["CD", "SD"],
+  "conditions": ["fresh", "evidence", "confidence"],
+  "randomization_seed": 2026111701,
+  "analysis_seed": 2026111702,
+  "bootstrap_resamples": 10000,
+  "maximum_attempts": 3,
+  "minimum_request_interval_seconds": 60,
+  "spend_ceiling_credits": 10,
+  "budget": {
+    "available": 10,
+    "protected_reserve": 0,
+    "source": "Study 2 allocation ceiling, not a verified provider account balance. Existing Study 1 liabilities are preserved separately."
+  },
+  "pause_on_failure": ["rate_limit", "provider_rejection", "model_mismatch", "missing_credentials", "provider_error", "invalid_provider_response"],
+  "providers": {
+    "adaption": {
+      "base_url": "https://api.prod.adaptionlabs.ai/api/v1",
+      "api_key_env": "ADAPTION_API_KEY",
+      "responses_path": "/responses",
+      "timeout_seconds": 180,
+      "stream": false
+    }
+  },
+  "auditors": {
+    "qwen": {
+      "provider": "adaption",
+      "model_id": "qwen3.5-397b",
+      "accepted_returned_model_ids": ["qwen3.5-397b-a17b-nvfp4"],
+      "generation": {"max_output_tokens": 8192, "temperature": 0},
+      "pricing": {
+        "input_credits_per_million": 0.55,
+        "output_credits_per_million": 3.5,
+        "source": "Study 1 config/study.json, checked 2026-11-14; inherited estimate, not a fresh price verification"
+      }
+    }
+  },
+  "scope": "All eligible CD/SD final artifacts; all-pass artifacts included; C/S eligible inventory retained for future separately frozen audits. Critic/cross-model prompts provided but not scheduled. No new builder generations.",
+  "replicate_id": 1
+}
