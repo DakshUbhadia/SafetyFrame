@@ -5,6 +5,7 @@ import csv
 from datetime import datetime,timezone
 import io
 from pathlib import Path
+import re
 import sys
 
 from harness.artifacts import confined,digest,read_json,tree_hash,write_json
@@ -30,6 +31,40 @@ def attempt_usage(outcome):
     return usage if isinstance(usage,dict) else {}
 
 
+def audit_attempts(raw_dir,model,execution,expected_context):
+    """Check persisted request/outcome pairs against the frozen retry policy."""
+    requests={p.name.removesuffix('-request.json'):p for p in raw_dir.glob('*-request.json')}
+    outcomes={p.name.removesuffix('-outcome.json'):p for p in raw_dir.glob('*-outcome.json')}
+    if not requests or requests.keys()!=outcomes.keys():
+        raise ValueError('Unreconciled request/outcome pair')
+    turns={1:[],2:[]}
+    entries=[]
+    for prefix,path in sorted(outcomes.items()):
+        match=re.fullmatch(r'turn([12])-attempt([0-9]+)',prefix)
+        if not match: raise ValueError('Unknown attempt filename')
+        turn,index=map(int,match.groups())
+        request=read_json(requests[prefix]); outcome=read_json(path)
+        if (request['turn']!=turn or request['attempt']!=index or outcome['turn']!=turn
+                or outcome['attempt']!=index or request['model_id']!=model['model_id']
+                or request['generation']!=model['generation']
+                or request['context']!=expected_context or outcome['context']!=expected_context):
+            raise ValueError('Request/outcome differs from frozen run identity')
+        turns[turn].append((index,outcome))
+        entries.append((path,outcome,digest(request)))
+    for turn,attempts in turns.items():
+        if not attempts: continue
+        indices=[i for i,outcome in attempts]
+        if indices!=list(range(len(indices))) or indices[-1]>execution['maximum_retries_per_turn']:
+            raise ValueError('Attempt sequence exceeds frozen retry policy')
+        for _,previous in attempts[:-1]:
+            if ('result' in previous or not previous.get('retryable')
+                    or previous.get('failure') not in execution['retryable']):
+                raise ValueError('Nonretryable response was rerun')
+    if not turns[1] or (turns[2] and 'result' not in turns[1][-1][1]):
+        raise ValueError('Turn 2 precedes a successful Turn 1 response')
+    return entries
+
+
 def load_phase(output=ROOT/'data/main'):
     """Validate all terminal identities and workspaces before releasing summaries."""
     manifest=verify_freeze()
@@ -38,6 +73,7 @@ def load_phase(output=ROOT/'data/main'):
     if missing: raise ValueError(f'Model A is incomplete: {len(missing)} planned runs lack terminal records')
     release=[]
     model=read_json(ROOT/'config/study.json')['models']['A']
+    execution=read_json(ROOT/'config/execution.json')
     for planned in rows:
         run=planned['run_id']
         record_path=output/'scored'/f'{run}.json'
@@ -74,13 +110,15 @@ def load_phase(output=ROOT/'data/main'):
                  'requirements_passed','workspace_hash','response_hash')})
         if row['status']=='completed' and len(public_turns)!=2: raise ValueError('Completed run needs both turns')
         attempts=[]
-        for path in sorted((output/'raw'/run).glob('*-outcome.json')):
-            outcome=read_json(path); usage=attempt_usage(outcome)
+        context={key:planned[key] for key in ('run_id','task_id','condition','provider','block_id','role')}
+        context['within_block_order']=int(planned['within_block_order'])
+        for path,outcome,request_hash in audit_attempts(output/'raw'/run,model,execution,context):
+            usage=attempt_usage(outcome)
             estimated=None
             if all(nonnegative_number(usage.get(key)) for key in ('input_tokens','output_tokens')):
                 rates=model['pricing']
                 estimated=(usage['input_tokens']*rates['input_credits_per_million']+usage['output_tokens']*rates['output_credits_per_million'])/1e6
-            attempts.append(dict(file=path.relative_to(ROOT).as_posix(),outcome_hash=digest(outcome),
+            attempts.append(dict(file=path.relative_to(ROOT).as_posix(),outcome_hash=digest(outcome),request_hash=request_hash,
                 failure=outcome.get('failure'),attempt=outcome['attempt'],
                 reported_cost=usage.get('cost') if nonnegative_number(usage.get('cost')) else None,
                 estimated_cost=estimated,input_tokens=usage.get('input_tokens'),output_tokens=usage.get('output_tokens')))
