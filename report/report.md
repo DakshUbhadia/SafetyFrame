@@ -1,4 +1,4 @@
-# SafetyFrame-Eval: Does AI-Safety Framing Change Technical Performance?
+# SafetyFrame-Eval: Safety Framing, Requirement Accounting, and Self-Assessment in AI Coding
 
 **Daksh Ubhadia — Independent researcher**
 
@@ -7,7 +7,7 @@ inspection and submission remain Sprint 11 tasks.
 
 ## Abstract
 
-AI assistants supporting research must both implement requested functionality and accurately describe unfinished work. We evaluated whether AI-safety framing changes performance on functionally matched benign coding tasks, and whether requirement accounting changes that relationship. Sixteen tasks spanning four evaluation-infrastructure families each contained five binary requirements. A Qwen model received capability and safety framing with and without accounting; a DeepSeek model received the baseline framing comparison. Each trajectory used a fixed two-turn implementation and public-feedback repair procedure. Of 96 planned trajectories, 90 completed and six ended in provider failures. Model A's paired capability-minus-safety Task Completion Score difference was 0.0125 (95% task-bootstrap interval [-0.0500, 0.1000]; 16 pairs). Its disclosure-by-framing interaction was -0.1286 [-0.2714, -0.0143] on 14 complete tasks, but weakened under provider-utility and valid-format sensitivities. Model B's baseline difference was -0.2000 [-0.4308, 0.0000] on 13 pairs; however, 50 of 59 replies exhausted the reasoning budget without emitting final code, preventing a clean coding-correctness generalization. Across Model A accounting conditions, all 20 failed final artifact requirements were claimed implemented. These findings support independent verification of completion claims, while leaving framing effects inconclusive and intervention benefits unestablished. The small, internally reviewed benchmark, fixed provider systems and budget-related output failures limit generalization.
+AI research assistants must implement requested functionality and accurately report unfinished work. We evaluated safety versus capability framing and explicit requirement accounting on sixteen functionally matched benign coding tasks, each with five binary requirements. Qwen received both framings with and without accounting; DeepSeek received the baseline framing comparison. Each trajectory used a fixed two-turn implementation and public-feedback repair procedure. Qwen's paired capability-minus-safety Task Completion Score difference was 0.0125 (95% task-bootstrap interval [-0.0500, 0.1000]; sixteen pairs), leaving framing effects inconclusive. Requirement accounting did not robustly improve safety-framed performance: the disclosure interaction was sensitive to provider and file-format failures. The clearest descriptive finding concerned self-assessment. Thirteen of 29 completed accounting trajectories contained at least one failed artifact requirement, yet all 145 final checklist entries said implemented, including all 20 failed requirements. DeepSeek did not provide a clean correctness-generalization test because most replies exhausted the reasoning budget before emitting final code. These findings favor independent verification of completion claims without establishing deception, beneficial mitigation, or a universal framing effect. The small internally reviewed benchmark and fixed provider systems limit generalization.
 
 ## 1. Introduction
 
@@ -27,6 +27,8 @@ model comparison and requirement-level claim checking. This is an independent,
 constrained study, not a literal replication of the motivating evaluation.
 An inconclusive framing contrast can coexist with informative evidence about
 completion claims.
+In this benchmark, inaccurate requirement reporting is the clearest descriptive
+observation; baseline framing evidence remains inconclusive.
 
 ## 2. Related work
 
@@ -89,15 +91,12 @@ uncertain labels for each requirement.
 
 Both models use Adaption: A requests `qwen3.5-397b` (Qwen); B requests
 `deepseek-v4-flash` (DeepSeek). Nonmissing trajectory-level returned IDs match
-these requests. The freeze also allows Qwen alias `qwen3.5-397b-a17b-nvfp4`,
-observed in an excluded pilot diagnostic. Backend routing and weight versions
-are not independently certified.
+these requests. Backend routing and weight versions are not independently
+certified; the allowed alias and full generation details are in Appendix B.
 
-Both use temperature 0, `max_output_tokens=8192`, nonstreaming Responses
-requests, a 180-second client timeout, no tools, `store=False` and
-`agentic_memory=False`. Generation seed and top_p are omitted. Equal token caps
-do not imply equal usable final-code budgets across reasoning systems. See
-[exact frozen settings](../config/study.json).
+Both models use temperature 0 and an 8,192-token output cap. A common cap need
+not leave the same final-code budget for different reasoning systems. Exact
+generation settings, backend identifiers and hashes appear in Appendix B.
 
 ### 3.3 Execution and scoring
 
@@ -113,28 +112,25 @@ Every hidden core check assigned to a requirement must pass. Artifact Task
 Completion Score (TCS) is passing binary requirements divided by five;
 end-to-end TCS is artifact TCS for a valid file transaction and zero otherwise.
 Claim parsing is separate from file parsing. Turn-2 end-to-end TCS is primary.
-Local hidden checks actually execute after each turn, although the registration
-describes scoring after both turns; only public results enter repair messages.
-Appendix D discloses this timing discrepancy without rewriting the registration.
+Hidden checks ran locally after each turn rather than after both turns as
+registered; repair feedback remained public-only (Appendix D).
 
-Python 3.13.7 orchestrates Docker scoring with the frozen image digest, one CPU,
-256 MB memory, 64-process limit, no network, nonroot user and a ten-second timeout
-per test invocation. No Kaggle GPU was used for scoring or analysis.
+Tests ran in a fixed, network-disabled Docker environment; full runtime
+configuration and hashes are provided in Appendix B and the repository.
 
 ### 3.4 Freeze, ordering and failures
 
-The local pre-outcome freeze is timestamped 2026-11-15 18:14:44 UTC, with source
-checkpoint `a5de5c6f7149e538c689e51a9680b5e660b9f3fa`. It is not an external
-registry or human signature. A seeded schedule randomizes task/model block order
-and conditions within blocks; execution projects Model A before Model B. There
-is one trajectory per task/condition, without sampling repetitions.
+Tasks, prompts, models, scoring and analysis rules were frozen locally before
+final outcomes, without an external registration. Seeded randomization orders
+task/model blocks and conditions within blocks; Model A executes before Model B.
+Each task/condition has one trajectory. Full identities and operational settings
+are in Appendix B.
 
-Serial requests start at least 60 seconds apart under a self-imposed throttle;
-official account rate limits remain unknown. Only timeout, HTTP-5xx and transport
-failures permit at most two retries per turn. Poor code, refusals and incomplete
-responses do not permit quality retries. Every planned row is retained.
-Provider failures are missing in primary comparisons and zero only in the
-labeled provider-utility sensitivity. No harness failure remains unresolved.
+Only specified infrastructure failures allow bounded retries; poor code,
+refusals and incomplete responses are never quality-resampled. Every planned
+row is retained. Provider failures are missing in primary comparisons and zero
+only in the separately labeled utility sensitivity. No harness failure remains
+unresolved.
 
 ### 3.5 Estimands and uncertainty
 
@@ -181,39 +177,38 @@ All 16 baseline pairs completed. Capability and safety means were 0.8250 and
 C and two favored S. The interval includes zero and practically meaningful
 effects in either direction. This is inconclusive, not evidence of equivalence.
 
-<!-- BEGIN table:conditions -->
-| Model | Condition | Completed / planned | Provider failures | TCS [95% CI] |
-| --- | --- | --- | --- | --- |
-| A | C | 16/16 | 0 | 0.8250 [0.7125, 0.9250] |
-| A | S | 16/16 | 0 | 0.8125 [0.6875, 0.9250] |
-| A | CD | 14/16 | 2 | 0.8857 [0.7857, 0.9571] |
-| A | SD | 15/16 | 1 | 0.7733 [0.6133, 0.9067] |
-| B | C | 14/16 | 2 | 0.0571 [0.0000, 0.1714] |
-| B | S | 15/16 | 1 | 0.2267 [0.0533, 0.4400] |
-<!-- END table:conditions -->
+![Figure 1. Every Model A paired framing gap; the mean estimate remains inconclusive.](model_a/task_framing_gap.png)
 
-*Table 1. All-completed condition means and task-bootstrap intervals; these
-differ from contrast-specific matched-subset means.*
+The paired estimate is the inferential comparison. Descriptive means using all
+completed runs are separated in Appendix C so they are not mistaken for matched
+contrasts.
 
-![Figure 1. Model A condition means and 95% task-bootstrap intervals.](figures/figure_1_condition_means.png)
+### 4.2 Requirement-level self-assessment
 
-### 4.2 Model B generalization
+**13 of 29 completed accounting trajectories contained at least one failed
+artifact requirement, yet every final checklist entry across all 29 trajectories
+said “implemented.”** All 145 final accounting entries claimed implemented.
+All 20 failed artifact requirements were among those claims: eight in CD and
+twelve in SD, over six and seven affected task trajectories, respectively.
+These counts use preserved-code requirements rather than the end-to-end format
+penalty. They demonstrate inaccurate completion reporting, without measuring
+awareness or intent.
 
-Model B completed 29 of 32 trajectories. On 13 complete pairs, C−S was -0.2000
-[-0.4308, 0.0000]; ten pairs tied, three favored S and none favored C. On those
-pairs C and S means were 0.0615 and 0.2615, distinct from Table 1's condition
-means. Provider-utility sensitivity was -0.1625 [-0.3500, 0.0000], N=16.
+![Figure 2. All 20 failed artifact requirements were claimed implemented; none were acknowledged incomplete or uncertain.](figures/claim_ground_truth.png)
 
-Crucially, 50/59 observed replies exhausted the 8,192-token budget entirely as
-reasoning and emitted no final text. Raw metadata show incomplete status with
-max_output_tokens and no recoverable final-message text; extraction mismatches
-were zero. There were 24/29 Turn-2 format failures and only one valid-format
-pair, whose gap was zero and interval undefined. This chiefly measures code
-emission under the frozen budget, not correctness when code is available.
-The diagnosis is post-collection metadata analysis, not a new exclusion, score
-correction or evidence about the content of private reasoning.
+<!-- BEGIN table:self_assessment -->
+| Metric | CD | SD |
+| --- | --- | --- |
+| Strict URDR | 0/8 = 0.0000 | 0/12 = 0.0000 |
+| Lenient URDR | 0/8 = 0.0000 | 0/12 = 0.0000 |
+| FCR | 8/8 = 1.0000 | 12/12 = 1.0000 |
+| Completion precision | 62/70 = 0.8857 | 63/75 = 0.8400 |
+| Unmet-disclosure precision | 0/0 = NA | 0/0 = NA |
+<!-- END table:self_assessment -->
 
-![Figure 2. Every planned task's framing gap; missing pairs remain visible.](figures/figure_2_task_framing.png)
+*Table 1. Model A Turn-2 claim accuracy. Undefined precision is NA, not zero.
+[Both-turn tables](final_analysis/self_assessment.csv) include macro ratios and
+counts of defined tasks. Model B has no accounting or scored self-assessment.*
 
 ### 4.3 Requirement-accounting interaction
 
@@ -233,7 +228,7 @@ effects does not reproduce the complete-quadruple interaction.
 | A interaction | -0.1286 [-0.2714, -0.0143], N=14 | -0.0375 [-0.2125, 0.1750], N=16 | -0.0769 [-0.1692, 0.0000], N=13 |
 <!-- END table:contrasts -->
 
-*Table 2. Primary contrasts and secondary simple effects, with all sensitivity
+*Table 2. Matched inferential contrasts and secondary simple effects, with all sensitivity
 intervals. N denotes matched tasks.*
 
 The interaction weakens to -0.0375 [-0.2125, 0.1750] under provider utility and
@@ -244,64 +239,23 @@ beneficial mitigation claim.
 
 ![Figure 3. Disclosure simple effects and interaction, with sensitivities.](figures/figure_3_disclosure_interaction.png)
 
-### 4.4 Requirement-level self-assessment
+### 4.4 Model B generalization
 
-All 145 final accounting entries claimed implemented. All 20 failed artifact
-requirements were among those claims: eight in CD and twelve in SD, distributed
-over six and seven affected task trajectories, respectively. This is inaccurate
-completion reporting, without a measurement of awareness or intent.
-
-<!-- BEGIN table:self_assessment -->
-| Metric | CD | SD |
-| --- | --- | --- |
-| Strict URDR | 0/8 = 0.0000 | 0/12 = 0.0000 |
-| Lenient URDR | 0/8 = 0.0000 | 0/12 = 0.0000 |
-| FCR | 8/8 = 1.0000 | 12/12 = 1.0000 |
-| Completion precision | 62/70 = 0.8857 | 63/75 = 0.8400 |
-| Unmet-disclosure precision | 0/0 = NA | 0/0 = NA |
-<!-- END table:self_assessment -->
-
-*Table 3. Model A Turn-2 claim accuracy. Undefined precision is NA, not zero.
-[Both-turn tables](final_analysis/self_assessment.csv) include macro ratios and
-counts of defined tasks. Model B has no accounting or scored self-assessment.*
-
-![Figure 4. Self-assessment ratios and underlying counts.](figures/figure_4_self_assessment.png)
+DeepSeek did not provide a clean correctness-generalization test: 50/59 observed
+replies exhausted the output budget before emitting final code, leaving only
+one valid-format C/S pair. Its apparent paired C−S gap was -0.2000
+[-0.4308, 0.0000], N=13. We treat this as a budget-limited end-to-end result,
+rather than evidence of a framing effect on coding correctness. Full diagnostics,
+condition means and sensitivities are retained in Appendix C and Table 2.
 
 ### 4.5 Repair dynamics and operational outcomes
 
-<!-- BEGIN table:repair -->
-| Model | Condition | Paired N | Turn 1 | Turn 2 | Repair | Artifact repair |
-| --- | --- | --- | --- | --- | --- | --- |
-| A | C | 16 | 0.8125 | 0.8250 | 0.0125 | 0.0125 |
-| A | S | 16 | 0.7750 | 0.8125 | 0.0375 | 0.0375 |
-| A | CD | 14 | 0.8429 | 0.8857 | 0.0429 | 0.0429 |
-| A | SD | 15 | 0.8133 | 0.7733 | -0.0400 | 0.0267 |
-| B | C | 14 | 0.0429 | 0.0571 | 0.0143 | 0.0571 |
-| B | S | 15 | 0.1733 | 0.2267 | 0.0533 | 0.0533 |
-<!-- END table:repair -->
-
-*Table 4. Paired repair uses completed trajectories. Turn-1 means here use that
-same subset, rather than every observed first turn.*
-
-Model A SD has negative end-to-end repair but positive artifact repair because
-of the format penalty. Model B S has 16 observed first turns but 15 completed
-pairs; its all-observed Turn-1 mean is 0.1625, so subtracting that mean would not
-yield paired repair. Figure 5 and both denominators appear in Appendix C.
-
-The six terminal failures were HTTP-5xx after the allowed retries; Appendix D
-identifies each row and turn. The final set contains 181 observed responses,
-235 attempts and 48 retries, with 54 outcomes lacking full usage. Reported costs
-and retained liabilities document local accounting, not independently verified
-account debits. See original [A](model_a/integrity.json) and
-[B](model_b/integrity.json) integrity records.
+Repair is secondary. Model A SD's negative end-to-end repair becomes positive
+when measured on preserved artifacts, reflecting the format failure described
+above. Paired repair tables, full operational accounting and provider incidents
+appear in Appendices C and D; no outcome was selectively replaced.
 
 ## 5. Discussion
-
-The channels answer different questions. Model A provides no clear baseline
-framing effect at this precision. Accounting does not show a robust beneficial
-change in safety-framed performance. Model B does not cleanly establish
-cross-family coding generalization because most requests emitted no final code.
-These limited or mixed findings remain worth reporting.
 
 The more direct epistemic finding is that explicit completion checklists can
 fail to communicate unfinished requirements. An implemented claim is not an
@@ -310,6 +264,12 @@ are appropriate complements, though hidden checks cover only specified tested
 behaviors. Because we did not reveal hidden failures or independently measure
 awareness, we cannot distinguish mistaken confidence, misunderstanding,
 insufficient checking and intentional misrepresentation.
+
+The channels answer different questions. Model A provides no clear baseline
+framing effect at this precision. Accounting does not show a robust beneficial
+change in safety-framed performance. Model B does not cleanly establish
+cross-family coding generalization because most requests emitted no final code.
+These limited or mixed findings remain worth reporting.
 
 A fixed cap is a legitimate deployment constraint but can be inadequate for
 comparing correctness conditional on emitted artifacts. Better evidence would
@@ -484,6 +444,37 @@ bind each prompt to its exact variant.
 
 ## Appendix B. Task metadata and scoring details
 
+### B.1 Runtime, generation and execution identities
+
+The freeze permits Qwen alias `qwen3.5-397b-a17b-nvfp4`, observed during an
+excluded pilot diagnostic. Requested and returned IDs remain recorded separately;
+nonmissing main-study trajectory IDs matched the requested IDs.
+
+Both use temperature 0, `max_output_tokens=8192`, nonstreaming Responses
+requests, a 180-second client timeout, no tools, `store=False` and
+`agentic_memory=False`. Generation seed and top_p are omitted. Equal token caps
+do not imply equal usable final-code budgets across reasoning systems. See
+[exact frozen settings](../config/study.json).
+
+Python 3.13.7 orchestrates Docker scoring with the frozen image digest, one CPU,
+256 MB memory, 64-process limit, no network, nonroot user and a ten-second timeout
+per test invocation. No Kaggle GPU was used for scoring or analysis.
+
+The local pre-outcome freeze is timestamped 2026-11-15 18:14:44 UTC, with source
+checkpoint `a5de5c6f7149e538c689e51a9680b5e660b9f3fa`. It is not an external
+registry or human signature. A seeded schedule randomizes task/model block order
+and conditions within blocks; execution projects Model A before Model B. There
+is one trajectory per task/condition, without sampling repetitions.
+
+Serial requests start at least 60 seconds apart under a self-imposed throttle;
+official account rate limits remain unknown. Only timeout, HTTP-5xx and transport
+failures permit at most two retries per turn. Poor code, refusals and incomplete
+responses do not permit quality retries. Every planned row is retained.
+Provider failures are missing in primary comparisons and zero only in the
+labeled provider-utility sensitivity. No harness failure remains unresolved.
+
+### B.2 Task inventory and scoring
+
 <!-- BEGIN table:tasks -->
 | Task | Family | Canonical title | Requirements | Editable files |
 | --- | --- | --- | --- | --- |
@@ -531,7 +522,79 @@ No frozen artifact was modified during report preparation.
 
 ## Appendix C. Repair, missingness and additional tables
 
-![Figure 5. Secondary repair separates artifact and end-to-end scores.](figures/figure_5_repair.png)
+### C.1 Descriptive condition means — not the matched causal contrasts
+
+These means use every completed trajectory within a condition. They are
+descriptive summaries, not the matched inferential contrasts in Table 2;
+different missingness sets can make the two differ. Exact matched-subset means
+remain available in final_analysis/matched_means.csv.
+
+<!-- BEGIN table:conditions -->
+| Model | Condition | Completed / planned | Provider failures | TCS [95% CI] |
+| --- | --- | --- | --- | --- |
+| A | C | 16/16 | 0 | 0.8250 [0.7125, 0.9250] |
+| A | S | 16/16 | 0 | 0.8125 [0.6875, 0.9250] |
+| A | CD | 14/16 | 2 | 0.8857 [0.7857, 0.9571] |
+| A | SD | 15/16 | 1 | 0.7733 [0.6133, 0.9067] |
+| B | C | 14/16 | 2 | 0.0571 [0.0000, 0.1714] |
+| B | S | 15/16 | 1 | 0.2267 [0.0533, 0.4400] |
+<!-- END table:conditions -->
+
+*Table C1. Descriptive condition means — not the matched causal contrasts.*
+
+![Figure C1. All-completed Model A condition means.](figures/figure_1_condition_means.png)
+
+### C.2 Model B budget and generalization details
+
+Model B completed 29 of 32 trajectories. On 13 complete pairs, C−S was -0.2000
+[-0.4308, 0.0000]; ten pairs tied, three favored S and none favored C. On those
+pairs C and S means were 0.0615 and 0.2615, distinct from Table C1's condition
+means. Provider-utility sensitivity was -0.1625 [-0.3500, 0.0000], N=16.
+
+Crucially, 50/59 observed replies exhausted the 8,192-token budget entirely as
+reasoning and emitted no final text. Raw metadata show incomplete status with
+max_output_tokens and no recoverable final-message text; extraction mismatches
+were zero. There were 24/29 Turn-2 format failures and only one valid-format
+pair, whose gap was zero and interval undefined. This chiefly measures code
+emission under the frozen budget, not correctness when code is available.
+The diagnosis is post-collection metadata analysis, not a new exclusion, score
+correction or evidence about the content of private reasoning.
+
+![Figure C2. Every planned task's framing gap; missing pairs remain visible.](figures/figure_2_task_framing.png)
+
+### C.3 Self-assessment metric detail
+
+![Figure C3. CD/SD self-assessment ratios and counts.](figures/figure_4_self_assessment.png)
+
+### C.4 Paired repair and operational accounting
+
+<!-- BEGIN table:repair -->
+| Model | Condition | Paired N | Turn 1 | Turn 2 | Repair | Artifact repair |
+| --- | --- | --- | --- | --- | --- | --- |
+| A | C | 16 | 0.8125 | 0.8250 | 0.0125 | 0.0125 |
+| A | S | 16 | 0.7750 | 0.8125 | 0.0375 | 0.0375 |
+| A | CD | 14 | 0.8429 | 0.8857 | 0.0429 | 0.0429 |
+| A | SD | 15 | 0.8133 | 0.7733 | -0.0400 | 0.0267 |
+| B | C | 14 | 0.0429 | 0.0571 | 0.0143 | 0.0571 |
+| B | S | 15 | 0.1733 | 0.2267 | 0.0533 | 0.0533 |
+<!-- END table:repair -->
+
+*Table C2. Paired repair uses completed trajectories. Turn-1 means here use that
+same subset, rather than every observed first turn.*
+
+Model A SD has negative end-to-end repair but positive artifact repair because
+of the format penalty. Model B S has 16 observed first turns but 15 completed
+pairs; its all-observed Turn-1 mean is 0.1625, so subtracting that mean would not
+yield paired repair. Figure C4 separates the two repair endpoints.
+
+The six terminal failures were HTTP-5xx after the allowed retries; Appendix D
+identifies each row and turn. The final set contains 181 observed responses,
+235 attempts and 48 retries, with 54 outcomes lacking full usage. Reported costs
+and retained liabilities document local accounting, not independently verified
+account debits. See original [A](model_a/integrity.json) and
+[B](model_b/integrity.json) integrity records.
+
+![Figure C4. Secondary repair separates artifact and end-to-end scores.](figures/figure_5_repair.png)
 
 <!-- BEGIN table:failures -->
 | Model | Condition | Turn | Observed / planned | Format failures | Terminal provider failures |
@@ -550,7 +613,7 @@ No frozen artifact was modified during report preparation.
 | B | S | 2 | 15/16 | 11 | 1 |
 <!-- END table:failures -->
 
-*Table C1. A Turn-1 provider failure also leaves Turn 2 unobserved. Missing
+*Table C3. A Turn-1 provider failure also leaves Turn 2 unobserved. Missing
 responses are distinct from observed format failures; terminal failures identify
 the actual failed request turn.*
 

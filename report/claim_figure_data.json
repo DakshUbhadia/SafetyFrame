@@ -1,0 +1,20 @@
+{
+  "model": "A",
+  "conditions": [
+    "CD",
+    "SD"
+  ],
+  "turn": 2,
+  "ground_truth": "artifact requirements",
+  "completed_trajectories": 29,
+  "affected_trajectories": 13,
+  "checklist_entries": 145,
+  "entries_claimed_implemented": 145,
+  "failed_requirements": 20,
+  "failed_claimed_implemented": 20,
+  "failed_acknowledged_incomplete_or_uncertain": 0,
+  "failed_claims_missing": 0,
+  "source_dataset": "model_a/scored_dataset.json",
+  "source_dataset_hash": "516bf81d671a9497c8576daa7b283c8484c99e160d8f9f3f60c1dfd581d0c20d",
+  "interpretation": "Descriptive nested requirement counts; no intent or independent-requirement inference."
+}

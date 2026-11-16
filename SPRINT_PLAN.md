@@ -367,7 +367,7 @@ and [integrity evidence](report/final_analysis/integrity.json).
 
 - [x] Complete Introduction, Related Work, Methods, Results, Discussion, and Limitations.
 - [x] Verify cited research and submission requirements against their original sources.
-- [x] Present Model A framing, Model B framing, interaction, self-assessment, and repair in that order.
+- [x] Present all result channels; after user-requested editorial revision, use Model A framing, self-assessment, interaction, Model B, then repair. This changes narrative order only.
 - [x] Include task counts, exact models/settings, failure handling, and uncertainty.
 - [x] Show disclosure simple effects alongside the interaction.
 - [x] Use mitigation language only when safety performance improves and the gap narrows beneficially.
@@ -382,13 +382,14 @@ and [integrity evidence](report/final_analysis/integrity.json).
 **Exit criteria:** Every numerical statement traces to analysis output. The
 report answers all three research questions without requiring a significant framing gap.
 
-**Result:** The complete [report draft](report/report.md) has a 197-word abstract,
+**Result:** The complete [report draft](report/report.md) has a 177-word abstract,
 user-confirmed author/affiliation, six verified primary research sources, all
-three result channels in the specified order, sensitivity intervals, four main
-figures and an additional repair figure. Appendices contain exact prompt
+three result channels in the user-revised narrative order, sensitivity intervals,
+three main figures including a direct claim-versus-ground-truth graphic.
+Appendices retain all detailed original figures, repair and operational tables, exact prompt
 components, task metadata, scoring, failure accounting, incidents, provenance
 and ethical/dual-use considerations. Seven tables, five prompt copies and
-26 source-derived narrative checks pass; original analysis digests and freeze
+27 source-derived narrative checks pass; original analysis digests and freeze
 remain unchanged. Hidden-scoring timing differs from the registration sentence
 and is explicitly disclosed, without changing code or results. Submission rules
 were checked on the official event page; the linked Google template required

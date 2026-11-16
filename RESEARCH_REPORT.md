@@ -3,13 +3,27 @@
 The [complete report draft](report/report.md) is authored as **Daksh Ubhadia,
 Independent researcher**, confirmed by the user. It covers Introduction,
 Related Work, Methods, Results, Discussion, Limitations and Conclusion, with a
-197-word abstract, four main figures and a secondary repair figure in the appendix.
+177-word abstract and three main figures. Runtime details, descriptive condition
+means, detailed self-assessment ratios, Model B diagnostics and repair figures
+are retained in the appendices.
 
-Results are presented in the requested order: Model A framing, Model B framing,
-requirement-accounting interaction, self-assessment and repair. The conclusions
+Following user-supplied editorial feedback, Results now present Model A framing,
+self-assessment, requirement-accounting interaction, Model B and repair. This
+post-result narrative change does not change the prespecified estimands or
+promote a descriptive metric into a new confirmatory primary hypothesis. The conclusions
 retain inconclusive framing evidence, sensitivity to operational handling,
 inaccurate completion claims and Model B's substantial reasoning-budget limit.
 No inference calls or changes to study scores were made.
+
+The title now represents all three channels: **SafetyFrame-Eval: Safety Framing,
+Requirement Accounting, and Self-Assessment in AI Coding**. The abstract and
+main text highlight that 13/29 completed accounting trajectories had failed
+artifact requirements while all 145 final checklist entries claimed implemented.
+The new Figure 2 shows 20 failed requirements, 20 implemented claims on those
+failures and zero incomplete/uncertain acknowledgements. Its
+[numerical input](report/claim_figure_data.json) derives directly from the unchanged
+Model A dataset. The conclusion remains narrow and the timing discrepancy stays
+disclosed.
 
 ## Appendices and provenance
 
@@ -37,6 +51,16 @@ reviewed analysis digests. It records
 [claim traceability](report/claim_traceability.json) and
 [verification evidence](report/report_verification.json). These checks establish
 internal consistency, not independent review or replication.
+
+To regenerate the additional claim-versus-ground-truth figure:
+
+```powershell
+.\.venv\Scripts\python.exe -m analysis.claim_figure
+```
+
+The verifier checks its counts against the reviewed dataset and records hashes
+of its PNG, SVG and PDF files. Original Sprint 9 figures and plotting data are
+preserved unchanged.
 
 If report tables need to be regenerated from unchanged analysis outputs:
 

@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from harness.artifacts import digest, read_json, write_json
 from harness.freeze import verify_freeze
 from report_tables import evidence, fmt, interval, tables
+from analysis.claim_figure import counts as claim_counts
 
 
 def block(text, name):
@@ -78,6 +79,12 @@ def narrative_claims(result, datasets, config, manifest):
         'model_a/summary.json:self_assessment.CD/SD.2.counts.claimed_implemented', claimed)
     add('failed_requirements', f'All {failed} failed artifact requirements',
         'model_a/summary.json:self_assessment.CD/SD.2.counts.actual_failed_requirements', failed)
+    accounting = claim_counts(datasets['A'])
+    add('affected_accounting_trajectories',
+        f"{accounting['affected_trajectories']} of {accounting['completed_trajectories']} completed accounting trajectories contained at least one failed artifact requirement",
+        'model_a/scored_dataset.json:completed CD/SD final artifact requirements', accounting)
+    if accounting['entries_claimed_implemented'] != accounting['checklist_entries']:
+        raise ValueError('Not every final accounting entry is implemented')
     for c in ('CD', 'SD'):
         counts = assessment[c]['2']['counts']
         if counts['failed_claimed_implemented'] != counts['actual_failed_requirements']:
@@ -136,11 +143,21 @@ def main():
     if not 150 <= word_count <= 250: raise ValueError('Abstract length: ' + str(word_count))
     for heading in ('1. Introduction', '2. Related work', '3. Methods', '4. Results', '5. Discussion', '6. Limitations', '7. Conclusion'):
         if '## ' + heading not in text: raise ValueError('Missing section: ' + heading)
-    order = [text.index('### 4.' + str(i)) for i in range(1, 6)]
+    headings = ('Model A framing sensitivity', 'Requirement-level self-assessment',
+                'Requirement-accounting interaction', 'Model B generalization',
+                'Repair dynamics and operational outcomes')
+    order = [text.index(f'### 4.{i} {name}') for i, name in enumerate(headings, 1)]
     if order != sorted(order): raise ValueError('Result channels are out of order')
     if re.search(r'\[(?:N\]|TODO\b|Report Model|Direct findings\.|Narrow claim\.)', text):
         raise ValueError('Unfilled report placeholder')
     claims = narrative_claims(result, datasets, config, manifest)
+    figure_data = claim_counts(datasets['A'])
+    if figure_data != read_json(ROOT / 'report/claim_figure_data.json'):
+        raise ValueError('Claim figure no longer matches the reviewed dataset')
+    import hashlib
+    figure_hashes = {f'figures/claim_ground_truth.{ext}': hashlib.sha256(
+        (ROOT / f'report/figures/claim_ground_truth.{ext}').read_bytes()).hexdigest()
+        for ext in ('png', 'svg', 'pdf')}
     flat = ' '.join(text.split())
     for claim in claims:
         if ' '.join(claim['manuscript_needle'].split()) not in flat:
@@ -161,6 +178,7 @@ def main():
         source_checkpoint=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         freeze_hash=digest(manifest), abstract_words=word_count, exact_tables=7, exact_prompt_blocks=5,
         narrative_checks=len(claims), local_links_checked=len(checked_links),
+        editorial_claim_figure_data_hash=digest(figure_data), editorial_claim_figure_sha256=figure_hashes,
         original_analysis_releases_unchanged=True, numerical_analysis_unchanged=True,
         author='Daksh Ubhadia', affiliation='Independent researcher', author_metadata_user_confirmed=True,
         additional_inference_calls=0, pdf_exported=False, page_limit_verified=False,
