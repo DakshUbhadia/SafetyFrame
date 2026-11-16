@@ -25,6 +25,16 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def normalized_sha(path):
+    return hashlib.sha256(path.read_bytes().replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest()
+
+
+def documentation_sha(path):
+    # Starter templates and original snapshots retain exact bytes. Readable
+    # documentation and generated metadata follow the repo's LF text policy.
+    return sha(path) if 'templates' in path.parts else normalized_sha(path)
+
+
 def verify(record=False):
     cleanup_path = ROOT/'presentation/documentation_cleanup.json'
     cleanup = read_json(cleanup_path) if cleanup_path.exists() else None
@@ -38,7 +48,7 @@ def verify(record=False):
                 raise ValueError('Archived original source changed: '+name)
         reviewed = read_json(ROOT/'presentation/documentation_cleanup_review.json')
         for name, expected in reviewed['files'].items():
-            if sha(confined(ROOT, name)) != expected:
+            if documentation_sha(confined(ROOT, name)) != expected:
                 raise ValueError('Reviewed cleanup document changed: '+name)
     preserved = read_json(ROOT/'study_2_audit/manifests/study1_preservation.json')
     original = read_json(ROOT/'freeze_manifest.json')
@@ -54,7 +64,9 @@ def verify(record=False):
             audit_inputs_unavailable.append(name)
             continue
         if sha(source(name)) != expected:
-            raise ValueError('Study 2 frozen protocol changed: '+name)
+            portable = reviewed.get('audit_text_sha256', {}).get(name) if cleanup else None
+            if not portable or normalized_sha(source(name)) != portable:
+                raise ValueError('Study 2 frozen protocol changed: '+name)
     amendments = dict(source_tag=preserved['tag'],
         reason='Post-collection presentation and status updates requested in the last-mile plan; no scientific changes.',
         files={name: {'preserved_original_sha256': preserved['files'][name],
@@ -73,7 +85,9 @@ def verify(record=False):
             unavailable.append(name)
             continue
         if sha(path) != expected:
-            raise ValueError('Preserved non-presentation file changed: '+name)
+            portable = reviewed.get('preserved_text_sha256', {}).get(name) if cleanup else None
+            if not portable or normalized_sha(path) != portable:
+                raise ValueError('Preserved non-presentation file changed: '+name)
     result, datasets, tasks = evidence()
     text = (ROOT/'report/report.md').read_text(encoding='utf-8')
     expected = {'table:'+name: value for name, value in tables(result, datasets, tasks).items()}

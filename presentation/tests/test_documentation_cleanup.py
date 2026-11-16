@@ -25,8 +25,8 @@ class CleanupIntegrityTests(unittest.TestCase):
                 verifier.verify()
 
     def test_unrecorded_presentation_edit_is_rejected(self):
-        original = verifier.sha
-        with patch.object(verifier, 'sha', side_effect=lambda p: '0'*64 if p == ROOT/'README.md' else original(p)):
+        original = verifier.documentation_sha
+        with patch.object(verifier, 'documentation_sha', side_effect=lambda p: '0'*64 if p == ROOT/'README.md' else original(p)):
             with self.assertRaisesRegex(ValueError, 'Reviewed cleanup document changed'):
                 verifier.verify()
 
