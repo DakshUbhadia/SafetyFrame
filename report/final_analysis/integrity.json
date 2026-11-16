@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "freeze_hash": "8f98b8ad025f4ee2773620ea989bbf50db201b3919db591b5759632ce5b87c13",
+  "frozen_source_checkpoint": "a5de5c6f7149e538c689e51a9680b5e660b9f3fa",
+  "analysis_code_checkpoint": "38a1ba756e125f2c84ac58889442dcb050c56ced",
+  "generated_at_utc": "2026-11-16T09:42:43.100761+00:00",
+  "terminal_trajectories": 96,
+  "completed_trajectories": 90,
+  "provider_failed_trajectories": 6,
+  "raw_audit_pass": true,
+  "scores_recomputed_from_requirements_and_claims": true,
+  "original_model_summaries_unchanged": true,
+  "numerical_reproduction_pass": true,
+  "normalized_text_digests": {
+    "summary.json": "54ad0bd32cb401a6a9ec203c0fd560418cd28e0955008bf9c571a80a75b66380",
+    "conditions.csv": "5e74e38e5f702498d6197681b7a564064cd8da67fff1de8233799920c375924c",
+    "contrasts.csv": "66896c65b9d9014637b2e775f3377b2213a0662ff151cdccb2dd72a938da2544",
+    "matched_means.csv": "f4d10abada674d4525962eafae88022dd3867e927b57e50f5f79408652d25431",
+    "failures.csv": "3eb657fb394a6d95693d423f02a6f8b0080e6c453a676f6cd54f516940652773",
+    "self_assessment.csv": "38bcec77a83cb36b9c4fc6f78350e19dfe7fffb1cf977f91da5cbd6e5c42d10e",
+    "repair.csv": "7bce1fdadce55b73a498aeb17afc1a094c3a77667d3b392dd44df86388cedfd9",
+    "task_contrasts.csv": "c5b58f37945195bccc6989b33275e303e2d31013b8c204da247a520c35d1fa8b",
+    "figure_data.json": "2050b4de1a3d661b093355dc368995ea9df8ff2904413cdf38df11fee323b2c7",
+    "results.md": "fd61bd3ab37cf91238ce5273016309c6581e954134b4bd4124b38f8546fcd297"
+  },
+  "figures": "report/figures; plotted data in figure_data.json; timestamped SVG/PDF bytes excluded",
+  "additional_inference_calls": 0,
+  "pooled_estimate": null
+}

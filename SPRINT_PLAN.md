@@ -13,7 +13,8 @@ Sprint 6 fixes the preregistration, analysis policies, randomized plan, and
 committed integrity freeze. Sprint 7 resolves all 64 Model-A trajectories
 (61 completed, three provider-failed), with audited and reproduced initial
 analysis and figures. Sprint 8 resolves all 32 Model-B trajectories with
-independent estimates and response-budget diagnostics. Sprints 9–11 remain not started.
+independent estimates and response-budget diagnostics. Sprint 9 completes the
+unified offline analysis, sensitivity tables and Figures 1–5. Sprints 10–11 remain not started.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
@@ -56,7 +57,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 6. Preregistration and freeze | Local registration, committed integrity freeze, 96 planned runs, and design-sensitivity table | 5 |
 | [x] | 7. Model A factorial | 64 terminal trajectories, audited scored dataset, first analysis and figures | 6 |
 | [x] | 8. Model B generalization | 32 terminal C/S trajectories, audited results and separate-model comparison | 7 |
-| [ ] | 9. Final analysis and figures | Reproducible tables, intervals, and figures | 8 |
+| [x] | 9. Final analysis and figures | Recomputed three result channels, sensitivity tables and Figures 1–5 | 8 |
 | [ ] | 10. Research report | Complete report supported by observed results | 9 |
 | [ ] | 11. Reproducibility and submission | Checked release artifacts and submission package | 10 |
 
@@ -323,19 +324,19 @@ Numerical/narrative outputs reproduce exactly; see [Model B results](report/mode
 
 **Goal:** Turn frozen datasets into the three research result channels.
 
-- [ ] Recompute derived metrics from stored requirement scores and parsed claims.
-- [ ] Estimate `BaselineSafetyGap_A = mean(TCS_C − TCS_S)`.
-- [ ] Estimate `DisclosureFramingInteraction_A = mean((TCS_SD − TCS_S) − (TCS_CD − TCS_C))`.
-- [ ] Estimate `BaselineSafetyGap_B` separately.
-- [ ] Preserve matched conditions during task-level bootstrap resampling.
-- [ ] Compute strict URDR, FCR, completion precision, and unmet-disclosure precision for CD/SD.
-- [ ] Show relevant numerator/denominator counts and leave zero-denominator metrics undefined.
-- [ ] Compute lenient URDR and Turn-2 minus Turn-1 RepairGain as secondary measures.
-- [ ] Report format failures and provider failures separately from coding performance.
-- [ ] Apply the preregistered missingness and sensitivity rules consistently.
-- [ ] Generate Figures 1–4: Model A condition means, task-level C−S for both models,
+- [x] Recompute derived metrics from stored requirement scores and parsed claims.
+- [x] Estimate `BaselineSafetyGap_A = mean(TCS_C − TCS_S)`.
+- [x] Estimate `DisclosureFramingInteraction_A = mean((TCS_SD − TCS_S) − (TCS_CD − TCS_C))`.
+- [x] Estimate `BaselineSafetyGap_B` separately.
+- [x] Preserve matched conditions during task-level bootstrap resampling.
+- [x] Compute strict URDR, FCR, completion precision, and unmet-disclosure precision for CD/SD.
+- [x] Show relevant numerator/denominator counts and leave zero-denominator metrics undefined.
+- [x] Compute lenient URDR and Turn-2 minus Turn-1 RepairGain as secondary measures.
+- [x] Report format failures and provider failures separately from coding performance.
+- [x] Apply the preregistered missingness and sensitivity rules consistently.
+- [x] Generate Figures 1–4: Model A condition means, task-level C−S for both models,
   Model A disclosure simple effects/interaction, and self-assessment accuracy.
-- [ ] Add an optional RepairGain figure only if informative.
+- [x] Add an optional RepairGain figure only if informative.
 
 **Deliverables:** `analysis/primary.py`, `analysis/bootstrap.py`,
 `analysis/self_assessment.py`, `analysis/repair.py`, `analysis/figures.py`,
@@ -343,6 +344,18 @@ result tables, and `report/figures/`.
 
 **Exit criteria:** Analysis reproduces from saved data; figures match tables;
 tasks remain the independent units; all three result channels are covered.
+
+**Result:** All 96 terminal trajectories recompute from saved requirement scores
+and parsed claims, preserving every reviewed Model A/B summary and the original
+freeze. The local raw-response/workspace/request audit passes. Ten final
+numerical/narrative artifacts reproduce exactly. All 112 tests pass (74 harness,
+38 analysis). Figures 1–4 and secondary Figure 5 are exported as PNG/SVG/PDF,
+with exact plotting values in figure_data.json. Repair separates artifact gain
+from end-to-end format penalties; observed Turn-1 denominators remain explicit.
+No inference credits were spent. Model B's reasoning-budget limitation persists;
+no coding-performance generalization is asserted. See
+[final-analysis guide](FINAL_ANALYSIS.md), [results](report/final_analysis/results.md),
+and [integrity evidence](report/final_analysis/integrity.json).
 
 **References:** [Scoring/analysis plan](09_SCORING_ANALYSIS_PLAN.md),
 [self-assessment rubric](10_SELF_ASSESSMENT_RUBRIC.md).

@@ -1,0 +1,16 @@
+model,contrast,estimand,tasks,estimate,lower,upper
+A,BaselineSafetyGap_A,primary,16,0.012500000000000004,-0.04999999999999999,0.1
+A,BaselineSafetyGap_A,provider_utility,16,0.012500000000000004,-0.04999999999999999,0.1
+A,BaselineSafetyGap_A,valid_format,16,0.012500000000000004,-0.04999999999999999,0.1
+A,DisclosureFramingInteraction_A,primary,14,-0.1285714285714286,-0.2714285714285714,-0.014285714285714282
+A,DisclosureFramingInteraction_A,provider_utility,16,-0.037500000000000006,-0.21250000000000002,0.175
+A,DisclosureFramingInteraction_A,valid_format,13,-0.07692307692307693,-0.16923076923076924,0.0
+A,DisclosureEffect_C_A,primary,14,0.04285714285714286,0.0,0.1142857142857143
+A,DisclosureEffect_C_A,provider_utility,16,-0.05,-0.2125,0.075
+A,DisclosureEffect_C_A,valid_format,14,0.04285714285714286,0.0,0.1142857142857143
+A,DisclosureEffect_S_A,primary,15,-0.06666666666666667,-0.21333333333333335,0.06666666666666667
+A,DisclosureEffect_S_A,provider_utility,16,-0.08750000000000001,-0.22500000000000003,0.0375
+A,DisclosureEffect_S_A,valid_format,14,-0.01428571428571429,-0.12857142857142856,0.08571428571428573
+B,BaselineSafetyGap_B,primary,13,-0.2,-0.43076923076923074,0.0
+B,BaselineSafetyGap_B,provider_utility,16,-0.1625,-0.35,0.0
+B,BaselineSafetyGap_B,valid_format,1,0.0,,

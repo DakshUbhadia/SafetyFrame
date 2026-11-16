@@ -15,8 +15,9 @@ provider-failed, with audited initial analysis and scientific figures.
 Sprint 8 resolves all 32 Model-B trajectories: 29 completed and three
 provider-failed, with separate-model estimates and reproducible figures.
 Model B exhausted its reasoning budget without emitting code in 50/59 replies;
-this materially limits the generalization result. Final analysis and report
-remain for Sprints 9?11.
+this materially limits the generalization result. Sprint 9 completes the unified
+offline analysis, all sensitivity tables and Figures 1–5. The full report and
+submission remain for Sprints 10–11.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -37,6 +38,10 @@ repair summaries, and reproducible figures.
 
 See [MODEL_B.md](MODEL_B.md) and [Model B results](report/model_b/results.md)
 for audited outcomes, response-budget diagnostics, and the separate-model comparison.
+
+See [FINAL_ANALYSIS.md](FINAL_ANALYSIS.md) and [final results](report/final_analysis/results.md)
+for the Sprint 9 reproduction command, all three result channels, matched-subset
+means, failure accounting, repair denominators, and scientific figures.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),

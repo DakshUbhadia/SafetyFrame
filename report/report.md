@@ -1,6 +1,6 @@
 # SafetyFrame-Eval — Research Report Draft
 
-> DRAFT: Model-A collection and initial analysis are complete: 61 completed trajectories and three terminal provider failures. Model-B collection is also complete (29 completed, three provider-failed), with substantial reasoning-budget exhaustion. The final analysis and report remain pending. All Model-A outcomes, missingness, and sensitivities are reported.
+> DRAFT: Collection and Sprint 9 final analysis are complete: 90 completed trajectories and six terminal provider failures across both models. Model B has substantial reasoning-budget exhaustion. All three result channels, sensitivities and Figures 1–5 are reproduced in the final-analysis package. The full report remains for Sprint 10.
 
 # Title
 
@@ -135,6 +135,17 @@ Paired task bootstrap; task-level plots.
 ---
 
 # 4. Results
+
+The [final-analysis package](final_analysis/results.md) recomputes both turns
+from requirement outcomes and parsed claims and verifies the unchanged original
+Model A/B summaries. It includes all three prespecified channels, simple effects,
+primary/provider-utility/valid-format intervals and paired sample sizes, exact
+matched-subset means, both-turn self-assessment with micro/macro denominators,
+failure accounting and paired repair. [Reproduction evidence](final_analysis/integrity.json)
+records the local raw audit and exact reproduction of ten numerical/narrative
+files. Figures 1–5 are in figures/; their exact numerical inputs are in
+[figure_data.json](final_analysis/figure_data.json). No further inference or
+changes to frozen analysis choices were made.
 
 ## 4.1 Model-A framing sensitivity
 
