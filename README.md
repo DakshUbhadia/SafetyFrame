@@ -16,8 +16,9 @@ Sprint 8 resolves all 32 Model-B trajectories: 29 completed and three
 provider-failed, with separate-model estimates and reproducible figures.
 Model B exhausted its reasoning budget without emitting code in 50/59 replies;
 this materially limits the generalization result. Sprint 9 completes the unified
-offline analysis, all sensitivity tables and Figures 1–5. The full report and
-submission remain for Sprints 10–11.
+offline analysis, all sensitivity tables and Figures 1–5. Sprint 10 completes the
+research report, primary-source checks and appendices. PDF packaging, release
+checks and submission remain Sprint 11.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -42,6 +43,10 @@ for audited outcomes, response-budget diagnostics, and the separate-model compar
 See [FINAL_ANALYSIS.md](FINAL_ANALYSIS.md) and [final results](report/final_analysis/results.md)
 for the Sprint 9 reproduction command, all three result channels, matched-subset
 means, failure accounting, repair denominators, and scientific figures.
+
+See [RESEARCH_REPORT.md](RESEARCH_REPORT.md) and the [complete report draft](report/report.md)
+for the Sprint 10 manuscript, user-confirmed authorship, evidence-linked results,
+source verification, prompt/task appendices and disclosed incidents.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),
@@ -94,7 +99,7 @@ The initial runtime directories follow v4 section 62. `requirements.txt` documen
 the Python harness and pinned PyYAML parser; live test execution also requires a
 working Docker engine and an explicitly installed image. Later dependencies will be added
 when used. [preregistration.md](preregistration.md) is a completed local registration and
-[report/report.md](report/report.md) contains planned Methods and unfilled results.
+[report/report.md](report/report.md) contains the completed Sprint 10 report draft.
 Sprint 6 records the freeze manifest and randomized planned run manifest from
 actual validated tasks and verified model choices. No human signature is asserted.
 

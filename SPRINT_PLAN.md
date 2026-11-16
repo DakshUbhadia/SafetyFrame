@@ -14,7 +14,8 @@ committed integrity freeze. Sprint 7 resolves all 64 Model-A trajectories
 (61 completed, three provider-failed), with audited and reproduced initial
 analysis and figures. Sprint 8 resolves all 32 Model-B trajectories with
 independent estimates and response-budget diagnostics. Sprint 9 completes the
-unified offline analysis, sensitivity tables and Figures 1–5. Sprints 10–11 remain not started.
+unified offline analysis, sensitivity tables and Figures 1–5. Sprint 10 completes
+the report draft, primary-source checks and appendices. Sprint 11 remains not started.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
@@ -58,7 +59,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 7. Model A factorial | 64 terminal trajectories, audited scored dataset, first analysis and figures | 6 |
 | [x] | 8. Model B generalization | 32 terminal C/S trajectories, audited results and separate-model comparison | 7 |
 | [x] | 9. Final analysis and figures | Recomputed three result channels, sensitivity tables and Figures 1–5 | 8 |
-| [ ] | 10. Research report | Complete report supported by observed results | 9 |
+| [x] | 10. Research report | Complete evidence-linked report, verified references and appendices | 9 |
 | [ ] | 11. Reproducibility and submission | Checked release artifacts and submission package | 10 |
 
 ## Sprint 1 — Scope, access, and environment
@@ -364,22 +365,36 @@ and [integrity evidence](report/final_analysis/integrity.json).
 
 **Goal:** Explain what the study establishes, including null or mixed findings.
 
-- [ ] Complete Introduction, Related Work, Methods, Results, Discussion, and Limitations.
-- [ ] Verify cited research and submission requirements against their original sources.
-- [ ] Present Model A framing, Model B framing, interaction, self-assessment, and repair in that order.
-- [ ] Include task counts, exact models/settings, failure handling, and uncertainty.
-- [ ] Show disclosure simple effects alongside the interaction.
-- [ ] Use mitigation language only when safety performance improves and the gap narrows beneficially.
-- [ ] Distinguish inaccurate completion claims from evidence of intent.
-- [ ] Describe precision limits, benign coding scope, fixed two-turn procedure,
+- [x] Complete Introduction, Related Work, Methods, Results, Discussion, and Limitations.
+- [x] Verify cited research and submission requirements against their original sources.
+- [x] Present Model A framing, Model B framing, interaction, self-assessment, and repair in that order.
+- [x] Include task counts, exact models/settings, failure handling, and uncertainty.
+- [x] Show disclosure simple effects alongside the interaction.
+- [x] Use mitigation language only when safety performance improves and the gap narrows beneficially.
+- [x] Distinguish inaccurate completion claims from evidence of intent.
+- [x] Describe precision limits, benign coding scope, fixed two-turn procedure,
   provider differences, and the framing treatment package.
-- [ ] Add prompts, task metadata, scoring details, and deviations to appendices.
-- [ ] Include the ethical/dual-use appendix and a 150–250 word abstract, per v4.
+- [x] Add prompts, task metadata, scoring details, and deviations to appendices.
+- [x] Include the ethical/dual-use appendix and a 150–250 word abstract, per v4.
 
 **Deliverables:** Complete report draft with figures, references, and appendices.
 
 **Exit criteria:** Every numerical statement traces to analysis output. The
 report answers all three research questions without requiring a significant framing gap.
+
+**Result:** The complete [report draft](report/report.md) has a 197-word abstract,
+user-confirmed author/affiliation, six verified primary research sources, all
+three result channels in the specified order, sensitivity intervals, four main
+figures and an additional repair figure. Appendices contain exact prompt
+components, task metadata, scoring, failure accounting, incidents, provenance
+and ethical/dual-use considerations. Seven tables, five prompt copies and
+26 source-derived narrative checks pass; original analysis digests and freeze
+remain unchanged. Hidden-scoring timing differs from the registration sentence
+and is explicitly disclosed, without changing code or results. Submission rules
+were checked on the official event page; the linked Google template required
+sign-in, so detailed template layout, PDF page inspection and submission remain
+Sprint 11. No inference credits were spent. See [RESEARCH_REPORT.md](RESEARCH_REPORT.md)
+and [verification evidence](report/report_verification.json).
 
 **Reference:** [Report template](13_REPORT_TEMPLATE.md).
 

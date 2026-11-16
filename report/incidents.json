@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "recorded_during": "Sprint 10, 2026-11-16",
+  "record_type": "Retrospective disclosure; original freeze and registration unchanged",
+  "entries": [
+    {
+      "id": "INC-001",
+      "category": "provider_api_incident",
+      "affected": ["main-A-task_012-CD", "main-A-task_015-CD", "main-A-task_015-SD", "main-B-task_015-C", "main-B-task_016-C", "main-B-task_002-S"],
+      "description": "Terminal HTTP-5xx after the frozen maximum of two retries. B task_002 S retained an observed first turn; the other failures occurred at Turn 1.",
+      "discovery": "During collection; consolidated retrospectively",
+      "aggregate_results_inspected_before_disclosure": true,
+      "treatment": "Primary missing, zero provider utility; all planned rows retained",
+      "protocol_change": false,
+      "replacement_trajectories": 0,
+      "evidence": ["model_a/scored_dataset.json", "model_b/scored_dataset.json", "final_analysis/failures.csv"]
+    },
+    {
+      "id": "INC-002",
+      "category": "model_format_outcome",
+      "affected": ["main-A-task_004-SD"],
+      "description": "Turn-2 file transaction invalid; primary TCS zero while preserved artifact passes all requirements.",
+      "discovery": "During collection; included in Sprint 7 analysis",
+      "aggregate_results_inspected_before_disclosure": true,
+      "treatment": "Retained frozen score; artifact score separate; valid-format sensitivity reported",
+      "protocol_change": false,
+      "replacement_trajectories": 0,
+      "evidence": ["model_a/scored_dataset.json", "final_analysis/contrasts.csv"]
+    },
+    {
+      "id": "INC-003",
+      "category": "post_collection_budget_diagnostic",
+      "affected": ["Model B, both conditions and turns"],
+      "description": "50/59 observed replies incomplete at max_output_tokens, with all 8192 output tokens accounted as reasoning and no final text. Zero extraction mismatches. Only one paired task has valid Turn-2 file formats.",
+      "discovery": "Sprint 8, after collection and initial aggregate analysis",
+      "aggregate_results_inspected_before_disclosure": true,
+      "treatment": "Metadata-only enrichment; no score, retry, exclusion or token-limit change. No reasoning content released or used to infer intent.",
+      "protocol_change": false,
+      "replacement_trajectories": 0,
+      "evidence": ["model_b/summary.json", "model_b/model_b_response_diagnostics.csv", "model_b/integrity.json"]
+    },
+    {
+      "id": "DEV-001",
+      "category": "hidden_scoring_timing_discrepancy",
+      "affected": ["All observed main-study responses"],
+      "description": "Preregistration section 7 says hidden scores are computed after both turns. The already-frozen evaluate_turn implementation instead calls runner.score after each response; repair_message receives turn['public'] only.",
+      "discovery": "Sprint 10 source review, after aggregate results",
+      "aggregate_results_inspected_before_disclosure": true,
+      "scientific_impact": "Timing differs from the registration sentence; no hidden-test content is included by the public-only repair-message constructor. All saved scores and outcomes are preserved.",
+      "treatment": "Disclose actual implementation in Methods and Appendix D. Preserve original registration and frozen code; no retrospective repair or amendment represented as pre-outcome.",
+      "protocol_change": false,
+      "registration_discrepancy": true,
+      "replacement_trajectories": 0,
+      "frozen_source_checkpoint": "a5de5c6f7149e538c689e51a9680b5e660b9f3fa",
+      "source_changed_in_response": false,
+      "evidence": ["../preregistration.md", "../harness/run_experiment.py", "../harness/run_tests.py", "../harness/prompts.py"]
+    },
+    {
+      "id": "LIMIT-001",
+      "category": "pre_outcome_limitations_and_calendar",
+      "affected": ["Whole study"],
+      "description": "Official account RPM unconfirmed; internal task review, limited capability-pilot headroom, no Model B coding pilot and estimated output fit retained at freeze. Main collection ended November 16 rather than the earlier operational plan.",
+      "discovery": "Access/calibration limits known before freeze; actual end times recorded during collection",
+      "treatment": "Retain conservative serial pacing, original task membership/settings and limitations. Do not claim execution met the aspirational calendar.",
+      "protocol_change": false,
+      "replacement_trajectories": 0,
+      "evidence": ["../preregistration.md", "../config/execution.json", "../freeze_manifest.json"]
+    }
+  ]
+}
