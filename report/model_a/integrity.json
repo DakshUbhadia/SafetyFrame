@@ -1,0 +1,28 @@
+{
+  "role": "A",
+  "terminal_trajectories": 64,
+  "numerical_reproduction_pass": true,
+  "normalized_text_digests": {
+    "scored_dataset.json": "5053f2edef2be98acffab7b819d42a9bdf66970055301ee00e069707b2862433",
+    "summary.json": "f441ad55816a71d185f37e4b8a1eced55ab5fe1268412f8bfeef67252e289d59",
+    "model_a_trajectories.csv": "f62e4ddbc3d7b539a394777d4d14cde337381af9b40b8f9e0a342e12ebbbab4b",
+    "model_a_conditions.csv": "89d1d43864ff615778a10188734dbb1e44e4fa644cd8639bdafa08cbe7efc6f3",
+    "model_a_contrasts.csv": "1c692b1506460710cfe0b72d2a1dc3433d308c04b473ac259f238fb11b496f06",
+    "model_a_self_assessment.csv": "43478983e421e0a430b9f28c071460d519e2783069eacc32128ab0d6d82c132d",
+    "model_a_task_differences.csv": "4abd1ee741d91632f7638b82c15b7b74d078c84e565c3ffb7452162c27c71874",
+    "results.md": "50c152cc795bbf5512b2bfa98c79eb3a76da2991cab07cf94e7455c3ff53b336"
+  },
+  "figure_note": "Plots are reproduced; SVG/PDF timestamps are not used for bitwise comparison.",
+  "freeze_hash": "8f98b8ad025f4ee2773620ea989bbf50db201b3919db591b5759632ce5b87c13",
+  "frozen_source_checkpoint": "a5de5c6f7149e538c689e51a9680b5e660b9f3fa",
+  "analysis_code_checkpoint": "efa34871fe8d6dd5ff0be5bfe69b9f03e5fc1df1",
+  "generated_at_utc": "2026-11-16T06:10:02.328011+00:00",
+  "completed_trajectories": 61,
+  "provider_failed_trajectories": 3,
+  "saved_scored_responses": 122,
+  "known_reported_credits": 1.29067145,
+  "main_retained_liability_credits": 2.1751422000000002,
+  "total_ledger_retained_liability_including_prior_credits": 2.52696025,
+  "account_debits_independently_verified": false,
+  "raw_response_text_released": false
+}

@@ -6,6 +6,33 @@ the new collector and analysis live outside frozen source directories.
 No main-task selection, generation setting, retry rule, pacing limit, or
 scoring/analysis definition is changed.
 
+## Completed Sprint 7
+
+All 64 planned A trajectories have auditable terminal records: 61 completed
+(122 recorded/scored responses) and three provider-failed on their first turn
+after the permitted HTTP-5xx retries. The failures are task_012 CD and task_015
+CD/SD. No failed or poor response was selectively replaced.
+
+The baseline C−S estimate is 0.0125 TCS, 95% task-bootstrap CI [−0.050,0.100],
+across 16 complete pairs. The primary interaction is −0.1286
+[−0.2714,−0.0143] across 14 complete quadruples; its provider-utility and
+valid-format sensitivities are weaker. One SD Turn-2 full-file format failure
+received zero end-to-end TCS while its retained artifact passed every requirement.
+These results do not establish intent or a robust mitigation effect.
+
+[Results and figures](report/model_a/results.md),
+[scored dataset](report/model_a/scored_dataset.json), and
+[integrity/reproduction evidence](report/model_a/integrity.json) are retained.
+Raw responses, public feedback, both workspaces, and terminal identities remain
+local under data/main. All 74 original tests and 15 new tooling tests passed.
+Eight numerical/narrative outputs reproduce exactly, and the original freeze
+still verifies. Model B has not been run.
+
+There were 148 recorded attempts, 23 frozen-policy retries, and 26 outcomes
+without complete usage. Known reported cost is 1.290671 credits; unknown
+liabilities stay reserved. The local ledger, not this known subtotal, controls
+the 40-credit collection ceiling; account debits are not independently verified.
+
 ## Collect or resume
 
 From PowerShell in the repository:

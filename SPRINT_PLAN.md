@@ -10,7 +10,9 @@ harness and Sprint 3's renderer/audit are verified using excluded synthetic
 examples. Sprint 4 completed five usable capability pilots and one rejected stress
 trial. Sprint 5 completed 16 validated task pairs without final-task model calls.
 Sprint 6 fixes the preregistration, analysis policies, randomized plan, and
-committed integrity freeze. Sprints 7–11 remain not started.
+committed integrity freeze. Sprint 7 resolves all 64 Model-A trajectories
+(61 completed, three provider-failed), with audited and reproduced initial
+analysis and figures. Sprints 8–11 remain not started.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
 [HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
 
@@ -51,7 +53,7 @@ Mark a sprint complete only when its exit criteria are met.
 | [x] | 4. Pilot and difficulty calibration | Five usable pilots, rejected stress trial, and provisional headroom profile | 3 |
 | [x] | 5. Final benchmark construction | 16 fully validated task pairs; inventory, Docker evidence, and per-task checklists | 4 |
 | [x] | 6. Preregistration and freeze | Local registration, committed integrity freeze, 96 planned runs, and design-sensitivity table | 5 |
-| [ ] | 7. Model A factorial | Complete C/S/CD/SD dataset and first analysis | 6 |
+| [x] | 7. Model A factorial | 64 terminal trajectories, audited scored dataset, first analysis and figures | 6 |
 | [ ] | 8. Model B generalization | Complete C/S dataset | 7 |
 | [ ] | 9. Final analysis and figures | Reproducible tables, intervals, and figures | 8 |
 | [ ] | 10. Research report | Complete report supported by observed results | 9 |
@@ -255,20 +257,35 @@ responses, excluding pilots and retries:
 
 **Goal:** Complete the primary causal comparison and intervention dataset.
 
-- [ ] Run every frozen Model A task block in its randomized C/S/CD/SD order.
-- [ ] Verify hashes and reset state before each trajectory.
-- [ ] Save both turns, public feedback, hidden scores, claims, and provider metadata.
-- [ ] Follow the frozen retry policy; never rerun poor output selectively.
-- [ ] Resolve run-manifest entries to completed trajectories or documented failures.
-- [ ] After the planned Model A set completes, compute condition means and paired C−S estimates.
-- [ ] Compute CD−C, SD−S, their interaction, and task-bootstrap intervals.
-- [ ] Produce an initial task-level framing plot, self-assessment table, and repair summary.
-- [ ] Update the Results skeleton with observed findings and limitations.
+- [x] Run every frozen Model A task block in its randomized C/S/CD/SD order.
+- [x] Verify hashes and reset state before each trajectory.
+- [x] Save both turns, public feedback, hidden scores, claims, and provider metadata.
+- [x] Follow the frozen retry policy; never rerun poor output selectively.
+- [x] Resolve run-manifest entries to completed trajectories or documented failures.
+- [x] After the planned Model A set completes, compute condition means and paired C−S estimates.
+- [x] Compute CD−C, SD−S, their interaction, and task-bootstrap intervals.
+- [x] Produce an initial task-level framing plot, self-assessment table, and repair summary.
+- [x] Update the Results skeleton with observed findings and limitations.
 
 **Deliverables:** Model A raw and scored datasets, first result table, and first figures.
 
 **Exit criteria:** Every planned Model A trajectory has an auditable terminal
 status. Primary estimates are reproducible, with missingness and failures visible.
+
+**Result:** 61 completed trajectories (122 saved/scored responses) and three
+terminal HTTP-5xx failures: task_012 CD, task_015 CD, task_015 SD. All requests,
+outcomes, snapshots, scoring, claims, and retry identities were audited; no
+low-quality or format response was resampled. There were 148 recorded attempts,
+23 policy-compliant retries, and 26 outcomes with unknown usage.
+Known reported Model-A cost is 1.290671 credits; unknown liabilities remain
+reserved. The original freeze is unchanged and verifies.
+
+Baseline C−S is 0.0125 TCS, 95% task-bootstrap CI [−0.050, 0.100], N=16.
+The primary interaction is −0.1286 [−0.2714, −0.0143], N=14; its provider-utility
+and valid-format sensitivities are weaker, so the initial report makes no
+robust mitigation or intent claim. Numerical JSON/CSVs and the results narrative
+reproduce exactly. See [Model A results](report/model_a/results.md),
+[integrity evidence](report/model_a/integrity.json), and [MODEL_A.md](MODEL_A.md).
 
 ## Sprint 8 — Model B framing generalization
 

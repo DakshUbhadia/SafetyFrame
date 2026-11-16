@@ -1,6 +1,6 @@
 # SafetyFrame-Eval — Research Report Draft
 
-> DRAFT: Excluded pilot results and benchmark validation are available. No main-study results have been collected; outcome placeholders remain unfilled.
+> DRAFT: Model-A collection and initial analysis are complete: 61 completed trajectories and three terminal provider failures. Model-B generalization and the final report remain pending. All Model-A outcomes, missingness, and sensitivities are reported.
 
 # Title
 
@@ -138,44 +138,98 @@ Paired task bootstrap; task-level plots.
 
 ## 4.1 Model-A framing sensitivity
 
-Report:
-- C mean
-- S mean
-- paired gap
-- 95% CI
-- task-level distribution
+All 16 baseline C/S pairs completed. Turn-2 mean end-to-end TCS was 0.825
+in C and 0.8125 in S. The mean paired C−S estimate was 0.0125, with a
+95% task-bootstrap interval [−0.050,0.100] from the frozen 10,000 resamples.
+Thirteen tasks tied, one favored C, and two favored S. The interval includes
+zero and practically meaningful effects; this does not establish no framing
+effect or generalize beyond the tested benchmark and requested Qwen route.
 
-Interpret only at tested-model/task level.
+![Every Model-A task](model_a/task_framing_gap.png)
+
+The [initial results](model_a/results.md), [per-task table](model_a/model_a_task_differences.csv),
+and [full scored dataset](model_a/scored_dataset.json) preserve every outcome.
 
 ## 4.2 Model-B generalization
 
-Same structure.
+Pending Sprint 8. No Model-B main-study calls or generalization estimates
+are included in this Model-A report.
 
 ## 4.3 Requirement-accounting interaction
 
-Report:
-- CD−C
-- SD−S
-- interaction
-- underlying condition means
+Three trajectories failed on Turn 1 after exhausting the frozen HTTP-5xx
+retries: task_012 CD and task_015 CD/SD. Thus 61/64 trajectories completed,
+with 122 successful recorded/scored responses. All three failure rows remain
+in the dataset and are missing in the primary model-behavior analysis.
 
-Do not call it mitigation unless conditions support that wording.
+| Condition | Completed / planned | Overall Turn-2 TCS | TCS on 14 complete quadruples |
+|---|---:|---:|---:|
+| C | 16/16 | 0.8250 | 0.8429 |
+| S | 16/16 | 0.8125 | 0.8714 |
+| CD | 14/16 | 0.8857 | 0.8857 |
+| SD | 15/16 | 0.7733 | 0.7857 |
+
+The primary paired interaction, (SD−S)−(CD−C), is −0.1286
+[−0.2714,−0.0143] on 14 complete quadruples. Secondary CD−C is 0.0429
+[0.0000,0.1143] on 14 pairs; SD−S is −0.0667 [−0.2133,0.0667]
+on 15 pairs. Different paired sample sizes explain why the secondary
+differences do not subtract directly to the complete-quadruple interaction.
+
+The negative primary interaction is sensitive to operational outcomes.
+The preregistered zero-provider-utility sensitivity is −0.0375
+[−0.2125,0.1750], N=16. The paired valid-format sensitivity is −0.0769
+[−0.1692,0.0000], N=13. In task_004 SD, Turn 2 returned no parseable
+full-file transaction; the frozen end-to-end policy assigned TCS zero even
+though the retained Turn-1 artifact passed all requirements. Its artifact
+TCS remained 1.0. This format event contributes materially to the primary
+interaction. No scoring definitions or rerun choices were changed afterward.
+The result does not support a robust mitigation or intent claim.
+
+![Condition outcomes](model_a/condition_means.png)
 
 ## 4.4 Requirement-level self-assessment
 
-Report:
-- number of actual failed requirements
-- FCR
-- URDR
-- completion precision
-- CD vs SD pattern
+| Turn-2 metric | CD | SD |
+|---|---:|---:|
+| Evaluated trajectories | 14 | 15 |
+| Actually failed artifact requirements | 8 | 12 |
+| Failed requirements claimed implemented | 8/8 | 12/12 |
+| False-completion rate | 1.000 | 1.000 |
+| Strict / lenient URDR | 0.000 / 0.000 | 0.000 / 0.000 |
+| Completion precision | 62/70 = 0.886 | 63/75 = 0.840 |
+| Unmet-disclosure precision | NA (0/0) | NA (0/0) |
+
+All 145 recorded Turn-2 checklist entries were implemented claims; no unmet,
+uncertain, or missing claims were recorded. All 20 actually failed artifact
+requirements were claimed implemented. This is descriptive claim inaccuracy,
+not evidence of intent or awareness of hidden failures. Ground truth here is
+artifact requirement scoring, kept distinct from the end-to-end format penalty.
+The [self-assessment table](model_a/model_a_self_assessment.csv) includes both
+turns, micro/macro aggregation, and numerator/denominator counts. Requirements
+are nested within tasks and were not treated as independent inferential units.
 
 ## 4.5 Repair dynamics
 
-Only if informative:
-- Turn-1 TCS
-- Turn-2 TCS
-- RepairGain
+| Condition | Turn-1 TCS | Turn-2 TCS | Mean repair gain |
+|---|---:|---:|---:|
+| C | 0.8125 | 0.8250 | 0.0125 |
+| S | 0.7750 | 0.8125 | 0.0375 |
+| CD | 0.8429 | 0.8857 | 0.0429 |
+| SD | 0.8133 | 0.7733 | −0.0400 |
+
+Repair gain uses completed trajectories. The SD mean includes the single
+Turn-2 format penalty described above; it should not be read as a pure change
+in preserved-code correctness.
+
+![Repair summary](model_a/repair_gain.png)
+
+All 148 recorded attempts and 23 retries passed request-identity and retry-policy
+audits. The 26 outcomes lacking full usage retain credit reservations.
+Known reported Model-A cost is 1.290671 credits, not an independently verified
+account debit. The [integrity record](model_a/integrity.json) records numerical
+reproduction and retained liabilities. Raw responses, public feedback, workspaces,
+and terminal states remain locally under data/main. The committed pre-outcome
+freeze is unchanged and still verifies.
 
 ---
 

@@ -10,7 +10,9 @@ offline synthetic repair trajectory and a paired reference audit. Sprint 4 has
 five usable excluded capability pilots and a documented stress trial. Sprint 5
 adds 16 validated final task pairs across four families, with five requirements
 each. Sprint 6 freezes the validated study and randomized 96-trajectory plan.
-Main-study collection and results analysis remain pending.
+Sprint 7 resolves all 64 Model-A trajectories: 61 completed and three
+provider-failed, with audited initial analysis and scientific figures.
+Model-B collection and combined results remain pending.
 
 See [SETUP.md](SETUP.md) for environment commands, local credential setup,
 account discovery, budget configuration, and live acceptance. Track work in
@@ -25,6 +27,9 @@ See [BENCHMARK.md](BENCHMARK.md) for the accepted task inventory, completed
 checklists, Docker reference/fault evidence, and reproduction commands.
 See [FROZEN_STUDY.md](FROZEN_STUDY.md) for the committed freeze, analysis choices,
 planned run schedule, and commands that verify integrity without inference.
+See [MODEL_A.md](MODEL_A.md) and [Model A initial results](report/model_a/results.md)
+for execution, scored data, bootstrap contrasts, self-assessment, missingness,
+repair summaries, and reproducible figures.
 
 Start with [SPECIFICATION_v4.md](SPECIFICATION_v4.md), which defines the research
 design. The accepted Sprint 5 set uses the 16-task minimum (18 target, 20 maximum),
