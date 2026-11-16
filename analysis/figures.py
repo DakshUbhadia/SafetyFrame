@@ -41,7 +41,8 @@ def render(data, output):
                 markerfacecolor=colors[c] if len(c) == 1 else 'white')
         ax.vlines(i, row['lower'], row['upper'], color=colors[c], linewidth=1.6)
         ax.text(i, 1.07, f"n={row['completed']}/{row['planned']}", ha='center', fontsize=9)
-    ax.set(xticks=range(4), xticklabels=[r['condition'] for r in data['figure_1']], ylim=(-.03, 1.16),
+    ax.set(xticks=range(4), xticklabels=[r['condition'] for r in data['figure_1']],
+           xlim=(-.45, 3.45), ylim=(-.03, 1.16),
            ylabel='Turn-2 end-to-end TCS', title='1. Model A condition means\n95% task-bootstrap intervals; all completed trajectories')
     ax.grid(axis='y', alpha=.18); save(fig, 'figure_1_condition_means')
 
