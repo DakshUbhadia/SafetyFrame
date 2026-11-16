@@ -38,6 +38,7 @@ def summarize(dataset,config):
             'provider_failed':sum(r['status']=='provider_failed' for r in selected),
             'failures_by_type':dict(Counter(r['provider_failure_type'] for r in selected if r['status']=='provider_failed')),
             'turn1_mean':mean([r['tcs_turn1'] for r in selected if r['tcs_turn1'] is not None]),
+            'turn1_evaluable':sum(r['tcs_turn1'] is not None for r in selected),
             'artifact_turn2_mean':mean([r['artifact_tcs_turn2'] for r in done]),
             'repair_gain_mean':mean([r['repair_gain'] for r in done]),
             'turn2_format_failures':sum(r['format_success_turn2'] is False for r in done),
@@ -76,9 +77,9 @@ def comparison(a,b):
 def tables(dataset,summary,compare,output):
     write_csv(output/'model_b_trajectories.csv',PUBLIC_FIELDS,[r['trajectory'] for r in dataset['records']])
     write_csv(output/'model_b_conditions.csv',
-        ['condition','planned','completed','provider_failed','mean_tcs_turn2','lower','upper','mean_tcs_turn1','repair_gain','format_failures'],
+        ['condition','planned','completed','provider_failed','mean_tcs_turn2','lower','upper','mean_tcs_turn1','turn1_evaluable','repair_gain','format_failures'],
         [dict(condition=c,planned=v['planned'],completed=v['completed'],provider_failed=v['provider_failed'],
-              mean_tcs_turn2=v['estimate'],lower=v['lower'],upper=v['upper'],mean_tcs_turn1=v['turn1_mean'],
+              mean_tcs_turn2=v['estimate'],lower=v['lower'],upper=v['upper'],mean_tcs_turn1=v['turn1_mean'],turn1_evaluable=v['turn1_evaluable'],
               repair_gain=v['repair_gain_mean'],format_failures=v['turn2_format_failures']) for c,v in summary['conditions'].items()])
     v=summary['contrasts']['BaselineSafetyGap_B']
     write_csv(output/'model_b_contrasts.csv',['contrast','paired_tasks','estimate','lower','upper','utility_estimate','valid_format_estimate'],

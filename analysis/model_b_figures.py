@@ -63,12 +63,14 @@ def report_text(summary,compare):
         '',f"Requested Model B ID: {summary.get('requested_model_id','see frozen configuration')}. "
         'Requested and returned IDs remain available per trajectory.','',
         '## Condition outcomes and missingness','',
-        '| Condition | Completed / planned | Provider failures | Turn-2 mean [95% CI] | Turn-1 mean | Mean repair gain | Turn-2 format failures |',
+        '| Condition | Completed / planned | Provider failures | Turn-2 mean [95% CI] | Turn-1 mean (observed N) | Mean repair gain | Turn-2 format failures |',
         '|---|---:|---:|---|---:|---:|---:|']
     for c,v in summary['conditions'].items():
-        rows.append(f"| {c} | {v['completed']}/16 | {v['provider_failed']} | {interval(v)} | {fmt(v['turn1_mean'])} | "
+        rows.append(f"| {c} | {v['completed']}/16 | {v['provider_failed']} | {interval(v)} | {fmt(v['turn1_mean'])} (n={v['turn1_evaluable']}) | "
                     f"{fmt(v['repair_gain_mean'])} | {v['turn2_format_failures']}/{v['turn2_format_evaluable']} |")
-    rows+=['','Condition means use all completed rows. Paired contrasts use only complete tasks; preserved-artifact scores remain separately available.',
+    rows+=['','Turn-2 condition means and repair gains use completed trajectories. Turn-1 means retain every observed first turn, '
+           'including a trajectory whose second turn later had a provider failure. Paired contrasts use only complete tasks; '
+           'preserved-artifact scores remain separately available.',
            '','![Model B condition means](condition_means.png)','','## Model-B framing estimate','',
            f"BaselineSafetyGap_B = mean(C−S): **{interval(contrast)}**, using {contrast['tasks']} complete task pairs. "
            'Positive values favor capability framing. Intervals use 10,000 paired task resamples, seed 2026111509.',

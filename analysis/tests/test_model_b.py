@@ -51,6 +51,8 @@ class ModelBTests(unittest.TestCase):
         self.assertEqual(gap['utility_sensitivity']['tasks'],16)
         self.assertAlmostEqual(gap['utility_sensitivity']['estimate'],.4375)
         self.assertEqual(result['conditions']['S']['provider_failed'],1)
+        self.assertEqual(result['conditions']['S']['turn1_evaluable'],16)
+        self.assertEqual(result['conditions']['S']['completed'],15)
 
     def test_format_failure_is_zero_primary_with_artifact_score_kept_separate(self):
         data=fixture()
