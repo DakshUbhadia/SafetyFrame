@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-16T10:06:41.018818+00:00",
+  "report_text_hash": "88f84fe3889677914f4f5111234cd991a968314d9365254668f5b1683fa11759",
+  "source_checkpoint": "0fc44adf7c60257b1c0ff3f0c6f2b6a48ce921da",
+  "freeze_hash": "8f98b8ad025f4ee2773620ea989bbf50db201b3919db591b5759632ce5b87c13",
+  "abstract_words": 197,
+  "exact_tables": 7,
+  "exact_prompt_blocks": 5,
+  "narrative_checks": 26,
+  "local_links_checked": 38,
+  "original_analysis_releases_unchanged": true,
+  "numerical_analysis_unchanged": true,
+  "author": "Daksh Ubhadia",
+  "affiliation": "Independent researcher",
+  "author_metadata_user_confirmed": true,
+  "additional_inference_calls": 0,
+  "pdf_exported": false,
+  "page_limit_verified": false,
+  "official_template_layout_verified": false,
+  "submitted": false,
+  "remaining": "Sprint 11: official-template layout, PDF/page inspection, clean-environment release checks and submission."
+}

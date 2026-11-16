@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "report_text_hash": "88f84fe3889677914f4f5111234cd991a968314d9365254668f5b1683fa11759",
+  "narrative_claims": [
+    {
+      "id": "BaselineSafetyGap_A",
+      "manuscript_needle": "0.0125 [-0.0500, 0.1000]",
+      "evidence": "final_analysis/summary.json:contrasts[BaselineSafetyGap_A,primary]",
+      "value": {
+        "model": "A",
+        "contrast": "BaselineSafetyGap_A",
+        "estimand": "primary",
+        "tasks": 16,
+        "estimate": 0.012500000000000004,
+        "lower": -0.04999999999999999,
+        "upper": 0.1,
+        "matched_condition_means": {
+          "C": 0.8250000000000001,
+          "S": 0.8125
+        }
+      }
+    },
+    {
+      "id": "BaselineSafetyGap_B",
+      "manuscript_needle": "-0.2000 [-0.4308, 0.0000]",
+      "evidence": "final_analysis/summary.json:contrasts[BaselineSafetyGap_B,primary]",
+      "value": {
+        "model": "B",
+        "contrast": "BaselineSafetyGap_B",
+        "estimand": "primary",
+        "tasks": 13,
+        "estimate": -0.2,
+        "lower": -0.43076923076923074,
+        "upper": 0.0,
+        "matched_condition_means": {
+          "C": 0.06153846153846154,
+          "S": 0.26153846153846155
+        }
+      }
+    },
+    {
+      "id": "DisclosureFramingInteraction_A",
+      "manuscript_needle": "-0.1286 [-0.2714, -0.0143]",
+      "evidence": "final_analysis/summary.json:contrasts[DisclosureFramingInteraction_A,primary]",
+      "value": {
+        "model": "A",
+        "contrast": "DisclosureFramingInteraction_A",
+        "estimand": "primary",
+        "tasks": 14,
+        "estimate": -0.1285714285714286,
+        "lower": -0.2714285714285714,
+        "upper": -0.014285714285714282,
+        "matched_condition_means": {
+          "SD": 0.7857142857142857,
+          "S": 0.8714285714285713,
+          "CD": 0.8857142857142858,
+          "C": 0.8428571428571429
+        }
+      }
+    },
+    {
+      "id": "DisclosureEffect_C_A",
+      "manuscript_needle": "0.0429 [0.0000, 0.1143]",
+      "evidence": "final_analysis/summary.json:contrasts[DisclosureEffect_C_A,primary]",
+      "value": {
+        "model": "A",
+        "contrast": "DisclosureEffect_C_A",
+        "estimand": "primary",
+        "tasks": 14,
+        "estimate": 0.04285714285714286,
+        "lower": 0.0,
+        "upper": 0.1142857142857143,
+        "matched_condition_means": {
+          "CD": 0.8857142857142858,
+          "C": 0.8428571428571429
+        }
+      }
+    },
+    {
+      "id": "DisclosureEffect_S_A",
+      "manuscript_needle": "-0.0667 [-0.2133, 0.0667]",
+      "evidence": "final_analysis/summary.json:contrasts[DisclosureEffect_S_A,primary]",
+      "value": {
+        "model": "A",
+        "contrast": "DisclosureEffect_S_A",
+        "estimand": "primary",
+        "tasks": 15,
+        "estimate": -0.06666666666666667,
+        "lower": -0.21333333333333335,
+        "upper": 0.06666666666666667,
+        "matched_condition_means": {
+          "SD": 0.7733333333333333,
+          "S": 0.84
+        }
+      }
+    },
+    {
+      "id": "DisclosureFramingInteraction_A_provider_utility",
+      "manuscript_needle": "-0.0375 [-0.2125, 0.1750]",
+      "evidence": "final_analysis/summary.json:contrasts[DisclosureFramingInteraction_A,provider_utility]",
+      "value": {
+        "model": "A",
+        "contrast": "DisclosureFramingInteraction_A",
+        "estimand": "provider_utility",
+        "tasks": 16,
+        "estimate": -0.037500000000000006,
+        "lower": -0.21250000000000002,
+        "upper": 0.175,
+        "matched_condition_means": {
+          "SD": 0.725,
+          "S": 0.8125,
+          "CD": 0.775,
+          "C": 0.8250000000000001
+        }
+      }
+    },
+    {
+      "id": "DisclosureFramingInteraction_A_valid_format",
+      "manuscript_needle": "-0.0769 [-0.1692, 0.0000]",
+      "evidence": "final_analysis/summary.json:contrasts[DisclosureFramingInteraction_A,valid_format]",
+      "value": {
+        "model": "A",
+        "contrast": "DisclosureFramingInteraction_A",
+        "estimand": "valid_format",
+        "tasks": 13,
+        "estimate": -0.07692307692307693,
+        "lower": -0.16923076923076924,
+        "upper": 0.0,
+        "matched_condition_means": {
+          "SD": 0.8461538461538461,
+          "S": 0.8769230769230769,
+          "CD": 0.8923076923076922,
+          "C": 0.8461538461538461
+        }
+      }
+    },
+    {
+      "id": "BaselineSafetyGap_B_provider_utility",
+      "manuscript_needle": "-0.1625 [-0.3500, 0.0000]",
+      "evidence": "final_analysis/summary.json:contrasts[BaselineSafetyGap_B,provider_utility]",
+      "value": {
+        "model": "B",
+        "contrast": "BaselineSafetyGap_B",
+        "estimand": "provider_utility",
+        "tasks": 16,
+        "estimate": -0.1625,
+        "lower": -0.35,
+        "upper": 0.0,
+        "matched_condition_means": {
+          "C": 0.05,
+          "S": 0.2125
+        }
+      }
+    },
+    {
+      "id": "study_terminal_counts",
+      "manuscript_needle": "All 96 planned trajectories are terminal: 90 completed",
+      "evidence": "final_analysis/summary.json:sum(conditions.planned/completed)",
+      "value": [
+        96,
+        90
+      ]
+    },
+    {
+      "id": "observed_responses",
+      "manuscript_needle": "181 observed responses",
+      "evidence": "model_a/b/scored_dataset.json:sum(len(turns))",
+      "value": 181
+    },
+    {
+      "id": "attempts_retries_unknown",
+      "manuscript_needle": "235 attempts and 48 retries, with 54 outcomes lacking full usage",
+      "evidence": "model_a/b/scored_dataset.json:attempts and retry/usage fields",
+      "value": [
+        235,
+        48,
+        54
+      ]
+    },
+    {
+      "id": "budget_exhaustion",
+      "manuscript_needle": "50/59 observed replies",
+      "evidence": "final_analysis/summary.json:model_b_response_diagnostics",
+      "value": {
+        "post_collection_diagnostic": true,
+        "rows": [
+          {
+            "condition": "C",
+            "turn": 1,
+            "observed_responses": 14,
+            "metadata_known": 14,
+            "format_failures": 13,
+            "incomplete_responses": 13,
+            "reasoning_only_budget_exhaustions": 13,
+            "empty_final_text": 13,
+            "extraction_mismatches": 0
+          },
+          {
+            "condition": "C",
+            "turn": 2,
+            "observed_responses": 14,
+            "metadata_known": 14,
+            "format_failures": 13,
+            "incomplete_responses": 13,
+            "reasoning_only_budget_exhaustions": 13,
+            "empty_final_text": 13,
+            "extraction_mismatches": 0
+          },
+          {
+            "condition": "S",
+            "turn": 1,
+            "observed_responses": 16,
+            "metadata_known": 16,
+            "format_failures": 13,
+            "incomplete_responses": 13,
+            "reasoning_only_budget_exhaustions": 13,
+            "empty_final_text": 13,
+            "extraction_mismatches": 0
+          },
+          {
+            "condition": "S",
+            "turn": 2,
+            "observed_responses": 15,
+            "metadata_known": 15,
+            "format_failures": 11,
+            "incomplete_responses": 11,
+            "reasoning_only_budget_exhaustions": 11,
+            "empty_final_text": 11,
+            "extraction_mismatches": 0
+          }
+        ],
+        "metadata_known": 59,
+        "observed_responses": 59,
+        "reasoning_only_budget_exhaustions": 50,
+        "output_token_caps": [
+          8192
+        ],
+        "extraction_mismatches": 0,
+        "statuses": {
+          "incomplete": 50,
+          "completed": 9
+        },
+        "scoring_changed": false,
+        "additional_inference": false
+      }
+    },
+    {
+      "id": "budget_mismatches",
+      "manuscript_needle": "extraction mismatches were zero",
+      "evidence": "final_analysis/summary.json:model_b_response_diagnostics.extraction_mismatches",
+      "value": 0
+    },
+    {
+      "id": "b_final_formats",
+      "manuscript_needle": "24/29 Turn-2 format failures",
+      "evidence": "final_analysis/summary.json:failures[B,turn2]",
+      "value": [
+        24,
+        29
+      ]
+    },
+    {
+      "id": "one_valid_b_pair",
+      "manuscript_needle": "only one valid-format pair, whose gap was zero and interval undefined",
+      "evidence": "final_analysis/summary.json:contrasts[BaselineSafetyGap_B,valid_format]",
+      "value": {
+        "model": "B",
+        "contrast": "BaselineSafetyGap_B",
+        "estimand": "valid_format",
+        "tasks": 1,
+        "estimate": 0.0,
+        "lower": null,
+        "upper": null,
+        "matched_condition_means": {
+          "C": 0.8,
+          "S": 0.8
+        }
+      }
+    },
+    {
+      "id": "all_accounting_claims",
+      "manuscript_needle": "All 145 final accounting entries claimed implemented",
+      "evidence": "model_a/summary.json:self_assessment.CD/SD.2.counts.claimed_implemented",
+      "value": 145
+    },
+    {
+      "id": "failed_requirements",
+      "manuscript_needle": "All 20 failed artifact requirements",
+      "evidence": "model_a/summary.json:self_assessment.CD/SD.2.counts.actual_failed_requirements",
+      "value": 20
+    },
+    {
+      "id": "interaction_matched_means",
+      "manuscript_needle": "0.8429/0.8714/0.8857/0.7857",
+      "evidence": "final_analysis/summary.json:interaction primary matched_condition_means",
+      "value": {
+        "SD": 0.7857142857142857,
+        "S": 0.8714285714285713,
+        "CD": 0.8857142857142858,
+        "C": 0.8428571428571429
+      }
+    },
+    {
+      "id": "b_matched_means",
+      "manuscript_needle": "0.0615 and 0.2615",
+      "evidence": "final_analysis/summary.json:B baseline matched_condition_means",
+      "value": {
+        "C": 0.06153846153846154,
+        "S": 0.26153846153846155
+      }
+    },
+    {
+      "id": "b_turn1_mean",
+      "manuscript_needle": "its all-observed Turn-1 mean is 0.1625",
+      "evidence": "final_analysis/summary.json:repair[B,S]",
+      "value": {
+        "model": "B",
+        "condition": "S",
+        "observed_turn1": 16,
+        "completed_pairs": 15,
+        "turn1_mean_all_observed": 0.1625,
+        "turn1_mean_completed": 0.17333333333333334,
+        "turn2_mean": 0.22666666666666666,
+        "mean_repair_gain": 0.05333333333333334,
+        "artifact_repair_gain": 0.05333333333333334,
+        "improved": 1,
+        "unchanged": 14,
+        "worsened": 0
+      }
+    },
+    {
+      "id": "task_distribution_A",
+      "manuscript_needle": "Thirteen tasks tied, one favored C and two favored S",
+      "evidence": "final_analysis/summary.json:task_contrasts[baseline,primary]",
+      "value": [
+        13,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "task_distribution_B",
+      "manuscript_needle": "ten pairs tied, three favored S and none favored C",
+      "evidence": "final_analysis/summary.json:task_contrasts[baseline,primary]",
+      "value": [
+        10,
+        0,
+        3
+      ]
+    },
+    {
+      "id": "bootstrap_resamples",
+      "manuscript_needle": "10,000 paired task-bootstrap resamples",
+      "evidence": "../config/analysis.json:bootstrap.resamples",
+      "value": 10000
+    },
+    {
+      "id": "bootstrap_seed",
+      "manuscript_needle": "seed 2026111509",
+      "evidence": "../config/analysis.json:bootstrap.seed",
+      "value": 2026111509
+    },
+    {
+      "id": "schedule_seed",
+      "manuscript_needle": "Schedule seed is 2026111506",
+      "evidence": "../config/execution.json:schedule_seed",
+      "value": 2026111506
+    },
+    {
+      "id": "freeze_checkpoint",
+      "manuscript_needle": "a5de5c6f7149e538c689e51a9680b5e660b9f3fa",
+      "evidence": "../freeze_manifest.json:git_commit",
+      "value": "a5de5c6f7149e538c689e51a9680b5e660b9f3fa"
+    }
+  ],
+  "table_evidence": {
+    "table:conditions": "f806109861f07cbee1a397973e507c811a05c2cb3849465d41b5fcd460860bec",
+    "table:contrasts": "03e009bb1472b6bfeb94b34d1bcf3d18ebe40054ea301c2e4e78884313b4c604",
+    "table:self_assessment": "372caa0b775a79dbeba653139154c53486dd7b0982e9e8fe81a227a8d68f62d2",
+    "table:repair": "c13ddaf451921de26f9de994123c643e7aec154ba8f5ddd8f398f144d33c07ef",
+    "table:tasks": "3bb8618623da63bd77bd3cb00507430bdf54bdb9998645636934f03161bb28bd",
+    "table:failures": "74ab050c7755539f9bc20a0512e3892975107a9bf222ab09ef44a95617782081",
+    "table:incidents": "0362942a2e582aeb72dabd250175fea05974e98d0df092e55c347ed3d3ee2d48",
+    "prompt:system.txt": "674605a38ca6f9035478e7e4757b4d259c7cc62344b63bd4dea9fbf0b1790324",
+    "prompt:capability.txt": "8acb13b19e4bb2c1d7f20fcd466d9230d3db9d5c1e836332ecd9c7ba1ad6c582",
+    "prompt:safety.txt": "9142466813af320bd285a3fe5ac6c6eaa1fdbef3b9a8931eae938364b954f3f3",
+    "prompt:requirement_accounting.txt": "ada584dac6b85d86c11bd0339c3e5ef5c9be2500c55d3f14c32e31d35aed7ec2",
+    "prompt:turn2.txt": "c9664bfa0cab80e134f5b72907e60a201511b0ff36d62be158fffcd2335db741"
+  },
+  "scope": "Source-derived narrative checks plus exact rendered tables; manual review still required."
+}
