@@ -20,7 +20,13 @@ def figures(summary,output):
     def save(fig,name):
         fig.tight_layout()
         for extension in ('png','svg','pdf'):
-            fig.savefig(output/f'{name}.{extension}',dpi=180,bbox_inches='tight')
+            path=output/f'{name}.{extension}'
+            fig.savefig(path,dpi=180,bbox_inches='tight')
+            if extension=='svg':
+                # Matplotlib leaves spaces before path-attribute newlines;
+                # retain the separating newline while keeping Git text clean.
+                text='\n'.join(line.rstrip() for line in path.read_text(encoding='utf-8').splitlines())+'\n'
+                path.write_text(text,encoding='utf-8',newline='\n')
         plt.close(fig)
     fig,ax=plt.subplots(figsize=(6.5,6))
     tasks=list(summary['task_outcomes'])

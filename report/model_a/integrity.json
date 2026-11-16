@@ -24,5 +24,6 @@
   "main_retained_liability_credits": 2.1751422000000002,
   "total_ledger_retained_liability_including_prior_credits": 2.52696025,
   "account_debits_independently_verified": false,
-  "raw_response_text_released": false
+  "raw_response_text_released": false,
+  "svg_export_postprocessing": "Trailing line whitespace normalized to LF after rendering; XML tags, attribute tokens, and labels verified unchanged."
 }
