@@ -18,7 +18,7 @@ about a framing effect. All pilot tasks and outputs are excluded from final infe
 
 These are freshly authored tasks, not reused synthetic fixtures. The unused
 sampling draft was archived locally before any model run and replaced after
-the initial simpler profiles hit ceiling. See [pilot_plan.json](config/pilot_plan.json)
+the initial simpler profiles hit ceiling. See [pilot_plan.json](../../config/pilot_plan.json)
 for the active cohort and permanent exclusion IDs. The final benchmark must use
 new task definitions, not these tasks or their model outputs.
 
@@ -76,10 +76,10 @@ directory. Set `SAFETYFRAME_DOCKER_HOST` only if your local engine endpoint diff
 - Reference and equivalence reports: `data/audits/pilots/`.
 - Local preparation state: `data/pilot/preparation.json`.
 - Requests, raw responses, both snapshots, scores, and per-requirement data:
-  `data/pilot/`, following the [harness layout](HARNESS.md).
+  `data/pilot/`, following the [harness layout](../methods/HARNESS.md).
 - Derived campaign summary: `data/pilot/sprint4-v1-summary.json`.
 - Reviewed interpretation and recommended task pattern:
-  [report/pilot_calibration.md](report/pilot_calibration.md).
+  [report/pilot_calibration.md](../../report/pilot_calibration.md).
 
 Raw pilot outputs and account spending files are ignored by Git pending release
 review. Canonical tasks and aggregate interpretation remain inspectable.
@@ -134,5 +134,5 @@ reconstructed into an implementation.
 Streaming support remains available, but the retained default is non-streaming
 at 8,192 tokens, as validated on the five usable trajectories. Do not repeat the
 stress profile merely to obtain a score. Its failed/unknown charges stay in the
-credit ledger. See the [calibration record](report/pilot_calibration.md) for exact
+credit ledger. See the [calibration record](../../report/pilot_calibration.md) for exact
 measurements, accounting, exclusions, and the provisional final-task recommendation.

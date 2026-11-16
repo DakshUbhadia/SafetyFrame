@@ -7,7 +7,7 @@
 Manuscript content and final analysis are complete. Official-template layout,
 PDF export/page inspection and submission remain pending; no submitted PDF is
 currently designated authoritative. [Final results](../FINAL_RESULTS.md) ·
-[Submission materials](../SUBMISSION.md) · [Frozen study](../FROZEN_STUDY.md).
+[Submission materials](../docs/archive/SUBMISSION.md) · [Frozen study](../FROZEN_STUDY.md).
 
 This opening was updated after collection for navigation and status clarity.
 The scientific narrative, tables, figures, frozen design and outcomes are unchanged.

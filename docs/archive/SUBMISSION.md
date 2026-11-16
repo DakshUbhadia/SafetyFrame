@@ -4,7 +4,7 @@
 The manuscript and numerical analysis are complete, but no final report PDF or
 submission confirmation is present in the repository. A figure PDF must not be
 mistaken for the report. Official-template layout, page limits, and final PDF
-inspection remain unchecked; see [source-verification limits](report/source_verification.md).
+inspection remain unchecked; see [source-verification limits](../../report/source_verification.md).
 
 ## Form fields
 
@@ -17,8 +17,8 @@ inspection remain unchecked; see [source-verification limits](report/source_veri
 | Optional team name suggested in the supplied plan | Eye Safety — not yet confirmed as the team's chosen name |
 | Repository | https://github.com/DakshUbhadia/SafetyFrame |
 | Recommended PDF filename | SafetyFrame_Eval_Daksh_Ubhadia.pdf |
-| Manuscript source | [report/report.md](report/report.md) |
-| Results overview | [FINAL_RESULTS.md](FINAL_RESULTS.md) |
+| Manuscript source | [report/report.md](../../report/report.md) |
+| Results overview | [FINAL_RESULTS.md](../../FINAL_RESULTS.md) |
 
 Track and team recommendations come from the last-mile plan; they are not a
 claim that a form has been inspected or submitted. Confirm the official form's

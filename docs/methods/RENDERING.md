@@ -30,7 +30,7 @@ Run from the repository root in PowerShell:
 Expected: equivalence true, automated balance diagnostics true, reference passed.
 Reports default to unique files in `data/audits/`. `--report <new-file.json>` sets
 an explicit path; existing reports are preserved. See the checked
-[audit evidence](data/audits/sprint3-final.json).
+[audit evidence](../../data/audits/sprint3-final.json).
 
 Omit `--validate-reference --trusted-example` for a static audit. Static success
 leaves `reference_pass` null and `sprint3_exit_criteria_met` false.
@@ -64,10 +64,10 @@ maps to one requirement. Suites currently use flat `test_*.py` modules with ordi
 test methods. Inherited, generated, parameterized, or async tests need additional
 validation support. Assertions do not become independent research observations.
 
-See the [mapping](task_templates/synthetic_domain_utils/mapping.yaml),
-[requirements](task_templates/synthetic_domain_utils/requirements.yaml),
-[metadata](task_templates/synthetic_domain_utils/task_metadata.json), and
-[author review](task_templates/synthetic_domain_utils/authoring_notes.md).
+See the [mapping](../../task_templates/synthetic_domain_utils/mapping.yaml),
+[requirements](../../task_templates/synthetic_domain_utils/requirements.yaml),
+[metadata](../../task_templates/synthetic_domain_utils/task_metadata.json), and
+[author review](../../task_templates/synthetic_domain_utils/authoring_notes.md).
 
 ## Mapping and publishing rules
 
@@ -132,7 +132,7 @@ requirement independence and hidden-test scope.
 General reference validation defaults to the resource-limited Docker executor.
 Use a working Linux Docker engine and an explicitly installed test image for new
 tasks. Live Docker integration was not verified in Sprint 2, but Sprint 4 has now
-exercised reference and model scoring in real containers; see [PILOTS.md](PILOTS.md).
+exercised reference and model scoring in real containers; see [PILOTS.md](../archive/PILOTS.md).
 
 `--trusted-example` allows local execution only for complete reference-source and
 test-tree hashes recorded in `harness/trusted_references.json`. A path or metadata

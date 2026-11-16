@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from harness.artifacts import digest, read_json, write_json
+from harness.artifacts import confined, digest, read_json, write_json
 from report_tables import evidence, tables
 from verify_report import block, narrative_claims
 
@@ -26,10 +26,24 @@ def sha(path):
 
 
 def verify(record=False):
+    cleanup_path = ROOT/'presentation/documentation_cleanup.json'
+    cleanup = read_json(cleanup_path) if cleanup_path.exists() else None
+
+    def source(name):
+        return confined(ROOT, cleanup['originals'].get(name, name) if cleanup else name)
+
+    if cleanup:
+        for name, expected in cleanup['snapshot_sha256'].items():
+            if sha(confined(ROOT, name)) != expected:
+                raise ValueError('Archived original source changed: '+name)
+        reviewed = read_json(ROOT/'presentation/documentation_cleanup_review.json')
+        for name, expected in reviewed['files'].items():
+            if sha(confined(ROOT, name)) != expected:
+                raise ValueError('Reviewed cleanup document changed: '+name)
     preserved = read_json(ROOT/'study_2_audit/manifests/study1_preservation.json')
     original = read_json(ROOT/'freeze_manifest.json')
     for name, expected in original['files'].items():
-        data = (ROOT/name).read_bytes().replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+        data = source(name).read_bytes().replace(b'\r\n', b'\n').replace(b'\r', b'\n')
         if 'sha256:'+hashlib.sha256(data).hexdigest() != expected:
             raise ValueError('Original frozen scientific file changed: '+name)
     # Verify the merged Study 2 protocol without changing its original hashes.
@@ -39,12 +53,12 @@ def verify(record=False):
         if not (ROOT/name).exists() and name.startswith('study_2_audit/inputs/'):
             audit_inputs_unavailable.append(name)
             continue
-        if sha(ROOT/name) != expected:
+        if sha(source(name)) != expected:
             raise ValueError('Study 2 frozen protocol changed: '+name)
     amendments = dict(source_tag=preserved['tag'],
         reason='Post-collection presentation and status updates requested in the last-mile plan; no scientific changes.',
         files={name: {'preserved_original_sha256': preserved['files'][name],
-                      'presentation_sha256': sha(ROOT/name)} for name in sorted(AMENDED)})
+                      'presentation_sha256': sha(source(name))} for name in sorted(AMENDED)})
     amendment_path = ROOT/'presentation/documentation_amendments.json'
     if record:
         write_json(amendment_path, amendments, immutable=True)
@@ -54,7 +68,7 @@ def verify(record=False):
     for name, expected in preserved['files'].items():
         if name in AMENDED:
             continue
-        path = ROOT/name
+        path = source(name)
         if not path.exists() and name.startswith('data/main/'):
             unavailable.append(name)
             continue
@@ -83,8 +97,16 @@ def verify(record=False):
     if proof['report_text_hash'] != digest(text):
         raise ValueError('Report verification hash differs')
     checked = 0
-    for name in ('README.md', 'FINAL_RESULTS.md', 'SUBMISSION.md', 'RESEARCH_REPORT.md',
-                 'SPRINT_PLAN.md', 'report/report.md'):
+    navigation = ['README.md', 'FINAL_RESULTS.md', 'BENCHMARK.md', 'FROZEN_STUDY.md',
+                  'MODEL_A.md', 'MODEL_B.md', 'report/report.md']
+    if cleanup:
+        navigation.extend(['docs/README.md', 'report/README.md'])
+        navigation.extend(p.relative_to(ROOT).as_posix() for p in (ROOT/'docs').rglob('*.md')
+                          if 'source_snapshots' not in p.parts and p.name != 'README.md')
+        navigation.append('docs/archive/README.md')
+    else:
+        navigation.extend(['SUBMISSION.md', 'RESEARCH_REPORT.md', 'SPRINT_PLAN.md'])
+    for name in navigation:
         path = ROOT/name
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
             if target.startswith(('http://', 'https://', '#')):
@@ -93,12 +115,15 @@ def verify(record=False):
                 raise ValueError('Broken local link: '+name+' '+target)
             checked += 1
     summary = dict(original_frozen_files_verified=len(original['files']),
-        study2_protocol_files_verified=len(audit_freeze['files']),
+        study2_protocol_files_verified=len(audit_freeze['files'])-len(audit_inputs_unavailable),
         study2_private_inputs_unavailable=len(audit_inputs_unavailable),
         authorized_documentation_amendments=len(AMENDED), local_links_checked=checked,
         exact_tables=7, exact_prompt_blocks=5, narrative_checks=len(claims),
         original_raw_files_unavailable=len(unavailable), new_model_calls=0,
         submitted=False, audit_collection_checkout='followup/self-assessment-audit')
+    if cleanup:
+        summary.update(relocated_files=len(cleanup['moves']),
+                       preserved_source_snapshots=len(cleanup['snapshot_sha256']))
     write_json(ROOT/'presentation/verification.json', summary)
     return summary
 

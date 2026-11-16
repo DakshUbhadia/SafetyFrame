@@ -6,7 +6,7 @@
 found and `.venv` was created in this workspace. Sprints 1–2 use the standard library;
 Sprint 3 adds pinned PyYAML 6.0.3 for canonical task parsing. Sprint 2's
 two-turn provider wrapper, public/hidden runners, parser, and resumable logging
-are now implemented; see [HARNESS.md](HARNESS.md).
+are now implemented; see [HARNESS.md](../methods/HARNESS.md).
 
 The initial inspection had no configured key; authenticated catalogue discovery
 subsequently succeeded. Model A is selected as `qwen3.5-397b` and Model B as
@@ -42,7 +42,7 @@ python -m venv .venv
 
 Python 3.11 or later is required; record the exact version used for final runs.
 PyYAML is the only third-party Python dependency currently required; the renderer
-uses a restricted safe loader. See [RENDERING.md](RENDERING.md) for Sprint 3 commands.
+uses a restricted safe loader. See [RENDERING.md](../methods/RENDERING.md) for Sprint 3 commands.
 The offline command validates the initial design/configuration and calculates
 run counts without contacting any provider. Success here does **not** certify
 that the live Sprint 1 exit criteria are met.
@@ -190,7 +190,7 @@ any answer. The prompt still requests only a short acknowledgement. It records r
 and returned model IDs, response/request IDs when exposed, usage, latency, status,
 and allowlisted rate-limit headers. Missing optional usage/version fields remain null.
 Incomplete, failed, or empty responses do not count as success. Model refusals and
-format parsing use the initial policies in [HARNESS.md](HARNESS.md), pending freeze.
+format parsing use the initial policies in [HARNESS.md](../methods/HARNESS.md), pending freeze.
 Paid smoke requests are skipped until a costed study plan fits the ceiling;
 catalogue discovery and offline checks remain available without a cost estimate.
 
@@ -230,7 +230,7 @@ tasks and 192 planned responses. Official account RPM remains unconfirmed;
 the frozen collector instead imposes a conservative serial minimum of
 60 seconds between request starts. It does not claim a confirmed account limit.
 The original Sprint-1 account-rate evidence gap remains visible.
-See [FROZEN_STUDY.md](FROZEN_STUDY.md) for current execution and budget policies.
+See [FROZEN_STUDY.md](../../FROZEN_STUDY.md) for current execution and budget policies.
 
 ## Provider sources consulted
 

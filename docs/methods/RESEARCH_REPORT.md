@@ -1,8 +1,8 @@
 # Research report — completed manuscript, submission pending
 
 The manuscript content and final analysis are complete. See the
-[final results overview](FINAL_RESULTS.md), [full manuscript](report/report.md),
-and [prepared submission materials](SUBMISSION.md). No final report PDF or
+[final results overview](../../FINAL_RESULTS.md), [full manuscript](../../report/report.md),
+and [prepared submission materials](../archive/SUBMISSION.md). No final report PDF or
 submission confirmation is recorded. The author confirmed that submission is
 still pending on November 16, 2026. Template, PDF and release checks remain
 Sprint 11 work; no submission or page-limit compliance is implied below.
@@ -17,7 +17,7 @@ Sprint 10 checkout at `safetyframe-sprint-2026-final`; the strict original
 verifier rejects the added Study 2 harness membership on main. Study 2 collection
 must use its frozen `followup/self-assessment-audit` checkout.
 
-The [complete report draft](report/report.md) is authored as **Daksh Ubhadia,
+The [complete report draft](../../report/report.md) is authored as **Daksh Ubhadia,
 Independent researcher**, confirmed by the user. It covers Introduction,
 Related Work, Methods, Results, Discussion, Limitations and Conclusion, with a
 177-word abstract and three main figures. Runtime details, descriptive condition
@@ -38,7 +38,7 @@ main text highlight that 13/29 completed accounting trajectories had failed
 artifact requirements while all 145 final checklist entries claimed implemented.
 The new Figure 2 shows 20 failed requirements, 20 implemented claims on those
 failures and zero incomplete/uncertain acknowledgements. Its
-[numerical input](report/claim_figure_data.json) derives directly from the unchanged
+[numerical input](../../report/claim_figure_data.json) derives directly from the unchanged
 Model A dataset. The conclusion remains narrow and the timing discrepancy stays
 disclosed.
 
@@ -53,7 +53,7 @@ remain outside the released scored datasets.
 The Sprint 10 source review found a timing discrepancy: the registration says
 hidden scoring occurs after both turns; the frozen code scores locally after
 each response while constructing Turn-2 feedback from public results only.
-This is disclosed in Methods, Appendix D and [incidents.json](report/incidents.json).
+This is disclosed in Methods, Appendix D and [incidents.json](../../report/incidents.json).
 The original registration and frozen implementation remain unchanged.
 
 ## Verify the draft
@@ -65,8 +65,8 @@ The original registration and frozen implementation remain unchanged.
 The verifier checks seven evidence-rendered tables, five exact prompt blocks,
 source-derived narrative quantities, the abstract length, local links and all
 reviewed analysis digests. It records
-[claim traceability](report/claim_traceability.json) and
-[verification evidence](report/report_verification.json). These checks establish
+[claim traceability](../../report/claim_traceability.json) and
+[verification evidence](../../report/report_verification.json). These checks establish
 internal consistency, not independent review or replication.
 
 To regenerate the additional claim-versus-ground-truth figure:
@@ -90,7 +90,7 @@ editable. Numerical analysis remains in the [Sprint 9 package](FINAL_ANALYSIS.md
 
 ## Source and submission checks
 
-[Source verification](report/source_verification.md) records six checked primary
+[Source verification](../../report/source_verification.md) records six checked primary
 research sources and the official event requirements. The suggested MASK-OFF
 landing page could not be verified, so no substantive findings are attributed
 to it. The official Google Docs template required sign-in, so its detailed

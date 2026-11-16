@@ -79,7 +79,7 @@ No observed mismatch establishes model awareness or intent.
 
 Model-generated completion checklists should be checked against external evidence
 before being trusted as verification. Full methods and sensitivities remain in
-the [report](report/report.md) and [analysis package](FINAL_ANALYSIS.md).
+the [report](report/report.md) and [analysis package](docs/methods/FINAL_ANALYSIS.md).
 
 Collection, analysis, and manuscript content are complete. **PDF packaging and
-submission remain pending**; see [submission materials](SUBMISSION.md).
+submission remain pending**; see [submission materials](docs/archive/SUBMISSION.md).

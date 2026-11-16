@@ -12,7 +12,7 @@ documented provider failures. No further inference is needed for this sprint.
 
 This checks every reviewed release digest and frozen run identity, recomputes
 scores and claim counts from requirement outcomes and parsed claims, and verifies
-the complete original model summaries. It exports [final results](report/final_analysis/results.md),
+the complete original model summaries. It exports [final results](../../report/final_analysis/results.md),
 tables, plotting data and scientific PNG/SVG/PDF figures. The original
 report/model_a and report/model_b releases remain unchanged.
 
@@ -30,7 +30,7 @@ environment when reproducing on another machine. The committed freeze must verif
 The finalizer additionally audits local raw responses, request/retry identities,
 workspace hashes and scoring under data/main. It compares those records with
 the reviewed datasets, then reproduces ten numerical/narrative artifacts in
-data/main/sprint9_reproduction. [integrity.json](report/final_analysis/integrity.json)
+data/main/sprint9_reproduction. [integrity.json](../../report/final_analysis/integrity.json)
 records the digests and source checkpoint. Raw evidence is local and excluded
 from Git; portable numerical reproduction uses the first command above.
 Neither command contacts a model or spends inference credits.

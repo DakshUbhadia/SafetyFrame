@@ -4,20 +4,20 @@
 
 **Current status:** Study 1 collection, final analysis and manuscript content are
 complete: 96 terminal trajectories, 90 completed and six provider failures.
-[Final results](FINAL_RESULTS.md) lead with the 20/20 unacknowledged failed
-requirements; [the report](report/report.md) retains the inconclusive framing
+[Final results](../../FINAL_RESULTS.md) lead with the 20/20 unacknowledged failed
+requirements; [the report](../../report/report.md) retains the inconclusive framing
 estimate and operational sensitivities. **PDF packaging and submission remain
 pending**, confirmed by the author on November 16, 2026. Prepared form fields and
 summary are in [SUBMISSION.md](SUBMISSION.md).
 
-This plan breaks [SPECIFICATION_v4.md](SPECIFICATION_v4.md) into sequential work
+This plan breaks [SPECIFICATION_v4.md](../methods/SPECIFICATION_v4.md) into sequential work
 blocks for one researcher. Sprints 2–10 are complete. Sprint 1's provider
 preflights passed; account rate-limit/balance reconciliation remains unconfirmed.
 Sprint 11 release and submission checks are still open. Historical implementation
 notes below retain the status observed during their original sprint; they are
 not current claims that model collection or final analysis is pending.
-See [FROZEN_STUDY.md](FROZEN_STUDY.md), [BENCHMARK.md](BENCHMARK.md), [SETUP.md](SETUP.md),
-[HARNESS.md](HARNESS.md), [RENDERING.md](RENDERING.md), and [PILOTS.md](PILOTS.md).
+See [FROZEN_STUDY.md](../../FROZEN_STUDY.md), [BENCHMARK.md](../../BENCHMARK.md), [SETUP.md](SETUP.md),
+[HARNESS.md](../methods/HARNESS.md), [RENDERING.md](../methods/RENDERING.md), and [PILOTS.md](PILOTS.md).
 
 The specification defines the research design. This plan organizes execution
 without changing that design. Paths listed as deliverables are files to build or
@@ -120,13 +120,13 @@ cannot escape the task directory, and failures are recorded consistently.
 with raw requests/responses, both workspace snapshots, checklist claims, metadata,
 and exported tables. Regression tests cover rejected paths, feedback separation,
 bounded retries, format/provider failures, interrupted-run recovery, credit
-reservations, and idempotent resume. See [HARNESS.md](HARNESS.md) for commands and
+reservations, and idempotent resume. See [HARNESS.md](../methods/HARNESS.md) for commands and
 artifact locations. Docker command restrictions are tested, but live container
 execution is pending because the Docker daemon is inaccessible here. No paid
 generation was used for Sprint 2. Final-study execution remains gated until freeze.
 
-**References:** [Experiment protocol](02_EXPERIMENT_PROTOCOL.md),
-[prompt protocol](05_PROMPT_PROTOCOL.md), [data dictionary](08_DATA_DICTIONARY.md).
+**References:** [Experiment protocol](../methods/02_EXPERIMENT_PROTOCOL.md),
+[prompt protocol](../methods/05_PROMPT_PROTOCOL.md), [data dictionary](../methods/08_DATA_DICTIONARY.md).
 
 ## Sprint 3 — Canonical task rendering and equivalence
 
@@ -150,8 +150,8 @@ same computational problem; only intended domain cues differ.
 mapping and requirement source. Both references pass 3 public tests and 8 hidden
 checks across 4 requirements. Reverse-mapped text and ASTs match canonical source;
 mutation and leakage tests exercise failure cases. The example is excluded from
-pilots and final inference. See [RENDERING.md](RENDERING.md) and
-[audit evidence](data/audits/sprint3-final.json). No API credits were spent.
+pilots and final inference. See [RENDERING.md](../methods/RENDERING.md) and
+[audit evidence](../../data/audits/sprint3-final.json). No API credits were spent.
 
 **References:** [Task authoring](03_TASK_AUTHORING_GUIDE.md),
 [validation checklist](04_TASK_VALIDATION_CHECKLIST.md), and `templates/`.
@@ -180,7 +180,7 @@ retries. One scored 4/5 at both turns; four scored 100%. The sixth hit gateway,
 reasoning-budget, and stream limits and is not a final coding score. Retain
 8,192-token non-streaming generation. The difficulty recommendation is preliminary,
 not a guarantee that all final tasks will land in range. See the
-[calibration record](report/pilot_calibration.md) and [task registry](config/pilot_plan.json).
+[calibration record](../../report/pilot_calibration.md) and [task registry](../../config/pilot_plan.json).
 
 ## Sprint 5 — Final benchmark construction
 
@@ -206,8 +206,8 @@ final task has been selected for a favorable observed framing difference.
 **Result:** 16 accepted tasks, four per family; 32 rendered variants; 80 scored
 requirements; 96 public and 320 hidden reference-check passes; 80 isolated
 API-fault checks preserve partial credit. Membership and artifact/evidence
-hashes are recorded in [config/benchmark.json](config/benchmark.json), with
-the [inventory](data/task_inventory.csv) and [completed checklists](data/task_validation).
+hashes are recorded in [config/benchmark.json](../../config/benchmark.json), with
+the [inventory](../../data/task_inventory.csv) and [completed checklists](../../data/task_validation).
 Validation uses Docker and author review; linguistic lengths use a token proxy.
 Difficulty on final target models remains unmeasured. No Adaption credits were
 spent. The benchmark remains unfrozen pending Sprint 6.
@@ -287,8 +287,8 @@ Baseline C−S is 0.0125 TCS, 95% task-bootstrap CI [−0.050, 0.100], N=16.
 The primary interaction is −0.1286 [−0.2714, −0.0143], N=14; its provider-utility
 and valid-format sensitivities are weaker, so the initial report makes no
 robust mitigation or intent claim. Numerical JSON/CSVs and the results narrative
-reproduce exactly. See [Model A results](report/model_a/results.md),
-[integrity evidence](report/model_a/integrity.json), and [MODEL_A.md](MODEL_A.md).
+reproduce exactly. See [Model A results](../../report/model_a/results.md),
+[integrity evidence](../../report/model_a/integrity.json), and [MODEL_A.md](../../MODEL_A.md).
 
 ## Sprint 8 — Model B framing generalization
 
@@ -318,8 +318,8 @@ in both conditions. The end-to-end contrast is therefore dominated by code
 emission under the fixed budget, and cannot cleanly establish a correctness
 generalization. Scores and collection settings remain unchanged. Model A
 outputs are preserved, and models are compared separately without pooling.
-Numerical/narrative outputs reproduce exactly; see [Model B results](report/model_b/results.md),
-[integrity evidence](report/model_b/integrity.json), and [MODEL_B.md](MODEL_B.md).
+Numerical/narrative outputs reproduce exactly; see [Model B results](../../report/model_b/results.md),
+[integrity evidence](../../report/model_b/integrity.json), and [MODEL_B.md](../../MODEL_B.md).
 
 ## Sprint 9 — Final analysis and figures
 
@@ -355,11 +355,11 @@ with exact plotting values in figure_data.json. Repair separates artifact gain
 from end-to-end format penalties; observed Turn-1 denominators remain explicit.
 No inference credits were spent. Model B's reasoning-budget limitation persists;
 no coding-performance generalization is asserted. See
-[final-analysis guide](FINAL_ANALYSIS.md), [results](report/final_analysis/results.md),
-and [integrity evidence](report/final_analysis/integrity.json).
+[final-analysis guide](../methods/FINAL_ANALYSIS.md), [results](../../report/final_analysis/results.md),
+and [integrity evidence](../../report/final_analysis/integrity.json).
 
-**References:** [Scoring/analysis plan](09_SCORING_ANALYSIS_PLAN.md),
-[self-assessment rubric](10_SELF_ASSESSMENT_RUBRIC.md).
+**References:** [Scoring/analysis plan](../methods/09_SCORING_ANALYSIS_PLAN.md),
+[self-assessment rubric](../methods/10_SELF_ASSESSMENT_RUBRIC.md).
 
 ## Sprint 10 — Research report
 
@@ -382,7 +382,7 @@ and [integrity evidence](report/final_analysis/integrity.json).
 **Exit criteria:** Every numerical statement traces to analysis output. The
 report answers all three research questions without requiring a significant framing gap.
 
-**Result:** The complete [report draft](report/report.md) has a 177-word abstract,
+**Result:** The complete [report draft](../../report/report.md) has a 177-word abstract,
 user-confirmed author/affiliation, six verified primary research sources, all
 three result channels in the user-revised narrative order, sensitivity intervals,
 three main figures including a direct claim-versus-ground-truth graphic.
@@ -394,8 +394,8 @@ remain unchanged. Hidden-scoring timing differs from the registration sentence
 and is explicitly disclosed, without changing code or results. Submission rules
 were checked on the official event page; the linked Google template required
 sign-in, so detailed template layout, PDF page inspection and submission remain
-Sprint 11. No inference credits were spent. See [RESEARCH_REPORT.md](RESEARCH_REPORT.md)
-and [verification evidence](report/report_verification.json).
+Sprint 11. No inference credits were spent. See [RESEARCH_REPORT.md](../methods/RESEARCH_REPORT.md)
+and [verification evidence](../../report/report_verification.json).
 
 **Reference:** [Report template](13_REPORT_TEMPLATE.md).
 

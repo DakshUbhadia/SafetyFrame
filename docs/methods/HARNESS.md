@@ -10,7 +10,7 @@ inference was needed for Sprint 2 verification.
 Adaption transport is implemented against the [Responses API](https://docs.adaptionlabs.ai/api/resources/responses/methods/create).
 Sprint 4 exercised Docker reference validation and five complete live Qwen pilot
 trajectories. A sixth stress task exposed gateway, reasoning-budget, and streaming
-limits; see [PILOTS.md](PILOTS.md). Generated code still requires Docker and cannot
+limits; see [PILOTS.md](../archive/PILOTS.md). Generated code still requires Docker and cannot
 use the local fixture executor. Account rate limits remain unconfirmed.
 
 ## Run the synthetic smoke trajectory
@@ -82,7 +82,7 @@ hidden_tests/test_*.py
 `framing` (`capability` or `safety`), `editable_files`, `public_test_count`, and
 4–5 requirements. Each requirement has a stable `id`, explicit `text`, and a
 nonempty list of hidden unittest selectors such as `test_hidden.Requirements.test_R1`.
-See [the synthetic task manifest](tests/fixtures/smoke_task/task.json) for an example.
+See [the synthetic task manifest](../../tests/fixtures/smoke_task/task.json) for an example.
 
 This JSON manifest is the executable rendered-task interface, not a replacement
 for canonical YAML mappings/requirements in v4. Sprint 3 exports it from
@@ -189,10 +189,10 @@ Prompt byte counts and published rounded rates are estimates, not a provider-sid
 hard billing cap. Keep the reserve and compare actual debits with recorded usage.
 No automatic credit-to-currency conversion or cache discount is assumed.
 
-[results_template.csv](templates/results_template.csv) now mirrors the executable
+[results_template.csv](../archive/templates/results_template.csv) now mirrors the executable
 trajectory schema, including per-turn metadata, integrity hashes, raw/snapshot paths,
 all v4 self-assessment counts, failure/missingness flags, and cost metadata.
-[requirement_results_template.csv](templates/requirement_results_template.csv)
+[requirement_results_template.csv](../archive/templates/requirement_results_template.csv)
 stores one requirement per turn, preserving claims and hidden pass/fail.
 `urdr` aliases strict URDR; `public_passed_*` aliases `public_tests_passed_*`.
 Aggregate token/cost fields are null when any relevant call lacks accounting;
@@ -209,5 +209,5 @@ verification. Main runs use harness.run_frozen and exact scheduled IDs;
 verification is the default and paid inference requires --execute.
 The immutable plan remains data/run_manifest.csv, while mutable status exports
 are data/main/run_manifest.csv. Pilot collection is closed after freeze.
-See [FROZEN_STUDY.md](FROZEN_STUDY.md) for commands, pacing, integrity checks,
+See [FROZEN_STUDY.md](../../FROZEN_STUDY.md) for commands, pacing, integrity checks,
 budget limits, interruption handling, and fixed scoring/analysis policies.

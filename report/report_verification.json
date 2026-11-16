@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_at_utc": "2026-11-16T11:33:42.858217+00:00",
-  "report_text_hash": "99f2028bfc4a702ee1d7d0f0ed82a7579dab0e5bc4bc1b470eed6cbd4d967d11",
+  "report_text_hash": "fc1a4d1c8be66a5c63c4302d78a5830fc277858d59f7bb21e6bd8d626a8b8cd3",
   "source_checkpoint": "036c2ef22a9bb3cc45a921da223ef65e0dd2d437",
   "freeze_hash": "8f98b8ad025f4ee2773620ea989bbf50db201b3919db591b5759632ce5b87c13",
   "abstract_words": 177,
