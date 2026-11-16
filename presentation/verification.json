@@ -1,0 +1,14 @@
+{
+  "original_frozen_files_verified": 570,
+  "study2_protocol_files_verified": 121,
+  "study2_private_inputs_unavailable": 0,
+  "authorized_documentation_amendments": 7,
+  "local_links_checked": 141,
+  "exact_tables": 7,
+  "exact_prompt_blocks": 5,
+  "narrative_checks": 27,
+  "original_raw_files_unavailable": 0,
+  "new_model_calls": 0,
+  "submitted": false,
+  "audit_collection_checkout": "followup/self-assessment-audit"
+}

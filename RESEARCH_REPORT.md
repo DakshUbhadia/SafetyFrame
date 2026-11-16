@@ -9,6 +9,14 @@ Sprint 11 work; no submission or page-limit compliance is implied below.
 
 The remaining notes describe the completed Sprint 10 content and its provenance.
 
+On main, run `python scripts/verify_presentation.py` after the presentation edits.
+It verifies all originally frozen scientific files, the merged Study 2 protocol,
+and the report's tables and narrative, with seven explicit documentation-only
+amendments. Original report-verifier commands below describe the preserved
+Sprint 10 checkout at `safetyframe-sprint-2026-final`; the strict original
+verifier rejects the added Study 2 harness membership on main. Study 2 collection
+must use its frozen `followup/self-assessment-audit` checkout.
+
 The [complete report draft](report/report.md) is authored as **Daksh Ubhadia,
 Independent researcher**, confirmed by the user. It covers Introduction,
 Related Work, Methods, Results, Discussion, Limitations and Conclusion, with a

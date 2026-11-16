@@ -33,9 +33,18 @@ The existing claim figure was visually inspected. GitHub About changes were
 read back from the API. These checks do not constitute independent research
 review, incognito-browser inspection, or a clean-environment release check.
 
-Study 2 remains on followup/self-assessment-audit at 7705011 with its original
-freeze and preservation hashes. Presentation changes are on main rather than
-rewriting that frozen branch. The preservation tag is unchanged.
+During publication, the remote main branch had gained the author's merge of
+Study 2 (cc22f2f). The presentation commit was rebased onto that merge, preserving
+it. Study 2's branch remains at 7705011 with its original freeze and preservation
+hashes, and the preservation tag is unchanged.
+
+Main now includes the frozen protocol plus newer navigation text. Its strict
+audit preservation check therefore intentionally rejects the presentation edits.
+Run collection on followup/self-assessment-audit. On main, use
+`python scripts/verify_presentation.py`: it checks the original scientific hashes,
+the merged audit protocol, all report evidence, and every preserved file apart
+from seven explicitly recorded documentation-only amendments. Original hashes
+are retained in documentation_amendments.json; no freeze was rewritten.
 
 Metadata preview and application are separate:
 

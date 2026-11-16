@@ -80,6 +80,13 @@ pending release review. The registration/scoring timing discrepancy is disclosed
 in the report. Internal task review is not independent validation; the local
 preregistration is not an external registration.
 
+Run `python scripts/verify_presentation.py` to check the original scientific
+hashes, merged Study 2 protocol, report evidence, and explicit documentation-only
+amendments on main. Original Study 1 reproduction uses the preservation tag
+`safetyframe-sprint-2026-final`; frozen Study 2 collection uses the
+`followup/self-assessment-audit` branch. Its strict preservation check correctly
+rejects main's newer navigation text. Neither freeze has been rewritten.
+
 ## Scope and interpretation
 
 The framing estimate is inconclusive, accounting is not a robust mitigation, and
